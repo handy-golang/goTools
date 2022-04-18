@@ -66,6 +66,8 @@ func NewHttp(opt HttpParam) []byte {
 func (o *Http) Get() []byte {
 	Url := o.Url
 
+	fmt.Println("get请求", Url)
+
 	var body []byte
 	var resError []byte
 	c := colly.NewCollector()
