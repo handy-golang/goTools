@@ -9,7 +9,7 @@ func Start() {
 	####                当前版本 v0.5.2                    ###     
 	####              go clean --modcache                 ###     
 	####          作者邮箱 meichangliang@mo7.cc            ###      
-	#### 项目地址 https://github.com/meichangliang/goTools ###     
+	#### 项目地址 https://github.com/EasyGolang/goTools ###     
 	#########################################################
 	`
 	fmt.Println(logStr)
