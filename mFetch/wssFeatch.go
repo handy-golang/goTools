@@ -8,6 +8,7 @@ import (
 )
 
 type Wss struct {
+	Url        string
 	Conn       *websocket.Conn
 	Ticker     *time.Ticker
 	PongTicker *time.Ticker
@@ -95,35 +96,49 @@ func (w *Wss) Close() *Wss {
 }
 
 type WssOpt struct {
-	Url      string
+	Origin   string
+	Path     string
 	Event    func(string, string)
 	Module   string
 	PingSec  int
 	NoResSec int
 }
 
-func NewWss(param WssOpt) *Wss {
+func NewWss(opt WssOpt) *Wss {
 	var w Wss
 
-	w.Event = param.Event
-	w.Module = param.Module
+	if len(opt.Path) < 2 {
+		errStr := fmt.Errorf("缺少 Path 参数")
+		panic(errStr)
+	}
 
-	w.PingSec = param.PingSec
+	if opt.Event == nil {
+		w.Event = func(s1, s2 string) {}
+	} else {
+		w.Event = opt.Event
+	}
+
 	if w.PingSec < 1 {
 		w.PingSec = 20
+	} else {
+		w.PingSec = opt.PingSec
 	}
 
-	w.NoResSec = param.NoResSec
 	if w.PingSec < 1 {
 		w.NoResSec = 60
+	} else {
+		w.NoResSec = opt.NoResSec
 	}
+
+	w.Url = opt.Origin + opt.Path
+	w.Module = opt.Module
 
 	w.Ticker = time.NewTicker(time.Second * time.Duration(w.PingSec))
 	w.PongTicker = time.NewTicker(time.Second * time.Duration(w.NoResSec))
 
 	w.Chan = make(chan string)
 
-	conn, _, err := websocket.DefaultDialer.Dial(param.Url, nil)
+	conn, _, err := websocket.DefaultDialer.Dial(w.Url, nil)
 	w.Conn = conn
 
 	if err != nil {

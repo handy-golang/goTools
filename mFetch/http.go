@@ -48,13 +48,14 @@ type Http struct {
 }
 
 func NewHttp(opt HttpOpt) *Http {
+	var HttpO Http
+
 	// 参数的错误处理
 	if len(opt.Path) < 2 {
 		errStr := fmt.Errorf("缺少 Path 参数")
 		panic(errStr)
 	}
 
-	var HttpO Http
 	HttpO.Url = opt.Origin + opt.Path
 	HttpO.Header = opt.Header
 
