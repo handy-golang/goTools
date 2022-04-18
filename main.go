@@ -4,8 +4,8 @@ import (
 	"fmt"
 	"time"
 
-	"github.com/meichangliang/goTools/mCycle"
-	"github.com/meichangliang/goTools/mTime"
+	"github.com/EasyGolang/goTools/mCycle"
+	"github.com/EasyGolang/goTools/mTime"
 )
 
 func main() {

@@ -14,7 +14,7 @@ import (
 	"strconv"
 	"time"
 
-	"github.com/meichangliang/goTools/mCount"
+	"github.com/EasyGolang/goTools/mCount"
 )
 
 // 将13位毫秒的时间戳字符串转为 时间对象，如果不是13 位则返回当前时间

@@ -4,8 +4,8 @@ import (
 	"os"
 	"path/filepath"
 
-	"github.com/meichangliang/goTools/mPath"
-	"github.com/meichangliang/goTools/mTime"
+	"github.com/EasyGolang/goTools/mPath"
+	"github.com/EasyGolang/goTools/mTime"
 
 	"github.com/gocolly/colly"
 )

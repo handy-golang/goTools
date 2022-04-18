@@ -6,7 +6,7 @@ import (
 	"net/http"
 	"os"
 
-	"github.com/meichangliang/goTools/mPath"
+	"github.com/EasyGolang/goTools/mPath"
 )
 
 // 写入文件内容 fileName 为文件的路径

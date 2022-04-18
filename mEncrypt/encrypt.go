@@ -9,7 +9,7 @@ import (
 	"fmt"
 	"strings"
 
-	"github.com/meichangliang/goTools/mStr"
+	"github.com/EasyGolang/goTools/mStr"
 )
 
 func Sha256(message string, secretKey string) (string, error) {

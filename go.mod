@@ -1,4 +1,4 @@
-module github.com/meichangliang/goTools
+module github.com/EasyGolang/goTools
 
 go 1.18
 
