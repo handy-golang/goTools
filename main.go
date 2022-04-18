@@ -2,11 +2,14 @@ package main
 
 import (
 	"fmt"
+
+	"github.com/EasyGolang/goTools/mStart"
 )
 
 func main() {
 	fmt.Println(" =========  START  ========= ")
-	fmt.Println(mStart.Start())
+
+	mStart.Start()
 
 	fmt.Println(" =========   END   ========= ")
 }
