@@ -5,6 +5,26 @@
 *.so
 *.dylib
 
+package-lock.json
+
+*.work
+
+*.sum
+
+node_modules
+
+logs
+
+*.log
+dist
+goRun-*
+/jsonData
+/www
+hunter_release
+*.zip
+*_aarch64
+*_x86_64
+
 # Test binary, built with `go test -c`
 *.test
 

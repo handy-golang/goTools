@@ -1,0 +1,7 @@
+{
+  "scripts": {
+    "git": "./_shell/gitSet.sh",
+    "sync": "./_shell/sync_git.sh"
+  },
+  "dependencies": {}
+}
