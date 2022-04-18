@@ -9,6 +9,7 @@ import (
 )
 
 /*
+
 	data := map[string]any{
 		"op": "subscribe",
 		"args": []string{
@@ -16,18 +17,17 @@ import (
 		},
 	}
 
-	res := mFetch.NewHttp(mFetch.HttpParam{
+	res := mFetch.NewHttp(mFetch.HttpOpt{
 		Origin: "http://mo7.cc:9000",
 		Path:   "/api/markets/tickers",
 		Data:   data,
-		Method: "get",
 		Header: map[string]string{
 			"Content-Type":  "appli1arset=utf-8",
 			"Content-Type1": "appl2et=utf-8",
 			"Content-Type2": "applicati3et=utf-8",
 			"Content-Type3": "application4t=utf-8",
 		},
-	})
+	}).Get()
 
 */
 
