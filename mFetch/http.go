@@ -2,7 +2,6 @@ package mFetch
 
 import (
 	"fmt"
-	"strings"
 
 	"github.com/EasyGolang/goTools/mUrl"
 	"github.com/gocolly/colly"
@@ -10,7 +9,6 @@ import (
 )
 
 /*
-
 	data := map[string]any{
 		"op": "subscribe",
 		"args": []string{
@@ -33,67 +31,69 @@ import (
 
 */
 
-type HttpParam struct {
+type HttpOpt struct {
 	Origin string
 	Path   string
 	Data   map[string]any
-	Method string
 	Header map[string]string
 	Event  func(string, string)
 }
 
 type Http struct {
-	Url    string
-	Data   []byte
-	Header map[string]string
-	Event  func(string, string)
+	Url     string
+	OptData map[string]any
+	Data    []byte
+	Header  map[string]string
+	Event   func(string, string)
 }
 
-func NewHttp(opt HttpParam) *Http {
+func NewHttp(opt HttpOpt) *Http {
 	// 参数的错误处理
-	if len(opt.Method) < 2 {
-		errStr := fmt.Errorf("缺少 Method 参数")
-		panic(errStr)
-	}
 	if len(opt.Path) < 2 {
 		errStr := fmt.Errorf("缺少 Path 参数")
-		panic(errStr)
-	}
-	if len(opt.Origin) < 2 {
-		errStr := fmt.Errorf("缺少 Origin 参数")
 		panic(errStr)
 	}
 
 	var HttpO Http
 	HttpO.Url = opt.Origin + opt.Path
 	HttpO.Header = opt.Header
-	HttpO.Event = opt.Event
 
-	if strings.ToLower(opt.Method) == "get" {
-		// 处理参数
-		urlO := mUrl.InitUrl(HttpO.Url)
-		for key, val := range opt.Data {
-			v := fmt.Sprintf("%+v", val)
-			urlO.AddParam(key, v)
-		}
-		HttpO.Url = urlO.String()
+	// 函数空指针的处理
+	if opt.Event != nil {
+		HttpO.Event = opt.Event
+	} else {
+		HttpO.Event = func(s1, s2 string) {}
 	}
 
-	if strings.ToLower(opt.Method) == "post" {
-
-		data, _ := jsoniter.Marshal(opt.Data)
-		HttpO.Data = data
-
-	}
+	HttpO.OptData = opt.Data
 
 	return &HttpO
 }
 
+func proessHttpParam(lType string, o *Http) *Http {
+	if lType == "get" {
+		urlO := mUrl.InitUrl(o.Url)
+		for key, val := range o.OptData {
+			v := fmt.Sprintf("%+v", val)
+			urlO.AddParam(key, v)
+		}
+		o.Url = urlO.String()
+	}
+
+	if lType == "post" {
+		data, _ := jsoniter.Marshal(o.OptData)
+		o.Data = data
+	}
+
+	return o
+}
+
 // GET
 func (o *Http) Get() []byte {
-	Url := o.Url
+	// 处理参数请求
+	proessHttpParam("get", o)
 
-	fmt.Println("get请求", Url)
+	Url := o.Url
 
 	var body []byte
 	var resError []byte
@@ -109,11 +109,11 @@ func (o *Http) Get() []byte {
 
 	c.OnResponse(func(r *colly.Response) {
 		body = r.Body
-		o.Log("succeed", body)
+		o.Event("succeed", string(r.Body))
 	})
 	c.OnError(func(r *colly.Response, err error) {
 		resError = r.Body
-		o.Log("err", resError)
+		o.Event("err", string(r.Body))
 	})
 
 	c.Visit(Url)
@@ -126,6 +126,8 @@ func (o *Http) Get() []byte {
 }
 
 func (o *Http) Post() []byte {
+	proessHttpParam("post", o)
+
 	url := o.Url
 	data := o.Data
 
@@ -143,11 +145,11 @@ func (o *Http) Post() []byte {
 
 	c.OnResponse(func(r *colly.Response) {
 		body = r.Body
-		o.Log("succeed", body)
+		o.Event("succeed", string(r.Body))
 	})
 	c.OnError(func(r *colly.Response, err error) {
 		resError = r.Body
-		o.Log("err", resError)
+		o.Event("err", string(r.Body))
 	})
 
 	c.PostRaw(url, data)

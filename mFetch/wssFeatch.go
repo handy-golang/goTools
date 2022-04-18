@@ -94,7 +94,7 @@ func (w *Wss) Close() *Wss {
 	return w
 }
 
-type WssParam struct {
+type WssOpt struct {
 	Url      string
 	Event    func(string, string)
 	Module   string
@@ -102,7 +102,7 @@ type WssParam struct {
 	NoResSec int
 }
 
-func NewWss(param WssParam) *Wss {
+func NewWss(param WssOpt) *Wss {
 	var w Wss
 
 	w.Event = param.Event
