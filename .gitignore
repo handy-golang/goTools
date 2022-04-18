@@ -9,8 +9,6 @@ package-lock.json
 
 *.work
 
-*.sum
-
 node_modules
 
 logs
