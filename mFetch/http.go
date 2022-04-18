@@ -15,15 +15,17 @@ type HttpParam struct {
 	Data   map[string]any
 	Method string
 	Header map[string]string
+	Event  func(string, string)
 }
 
 type Http struct {
 	Url    string
 	Data   []byte
 	Header map[string]string
+	Event  func(string, string)
 }
 
-func NewHttp(opt HttpParam) []byte {
+func NewHttp(opt HttpParam) *Http {
 	// 参数的错误处理
 	if len(opt.Method) < 2 {
 		errStr := fmt.Errorf("缺少 Method 参数")
@@ -41,6 +43,7 @@ func NewHttp(opt HttpParam) []byte {
 	var HttpO Http
 	HttpO.Url = opt.Origin + opt.Path
 	HttpO.Header = opt.Header
+	HttpO.Event = opt.Event
 
 	if strings.ToLower(opt.Method) == "get" {
 		// 处理参数
@@ -50,8 +53,6 @@ func NewHttp(opt HttpParam) []byte {
 			urlO.AddParam(key, v)
 		}
 		HttpO.Url = urlO.String()
-		return HttpO.Get()
-
 	}
 
 	if strings.ToLower(opt.Method) == "post" {
@@ -59,10 +60,9 @@ func NewHttp(opt HttpParam) []byte {
 		data, _ := jsoniter.Marshal(opt.Data)
 		HttpO.Data = data
 
-		return HttpO.Post()
 	}
 
-	return []byte("")
+	return &HttpO
 }
 
 // GET
@@ -85,9 +85,11 @@ func (o *Http) Get() []byte {
 
 	c.OnResponse(func(r *colly.Response) {
 		body = r.Body
+		o.Log("succeed", body)
 	})
 	c.OnError(func(r *colly.Response, err error) {
 		resError = r.Body
+		o.Log("err", resError)
 	})
 
 	c.Visit(Url)
@@ -117,9 +119,11 @@ func (o *Http) Post() []byte {
 
 	c.OnResponse(func(r *colly.Response) {
 		body = r.Body
+		o.Log("succeed", body)
 	})
 	c.OnError(func(r *colly.Response, err error) {
 		resError = r.Body
+		o.Log("err", resError)
 	})
 
 	c.PostRaw(url, data)

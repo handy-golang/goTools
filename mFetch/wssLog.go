@@ -22,6 +22,8 @@ PingErr
 
 ReadErr
 
+Read
+
 Pong
 
 */
