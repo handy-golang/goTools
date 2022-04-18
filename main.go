@@ -24,6 +24,12 @@ func main() {
 		Path:   "/api/markets/tickers",
 		Data:   data,
 		Method: "get",
+		Header: map[string]string{
+			"Content-Type":  "appli1arset=utf-8",
+			"Content-Type1": "appl2et=utf-8",
+			"Content-Type2": "applicati3et=utf-8",
+			"Content-Type3": "application4t=utf-8",
+		},
 	})
 
 	fmt.Println(string(res))

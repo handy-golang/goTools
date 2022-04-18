@@ -14,11 +14,13 @@ type HttpParam struct {
 	Path   string
 	Data   map[string]any
 	Method string
+	Header map[string]string
 }
 
 type Http struct {
-	Url  string
-	Data []byte
+	Url    string
+	Data   []byte
+	Header map[string]string
 }
 
 func NewHttp(opt HttpParam) []byte {
@@ -38,6 +40,7 @@ func NewHttp(opt HttpParam) []byte {
 
 	var HttpO Http
 	HttpO.Url = opt.Origin + opt.Path
+	HttpO.Header = opt.Header
 
 	if strings.ToLower(opt.Method) == "get" {
 		// 处理参数
@@ -74,6 +77,10 @@ func (o *Http) Get() []byte {
 
 	c.OnRequest(func(r *colly.Request) {
 		r.Headers.Set("Content-Type", "application/json; charset=utf-8")
+		// 添加header头
+		for key, val := range o.Header {
+			r.Headers.Set(key, val)
+		}
 	})
 
 	c.OnResponse(func(r *colly.Response) {
@@ -102,6 +109,10 @@ func (o *Http) Post() []byte {
 
 	c.OnRequest(func(r *colly.Request) {
 		r.Headers.Set("Content-Type", "application/json; charset=utf-8")
+		// 添加header头
+		for key, val := range o.Header {
+			r.Headers.Set(key, val)
+		}
 	})
 
 	c.OnResponse(func(r *colly.Response) {
