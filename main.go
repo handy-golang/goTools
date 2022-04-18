@@ -11,7 +11,7 @@ func main() {
 	fmt.Println(" =========  START  ========= ")
 
 	feishuApp := mFeiShu.New(mFeiShu.Opt{
-		AppID:     "cli_a28394cb5478d00d",
+		AppID:     "cli_xxxx78d00d",
 		AppSecret: "MDMJs33KsiH9FAxr74MqSXG3lTL4ptPT",
 	})
 
@@ -22,7 +22,7 @@ func main() {
 
 	feishuApp.SendMessage(mFeiShu.MsgOpt{
 		ReceiveType: "user_id",
-		ReceiveId:   "d81242gc",
+		ReceiveId:   "d8xxx42gc",
 		Content:     str,
 	})
 
