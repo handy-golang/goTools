@@ -3,34 +3,16 @@ package main
 import (
 	"fmt"
 
-	"github.com/EasyGolang/goTools/mFetch"
+	"github.com/EasyGolang/goTools/mFeiShu"
 )
 
 func main() {
 	fmt.Println(" =========  START  ========= ")
-	Channel := "asdas"
-	InstID := "Avax-usdt"
 
-	data := map[string]any{
-		"op": "subscribe",
-		"args": []string{
-			Channel, InstID, "mei",
-		},
-	}
-
-	res := mFetch.NewHttp(mFetch.HttpOpt{
-		Origin: "http://mo7.cc:9000",
-		Path:   "/api/markets/tickers",
-		Data:   data,
-		Header: map[string]string{
-			"Content-Type":  "appli1arset=utf-8",
-			"Content-Type1": "appl2et=utf-8",
-			"Content-Type2": "applicati3et=utf-8",
-			"Content-Type3": "application4t=utf-8",
-		},
-	}).Get()
-
-	fmt.Println(res)
+	mFeiShu.New(mFeiShu.Opt{
+		AppID:     "cli_a28394cb5478d00d",
+		AppSecret: "MDMJs33KsiH9FAxr74MqSXG3lTL4ptPT",
+	})
 
 	fmt.Println(" =========   END   ========= ")
 }

@@ -6,6 +6,7 @@ import (
 
 	"github.com/EasyGolang/goTools/mCycle"
 	"github.com/EasyGolang/goTools/mFetch"
+	jsoniter "github.com/json-iterator/go"
 )
 
 type Opt struct {
@@ -16,10 +17,10 @@ type Opt struct {
 }
 
 type NewFeiShu struct {
-	AppID              string
-	AppSecret          string
-	AppType            string
-	Getaccess_tokenUrl string
+	AppID       string
+	AppSecret   string
+	AppType     string
+	AccessToken string
 }
 
 func New(opt Opt) *NewFeiShu {
@@ -36,10 +37,11 @@ func New(opt Opt) *NewFeiShu {
 	var o NewFeiShu
 	o.AppID = opt.AppID
 	o.AppSecret = opt.AppSecret
-	o.AppType = opt.AppType
 
-	if len(o.AppType) < 5 {
+	if len(opt.AppType) < 5 {
 		o.AppType = "company"
+	} else {
+		o.AppType = opt.AppType
 	}
 
 	// 获取 AccessToken
@@ -47,10 +49,17 @@ func New(opt Opt) *NewFeiShu {
 		Func: func() {
 			o.GetAccessToken()
 		},
-		SleepTime: time.Second * 5,
+		SleepTime: time.Hour,
 	}).Start()
 
 	return &o
+}
+
+type TenantAccessToken struct {
+	Code              int    `json:"code"`
+	Expire            int    `json:"expire"`
+	Msg               string `json:"msg"`
+	TenantAccessToken string `json:"tenant_access_token"`
 }
 
 func (o *NewFeiShu) GetAccessToken() *NewFeiShu {
@@ -59,15 +68,28 @@ func (o *NewFeiShu) GetAccessToken() *NewFeiShu {
 		"app_secret": o.AppSecret,
 	}
 
-	Path := "open-apis/auth/v3/tenant_access_token/internal"
+	Path := "/open-apis/auth/v3/tenant_access_token/internal"
 
-	res := mFetch.NewHttp(mFetch.HttpParam{
-		Origin: "https://open.feishu.cn/open-apis",
+	if o.AppType == "store" {
+		Path = "/open-apis/auth/v3/tenant_access_token"
+	}
+
+	res := mFetch.NewHttp(mFetch.HttpOpt{
+		Origin: "https://open.feishu.cn",
 		Path:   Path,
 		Data:   data,
 	}).Post()
 
-	fmt.Println(string(res))
+	if len(res) < 5 {
+		return o
+	}
+
+	var result TenantAccessToken
+	jsoniter.Unmarshal(res, &result)
+
+	if result.Code == 0 {
+		o.AccessToken = result.TenantAccessToken
+	}
 
 	return o
 }
