@@ -9,18 +9,42 @@ import (
 	jsoniter "github.com/json-iterator/go"
 )
 
+/*
+
+	feishuApp := mFeiShu.New(mFeiShu.Opt{
+		AppID:     "cli_a2xxxxxd00d",
+		AppSecret: "MDMJxxxxxxlTL4ptPT",
+	})
+
+	str := mStr.Join(
+		"交易方向: **", "开多", "** \n",
+		"交易币种: **", "avax", "** \n",
+	)
+
+	feishuApp.SendMessage(mFeiShu.MsgOpt{
+		ReceiveType: "user_id",
+		ReceiveId:   "d8xxxxgc",
+		Content:     str,
+	})
+
+*/
+
 type Opt struct {
 	AppID     string
 	AppSecret string
 	AppType   string // 企业内 & 应用商店  company &  store
+	CardType  int    // 1 ,2 ,3, 4
 	Event     func(string, string)
 }
 
 type NewFeiShu struct {
+	Origin      string
 	AppID       string
 	AppSecret   string
+	CardType    int
 	AppType     string
 	AccessToken string
+	Event       func(string, string)
 }
 
 func New(opt Opt) *NewFeiShu {
@@ -37,6 +61,20 @@ func New(opt Opt) *NewFeiShu {
 	var o NewFeiShu
 	o.AppID = opt.AppID
 	o.AppSecret = opt.AppSecret
+	o.Origin = "https://open.feishu.cn"
+
+	if opt.CardType < 1 {
+		o.CardType = 1
+	} else {
+		o.CardType = opt.CardType
+	}
+
+	// 函数空指针的处理
+	if opt.Event != nil {
+		o.Event = opt.Event
+	} else {
+		o.Event = func(s1, s2 string) {}
+	}
 
 	if len(opt.AppType) < 5 {
 		o.AppType = "company"
@@ -75,10 +113,12 @@ func (o *NewFeiShu) GetAccessToken() *NewFeiShu {
 	}
 
 	res := mFetch.NewHttp(mFetch.HttpOpt{
-		Origin: "https://open.feishu.cn",
+		Origin: o.Origin,
 		Path:   Path,
 		Data:   data,
 	}).Post()
+
+	o.Event("GetAccessToken", string(res))
 
 	if len(res) < 5 {
 		return o
