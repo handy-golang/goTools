@@ -1,4 +1,4 @@
-package mWss
+package mFetch
 
 import (
 	"fmt"

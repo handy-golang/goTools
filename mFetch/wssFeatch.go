@@ -1,4 +1,4 @@
-package mWss
+package mFetch
 
 import (
 	"fmt"
@@ -102,7 +102,7 @@ type WssParam struct {
 	NoResSec int
 }
 
-func Connection(param WssParam) *Wss {
+func NewWss(param WssParam) *Wss {
 	var w Wss
 
 	w.Event = param.Event
