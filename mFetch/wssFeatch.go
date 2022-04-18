@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"time"
 
+	"github.com/EasyGolang/goTools/mStr"
 	"github.com/gorilla/websocket"
 )
 
@@ -26,9 +27,9 @@ type Wss struct {
 // 写入内容
 func (w *Wss) WriteData(content []byte) *Wss {
 	err := w.Conn.WriteMessage(websocket.TextMessage, content)
-	w.Log("Write", string(content))
+	w.Event("Write", string(content))
 	if err != nil {
-		w.Log("WriteErr", err)
+		w.Event("WriteErr", mStr.ToStr(err))
 		w.Close()
 	}
 	return w
@@ -37,9 +38,9 @@ func (w *Wss) WriteData(content []byte) *Wss {
 // 发送 ping
 func (w *Wss) SendPing() {
 	err := w.Conn.WriteMessage(websocket.TextMessage, []byte("ping"))
-	w.Log("Ping", w.PingSec)
+	w.Event("Ping", mStr.ToStr(w.PingSec))
 	if err != nil {
-		w.Log("PingErr", err)
+		w.Event("PingErr", mStr.ToStr(err))
 		w.Close()
 	}
 }
@@ -49,7 +50,7 @@ func (w *Wss) ReadData(outcome func(msg []byte)) {
 	for {
 		_, data, err := w.Conn.ReadMessage()
 		if err != nil {
-			w.Log("ReadErr", err)
+			w.Event("ReadErr", mStr.ToStr(err))
 			w.Close()
 			break
 		}
@@ -60,7 +61,7 @@ func (w *Wss) ReadData(outcome func(msg []byte)) {
 			outcome(data)
 		} else {
 			// 数据大小不对
-			w.Log("Pong", string(data))
+			w.Event("Pong", string(data))
 		}
 
 		w.Ticker.Reset(time.Second * time.Duration(w.PingSec))
@@ -75,11 +76,11 @@ func (w *Wss) ReadData(outcome func(msg []byte)) {
 }
 
 func (w *Wss) Close() *Wss {
-	w.Log("WssClose", w.Module)
+	w.Event("WssClose", w.Module)
 
 	err := w.Conn.Close()
 	if err != nil {
-		w.Log("CloseErr", err)
+		w.Event("CloseErr", mStr.ToStr(err))
 	}
 
 	w.Ticker.Stop()
@@ -142,7 +143,7 @@ func NewWss(opt WssOpt) *Wss {
 	w.Conn = conn
 
 	if err != nil {
-		w.Log("ConnectErr", err)
+		w.Event("ConnectErr", mStr.ToStr(err))
 		w.Close()
 	}
 
@@ -161,7 +162,7 @@ func NewWss(opt WssOpt) *Wss {
 	// 如果未响应，则关闭连接重启
 	go func() {
 		for range w.PongTicker.C {
-			w.Log("PongErr", fmt.Sprint(w.NoResSec)+"秒无响应", err)
+			w.Event("PongErr", fmt.Sprint(w.NoResSec)+"秒无响应")
 			w.Close()
 			break
 		}

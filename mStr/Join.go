@@ -1,6 +1,7 @@
 package mStr
 
 import (
+	"fmt"
 	"os"
 	"strings"
 )
@@ -8,6 +9,10 @@ import (
 /*
 拼接字符串
 */
+
+func ToStr(p any) string {
+	return fmt.Sprintf("%+v", p)
+}
 
 func Join(s ...string) string {
 	var build strings.Builder
