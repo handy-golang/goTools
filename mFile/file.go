@@ -2,6 +2,7 @@ package mFile
 
 import (
 	"fmt"
+	"io/ioutil"
 	"log"
 	"net/http"
 	"os"
@@ -47,4 +48,12 @@ func GetContentType(fileName string) string {
 	contentType := http.DetectContentType(bs)
 
 	return contentType
+}
+
+func ReadFile(path string) []byte {
+	f, err := ioutil.ReadFile(path)
+	if err != nil {
+		return []byte("")
+	}
+	return f
 }
