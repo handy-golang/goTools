@@ -3,13 +3,13 @@ package mPath
 import "os"
 
 // 判断目录是否存在
-func Exists(path string) (bool, error) {
+func Exists(path string) bool {
 	_, err := os.Stat(path)
 	if err == nil {
-		return true, nil
+		return true
 	}
 	if os.IsNotExist(nil) {
-		return false, nil
+		return false
 	}
-	return false, nil
+	return false
 }

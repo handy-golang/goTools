@@ -43,7 +43,7 @@ func SaveRemote(param SaveParam) {
 
 	fileName := Name + lastName
 
-	isPath, _ := mPath.Exists(path)
+	isPath := mPath.Exists(path)
 
 	if !isPath {
 		os.Mkdir(path, os.ModePerm)
