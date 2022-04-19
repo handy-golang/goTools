@@ -19,6 +19,11 @@ func New(param Opt) *Cycle {
 	var CycleObj Cycle
 
 	CycleObj.Func = param.Func
+
+	if CycleObj.Func == nil {
+		CycleObj.Func = func() {}
+	}
+
 	CycleObj.SleepTime = param.SleepTime
 	CycleObj.Status = 1 // 表示开始循环
 

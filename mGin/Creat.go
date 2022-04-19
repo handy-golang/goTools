@@ -9,7 +9,20 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
-func SPAServer(uri string, router *gin.Engine) {
+type SPAServerOpt struct {
+	Path   string      // 静态文件目录
+	Router *gin.Engine // 创建好的 Gin
+}
+
+func SPAServer(opt SPAServerOpt) *gin.Engine {
+	uri := "./"
+	router := opt.Router
+
+	if router == nil {
+		errStr := fmt.Errorf("缺少 Router 参数 ")
+		panic(errStr)
+	}
+
 	router.Use(Public)
 
 	router.StaticFile("/", uri+"/index.html")
@@ -35,4 +48,6 @@ func SPAServer(uri string, router *gin.Engine) {
 	router.NoRoute(func(c *gin.Context) {
 		c.File(uri + "/index.html")
 	})
+
+	return router
 }

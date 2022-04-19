@@ -31,20 +31,20 @@ import (
 
 */
 
-type HttpOpt struct {
-	Origin string
-	Path   string
-	Data   map[string]any
-	Header map[string]string
-	Event  func(string, string)
-}
-
 type Http struct {
 	Url     string
 	OptData map[string]any
 	Data    []byte
 	Header  map[string]string
 	Event   func(string, string)
+}
+
+type HttpOpt struct {
+	Origin string
+	Path   string
+	Data   map[string]any
+	Header map[string]string
+	Event  func(string, string)
 }
 
 func NewHttp(opt HttpOpt) *Http {

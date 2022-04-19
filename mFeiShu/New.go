@@ -29,14 +29,6 @@ import (
 
 */
 
-type Opt struct {
-	AppID     string
-	AppSecret string
-	AppType   string // 企业内 & 应用商店  company &  store
-	CardType  int    // 1 ,2 ,3, 4
-	Event     func(string, string)
-}
-
 type NewFeiShu struct {
 	Origin      string
 	AppID       string
@@ -45,6 +37,14 @@ type NewFeiShu struct {
 	AppType     string
 	AccessToken string
 	Event       func(string, string)
+}
+
+type Opt struct {
+	AppID     string
+	AppSecret string
+	AppType   string // 企业内 & 应用商店  company &  store
+	CardType  int    // 1 ,2 ,3, 4
+	Event     func(string, string)
 }
 
 func New(opt Opt) *NewFeiShu {
@@ -83,7 +83,7 @@ func New(opt Opt) *NewFeiShu {
 	}
 
 	// 获取 AccessToken
-	mCycle.New(mCycle.CycleParam{
+	mCycle.New(mCycle.Opt{
 		Func: func() {
 			o.GetAccessToken()
 		},
