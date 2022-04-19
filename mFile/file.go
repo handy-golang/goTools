@@ -12,11 +12,6 @@ import (
 
 // 写入文件内容 fileName 为文件的路径
 func Write(fileName string, content string) {
-	if !mPath.IsFile(fileName) {
-		errorsStr := fmt.Errorf("fileName必须为一个文件")
-		panic(errorsStr)
-	}
-
 	f, err := os.OpenFile(fileName, os.O_WRONLY|os.O_TRUNC|os.O_CREATE, 0o644)
 	if err != nil {
 		panic("file create failed. err: " + err.Error())
@@ -30,6 +25,11 @@ func Write(fileName string, content string) {
 
 // 获取一个文件的类型
 func GetContentType(fileName string) string {
+	if !mPath.IsFile(fileName) {
+		errorsStr := fmt.Errorf("fileName必须为一个文件")
+		panic(errorsStr)
+	}
+
 	file, err := os.Open(fileName)
 	if err != nil {
 		panic("读取文件出错")
@@ -50,8 +50,14 @@ func GetContentType(fileName string) string {
 	return contentType
 }
 
-func ReadFile(path string) []byte {
-	f, err := ioutil.ReadFile(path)
+func ReadFile(fileName string) []byte {
+	if !mPath.IsFile(fileName) {
+		errStr := fmt.Errorf("fileName必须为一个文件")
+		log.Println(errStr)
+		return []byte("")
+	}
+
+	f, err := ioutil.ReadFile(fileName)
 	if err != nil {
 		return []byte("")
 	}
