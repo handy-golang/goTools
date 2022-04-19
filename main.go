@@ -3,28 +3,17 @@ package main
 import (
 	"fmt"
 
-	"github.com/EasyGolang/goTools/mFeiShu"
-	"github.com/EasyGolang/goTools/mStr"
+	"github.com/EasyGolang/goTools/mCount"
 )
 
 func main() {
 	fmt.Println(" =========  START  ========= ")
 
-	feishuApp := mFeiShu.New(mFeiShu.Opt{
-		AppID:     "cli_xxxx78d00d",
-		AppSecret: "MDMJs33KsiH9FAxr74MqSXG3lTL4ptPT",
-	})
-
-	str := mStr.Join(
-		"交易方向: **", "开多", "** \n",
-		"交易币种: **", "avax", "** \n",
-	)
-
-	feishuApp.SendMessage(mFeiShu.MsgOpt{
-		ReceiveType: "user_id",
-		ReceiveId:   "d8xxx42gc",
-		Content:     str,
-	})
+	ll := []string{
+		"1", "2", "3", "4",
+	}
+	r := mCount.Sum(ll)
+	fmt.Println(r)
 
 	fmt.Println(" =========   END   ========= ")
 }

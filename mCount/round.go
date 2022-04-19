@@ -10,7 +10,7 @@ import (
 	随机数整数
 */
 
-func GetRand(min, max int64) int64 {
+func GetRound(min, max int64) int64 {
 	if min > max {
 		panic("the min is greater than max!")
 	}

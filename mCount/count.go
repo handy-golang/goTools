@@ -45,7 +45,7 @@ func Per(a, b string) string {
 }
 
 // (a/b)*100 保留三位小数
-func PerRand(a, b string) string {
+func PerCent(a, b string) string {
 	n := toDec(a).Div(toDec(b)).Mul(toDec("100"))
 	return n.RoundDown(3).String()
 }
@@ -57,7 +57,7 @@ func Rose(a, b string) string {
 }
 
 // ( (a-b)/b )*100 保留 3 位小数
-func RoseRand(a, b string) string {
+func RoseCent(a, b string) string {
 	n := toDec(a).Sub(toDec(b)).Div(toDec(b)).Mul(toDec("100"))
 	return n.RoundDown(3).String()
 }
