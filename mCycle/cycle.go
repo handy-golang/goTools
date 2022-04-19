@@ -4,18 +4,18 @@ import (
 	"time"
 )
 
-type CycleParam struct {
-	Func      func()
-	SleepTime time.Duration
-}
-
 type Cycle struct {
 	Func      func()
 	SleepTime time.Duration
 	Status    int
 }
 
-func New(param CycleParam) *Cycle {
+type Opt struct {
+	Func      func()
+	SleepTime time.Duration
+}
+
+func New(param Opt) *Cycle {
 	var CycleObj Cycle
 
 	CycleObj.Func = param.Func
