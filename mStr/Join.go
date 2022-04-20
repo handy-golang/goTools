@@ -15,6 +15,7 @@ import (
 	a := []rune("mo7欢迎你")
 	a := []byte("mo7欢迎你")
 	a := 10.97
+	a := os.PathSeparator
 
 	str := mStr.ToStr(a)
 
