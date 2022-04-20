@@ -6,7 +6,7 @@ func Start() {
 	logStr := `
 	#########################################################
 	####                欢迎使用 goTools                   ###     
-	####       github.com/EasyGolang/goTools v0.6.6       ###     
+	####       github.com/EasyGolang/goTools v0.6.7       ###     
 	####              go clean --modcache                 ###     
 	####          作者邮箱 meichangliang@mo7.cc            ###      
 	####  项目地址 https://github.com/EasyGolang/goTools   ###     
