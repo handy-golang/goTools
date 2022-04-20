@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"time"
 
+	"github.com/EasyGolang/goTools/mStr"
 	"go.mongodb.org/mongo-driver/mongo"
 	"go.mongodb.org/mongo-driver/mongo/options"
 	"go.mongodb.org/mongo-driver/mongo/readpref"
@@ -124,7 +125,11 @@ func (info *DBInfo) Connect() *DBInfo {
 
 	info.Client = Client
 
+	info.Event("Connected", "连接成功")
+
 	info.db = info.Client.Database(info.dbName)
+
+	info.Event("Database", info.dbName)
 
 	return info
 }
@@ -136,10 +141,11 @@ func (info *DBInfo) Ping() error {
 
 func (info *DBInfo) Close() {
 	info.cancel()
+	info.Event("Close", mStr.ToStr(info))
 }
 
 func (info *DBInfo) Collection(tableName string) *DBInfo {
 	info.Table = info.db.Collection(tableName)
-
+	info.Event("Collection", tableName)
 	return info
 }
