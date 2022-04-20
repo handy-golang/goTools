@@ -11,7 +11,18 @@ import (
 */
 
 func ToStr(p any) string {
-	return fmt.Sprintf("%+v", p)
+	returnStr := ""
+
+	switch p.(type) {
+
+	case string:
+
+	case int:
+	default:
+		returnStr = fmt.Sprintf("%+v", p)
+	}
+
+	return returnStr
 }
 
 func Join(s ...string) string {
