@@ -3,6 +3,7 @@ package mStr
 import (
 	"fmt"
 	"os"
+	"reflect"
 	"strings"
 )
 
@@ -19,12 +20,16 @@ import (
 
 */
 func ToStr(p any) string {
-	// fmt.Println("type: ", reflect.TypeOf(p))
+	fmt.Println("type: ", reflect.TypeOf(p))
 	returnStr := ""
 	switch p := p.(type) {
 	case []int32:
 		returnStr = string(p)
 	case []uint8:
+		returnStr = string(p)
+	case int32:
+		returnStr = string(p)
+	case uint8:
 		returnStr = string(p)
 	default:
 		returnStr = fmt.Sprintf("%+v", p)
