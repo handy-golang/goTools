@@ -102,7 +102,7 @@ import (
 */
 
 // 连接数据库
-func (info *DBInfo) Connect() *DBInfo {
+func (info *DB) Connect() *DB {
 	info.Ctx, info.cancel = context.WithTimeout(
 		context.Background(),
 		time.Duration(info.Timeout)*time.Second,
@@ -134,17 +134,17 @@ func (info *DBInfo) Connect() *DBInfo {
 	return info
 }
 
-func (info *DBInfo) Ping() error {
+func (info *DB) Ping() error {
 	err := info.Client.Ping(info.Ctx, readpref.Primary())
 	return err
 }
 
-func (info *DBInfo) Close() {
+func (info *DB) Close() {
 	info.cancel()
 	info.Event("Close", mStr.ToStr(info))
 }
 
-func (info *DBInfo) Collection(tableName string) *DBInfo {
+func (info *DB) Collection(tableName string) *DB {
 	info.Table = info.db.Collection(tableName)
 	info.Event("Collection", tableName)
 	return info

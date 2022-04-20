@@ -20,7 +20,7 @@ type Opt struct {
 	Event    func(string, string)
 }
 
-type DBInfo struct {
+type DB struct {
 	URI     string
 	Event   func(string, string)
 	Client  *mongo.Client
@@ -32,7 +32,7 @@ type DBInfo struct {
 	Timeout int // 超时时长
 }
 
-func New(opt Opt) *DBInfo {
+func New(opt Opt) *DB {
 	var optNilStr []string
 	if len(opt.DBName) < 2 {
 		optNilStr = append(optNilStr, "Database")
@@ -57,7 +57,7 @@ func New(opt Opt) *DBInfo {
 	if len(optNilStr) > 0 {
 		fmt.Println("缺少参数:", strings.Join(optNilStr, ","))
 	}
-	var NewDB DBInfo
+	var NewDB DB
 
 	NewDB.dbName = opt.DBName
 
