@@ -15,5 +15,7 @@ func main() {
 	r := mCount.Sum(ll)
 	fmt.Println(r)
 
+	mCount.RoseCent("1", "2")
+
 	fmt.Println(" =========   END   ========= ")
 }
