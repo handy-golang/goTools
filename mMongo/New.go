@@ -15,7 +15,7 @@ type Opt struct {
 	Password string
 	Host     string
 	Port     string
-	Database string
+	DBName   string
 	Timeout  int // 秒
 	Event    func(string, string)
 }
@@ -24,14 +24,17 @@ type DBInfo struct {
 	URI     string
 	Event   func(string, string)
 	Client  *mongo.Client
+	dbName  string
 	Ctx     context.Context
-	Close   context.CancelFunc
+	cancel  context.CancelFunc
+	db      *mongo.Database
+	Table   *mongo.Collection
 	Timeout int // 超时时长
 }
 
 func New(opt Opt) *DBInfo {
 	var optNilStr []string
-	if len(opt.Database) < 2 {
+	if len(opt.DBName) < 2 {
 		optNilStr = append(optNilStr, "Database")
 	}
 	// 如果没有 URI 则要检查 账户信息
@@ -56,6 +59,8 @@ func New(opt Opt) *DBInfo {
 	}
 	var NewDB DBInfo
 
+	NewDB.dbName = opt.DBName
+
 	if opt.Timeout < 1 {
 		NewDB.Timeout = 10
 	} else {
@@ -69,7 +74,7 @@ func New(opt Opt) *DBInfo {
 			"mongodb://",
 			opt.UserName, ":", opt.Password,
 			"@", opt.Host, ":", opt.Port,
-			"/", opt.Database,
+			"/", NewDB.dbName,
 		)
 	}
 

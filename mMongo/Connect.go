@@ -12,7 +12,7 @@ import (
 
 // 连接数据库
 func (info *DBInfo) Connect() *DBInfo {
-	info.Ctx, info.Close = context.WithTimeout(
+	info.Ctx, info.cancel = context.WithTimeout(
 		context.Background(),
 		time.Duration(info.Timeout)*time.Second,
 	)
@@ -33,6 +33,9 @@ func (info *DBInfo) Connect() *DBInfo {
 	}
 
 	info.Client = Client
+
+	info.db = info.Client.Database(info.dbName)
+
 	return info
 }
 
@@ -41,6 +44,11 @@ func (info *DBInfo) Ping() error {
 	return err
 }
 
-func (info *DBInfo) Database(dbName string) {
-	info.Client.Database(dbName)
+func (info *DBInfo) Close() {
+	info.cancel()
+}
+
+func (info *DBInfo) Collection(tableName string) *DBInfo {
+	info.Table = info.db.Collection(tableName)
+	return info
 }
