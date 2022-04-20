@@ -10,14 +10,22 @@ import (
 拼接字符串
 */
 
+/*
+	a := []rune("mo7欢迎你")
+	a := []byte("mo7欢迎你")
+	a := 10.97
+
+	str := mStr.ToStr(a)
+
+*/
 func ToStr(p any) string {
+	// fmt.Println("type: ", reflect.TypeOf(p))
 	returnStr := ""
-
-	switch p.(type) {
-
-	case string:
-
-	case int:
+	switch p := p.(type) {
+	case []int32:
+		returnStr = string(p)
+	case []uint8:
+		returnStr = string(p)
 	default:
 		returnStr = fmt.Sprintf("%+v", p)
 	}
