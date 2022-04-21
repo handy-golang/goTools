@@ -9,13 +9,18 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
-type SPAServerOpt struct {
+type SPAOpt struct {
 	Path   string      // 静态文件目录
 	Router *gin.Engine // 创建好的 Gin
 }
 
-func SPAServer(opt SPAServerOpt) *gin.Engine {
-	uri := "./"
+func SPAServer(opt SPAOpt) *gin.Engine {
+	if len(opt.Path) < 1 {
+		errStr := fmt.Errorf("缺少 Path 参数 ")
+		panic(errStr)
+	}
+
+	uri := opt.Path
 	router := opt.Router
 
 	if router == nil {
