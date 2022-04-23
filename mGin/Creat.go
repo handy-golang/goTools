@@ -10,9 +10,8 @@ import (
 )
 
 type SPAOpt struct {
-	Root         string      // 静态文件目录
-	RelativePath string      // 路由
-	Router       *gin.Engine // 创建好的 Gin
+	Root   string      // 静态文件目录
+	Router *gin.Engine // 创建好的 Gin
 }
 
 func SPAServer(opt SPAOpt) *gin.Engine {
@@ -31,7 +30,7 @@ func SPAServer(opt SPAOpt) *gin.Engine {
 
 	router.Use(Public)
 
-	router.StaticFile(opt.RelativePath, uri+"/index.html")
+	router.StaticFile("/", uri+"/index.html")
 
 	fileInfoList, err := ioutil.ReadDir(uri)
 	if err != nil {
@@ -44,10 +43,10 @@ func SPAServer(opt SPAOpt) *gin.Engine {
 		path := uri + "/" + name
 
 		if mPath.IsDir(path) {
-			router.StaticFS(opt.RelativePath+name, http.Dir(path))
+			router.StaticFS("/"+name, http.Dir(path))
 		}
 		if mPath.IsFile(path) {
-			router.StaticFile(opt.RelativePath+name, path)
+			router.StaticFile("/"+name, path)
 		}
 	}
 
