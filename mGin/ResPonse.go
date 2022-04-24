@@ -1,11 +1,5 @@
 package mGin
 
-type ResType struct {
-	Code int    `json:"code"` // 返回码
-	Data any    `json:"data"` // 返回数据
-	Msg  string `json:"msg"`  // 描述
-}
-
 /*
 var (
 	// OK
@@ -37,6 +31,11 @@ var (
 mGin.ConfigSucceed.WithData(result)
 
 */
+type ResType struct {
+	Code int    `json:"Code"` // 返回码
+	Data any    `json:"Data"` // 返回数据
+	Msg  string `json:"Msg"`  // 描述
+}
 
 func Response(code int, msg string) *ResType {
 	return &ResType{
