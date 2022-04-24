@@ -3,15 +3,15 @@ package main
 import (
 	"fmt"
 
-	"github.com/EasyGolang/goTools/mVerify"
+	"github.com/EasyGolang/goTools/mEncrypt"
 )
 
 func main() {
 	fmt.Println(" =========  START  ========= ")
 
 	for i := 0; i < 10; i++ {
-		vCode := mVerify.NewCode()
-		fmt.Println(vCode)
+		uuid := mEncrypt.GetUUID()
+		fmt.Println(uuid)
 	}
 	fmt.Println(" =========   END   ========= ")
 }
