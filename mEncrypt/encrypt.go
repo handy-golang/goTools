@@ -12,13 +12,13 @@ import (
 	"github.com/EasyGolang/goTools/mStr"
 )
 
-func Sha256(message string, secretKey string) (string, error) {
+func Sha256(message string, secretKey string) string {
 	mac := hmac.New(sha256.New, []byte(secretKey))
 	_, err := mac.Write([]byte(message))
 	if err != nil {
-		return "", err
+		return ""
 	}
-	return base64.StdEncoding.EncodeToString(mac.Sum(nil)), nil
+	return base64.StdEncoding.EncodeToString(mac.Sum(nil))
 }
 
 func Sum256(data string) string {
@@ -51,9 +51,7 @@ func GetOkxSign(param OkxSignInfo) string {
 		param.Body,
 	)
 
-	sign, err := Sha256(signStr, param.SecretKey)
-	if err != nil {
-		return ""
-	}
+	sign := Sha256(signStr, param.SecretKey)
+
 	return sign
 }
