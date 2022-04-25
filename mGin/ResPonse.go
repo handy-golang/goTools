@@ -60,3 +60,11 @@ func (o *ResType) WithData(data any) ResType {
 		Data: data,
 	}
 }
+
+func (o *ResType) With(message string, data any) ResType {
+	return ResType{
+		Code: o.Code,
+		Msg:  message,
+		Data: data,
+	}
+}
