@@ -2,6 +2,7 @@ package main
 
 import (
 	"fmt"
+	"time"
 
 	"github.com/EasyGolang/goTools/mEncrypt"
 )
@@ -9,23 +10,32 @@ import (
 func main() {
 	fmt.Println(" =========  START  ========= ")
 
-	for i := 0; i < 10; i++ {
-		str := mEncrypt.RandStr(8)
-		fmt.Println(str)
+	SecretKey := "meichangliang"
 
-	}
+	tokenStr1 := mEncrypt.NewToken(mEncrypt.NewTokenOpt{
+		SecretKey: SecretKey,                        // key
+		ExpiresAt: time.Now().Add(60 * time.Second), // 过期时间
+		Message:   "kjhgfyu",
+		Issuer:    "mo7.cc",
+		Subject:   "UserToken",
+	}).Generate()
+
+	tokenStr2 := mEncrypt.NewToken(mEncrypt.NewTokenOpt{
+		SecretKey: SecretKey,                        // key
+		ExpiresAt: time.Now().Add(60 * time.Second), // 过期时间
+		Message:   "abcde",
+		Issuer:    "mo7.cc",
+		Subject:   "UserToken",
+	}).Generate()
+
+	fmt.Println("tokenStr1", tokenStr1)
+	fmt.Println("tokenStr2", tokenStr2)
+	mes2 := mEncrypt.ParseToken(tokenStr2)
+
+	mes1 := mEncrypt.ParseToken(tokenStr1)
+
+	fmt.Println("mes1", mes1)
+	fmt.Println("mes2", mes2)
 
 	fmt.Println(" =========   END   ========= ")
 }
-
-/*
-1L6olEDHzaUAHg2r1yJeYiyasmLbtA98pkPChumdWGI=
-1L6olEDHzaUAHg2r1yJeYiyasmLbtA98pkPChumdWGI=
-
-
-
-nHQQuqFyWopraPbQgBUChWncXhPAclWlOfOHLnPDG0c=
-nHQQuqFyWopraPbQgBUChWncXhPAclWlOfOHLnPDG0c=
-
-
-*/
