@@ -68,15 +68,15 @@ func (Obj *TokenObj) Generate() string {
 	return token
 }
 
-func ParseToken(tokenString string, SecretKey string) string {
+func ParseToken(tokenString string, SecretKey string) Claims {
 	Claims := &Claims{}
 	jwt.ParseWithClaims(
 		tokenString,
 		Claims,
 		func(token *jwt.Token) (i interface{}, err error) {
-			return []byte(SecretKey), nil
+			return []byte("SecretKey"), nil
 		},
 	)
 
-	return Claims.Message
+	return *Claims
 }
