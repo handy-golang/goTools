@@ -30,9 +30,9 @@ func main() {
 
 	fmt.Println("tokenStr1", tokenStr1)
 	fmt.Println("tokenStr2", tokenStr2)
-	mes2 := mEncrypt.ParseToken(tokenStr2)
+	mes2 := mEncrypt.ParseToken(tokenStr2, SecretKey)
 
-	mes1 := mEncrypt.ParseToken(tokenStr1)
+	mes1 := mEncrypt.ParseToken(tokenStr1, SecretKey)
 
 	fmt.Println("mes1", mes1)
 	fmt.Println("mes2", mes2)

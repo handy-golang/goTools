@@ -54,13 +54,13 @@ func (Obj *TokenObj) Generate() string {
 	claims := Claims{
 		Message: Obj.Message,
 		StandardClaims: jwt.StandardClaims{
-			ExpiresAt: Obj.ExpiresAt.Unix(), // 过期时间
+			ExpiresAt: Obj.ExpiresAt.Unix(),
 			IssuedAt:  time.Now().Unix(),
 			Issuer:    Obj.Issuer,
 			Subject:   Obj.Subject,
 		},
 	}
-	token, err := jwt.NewWithClaims(jwt.SigningMethodHS256, claims).SignedString([]byte("golang"))
+	token, err := jwt.NewWithClaims(jwt.SigningMethodHS256, claims).SignedString(Obj.SecretKey)
 	if err != nil {
 		fmt.Println(err)
 		return ""
@@ -68,13 +68,13 @@ func (Obj *TokenObj) Generate() string {
 	return token
 }
 
-func ParseToken(tokenString string) string {
+func ParseToken(tokenString string, SecretKey string) string {
 	Claims := &Claims{}
 	jwt.ParseWithClaims(
 		tokenString,
 		Claims,
 		func(token *jwt.Token) (i interface{}, err error) {
-			return "", nil
+			return []byte(SecretKey), nil
 		},
 	)
 
