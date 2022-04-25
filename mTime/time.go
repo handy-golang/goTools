@@ -29,28 +29,18 @@ func MsToTime(ms string, diff string) time.Time {
 	return time.Now()
 }
 
+func StrFormat(ms string) string {
+	T := MsToTime(ms, "0")
+
+	timeStr := T.Format("2006-01-02T15:04:05")
+
+	return timeStr
+}
+
 // 获取 13 位毫秒时间戳
 func GetUnix() string {
 	unix := time.Now().UnixNano() / 1e6
 	str := strconv.FormatInt(unix, 10)
 
 	return str
-}
-
-// 2022-02-23T13:39:24.630Z
-func IsoTime() string {
-	utcTime := time.Now().UTC()
-	iso := utcTime.String()
-	isoBytes := []byte(iso)
-	iso = string(isoBytes[:10]) + "T" + string(isoBytes[11:23]) + "Z"
-	return iso
-}
-
-func EpochTime() string {
-	millisecond := time.Now().UnixNano() / 1000000
-	epoch := strconv.Itoa(int(millisecond))
-	epochBytes := []byte(epoch)
-	epoch = string(epochBytes[:10])
-
-	return epoch
 }
