@@ -8,11 +8,12 @@ import (
 
 func main() {
 	fmt.Println(" =========  START  ========= ")
-	message := "ab123cdef"
-	secretKey := "meicha44ngliang"
-	shaStr := mEncrypt.Sha256(message, secretKey)
 
-	fmt.Println("shaStr", shaStr)
+	for i := 0; i < 10; i++ {
+		str := mEncrypt.RandStr(8)
+		fmt.Println(str)
+
+	}
 
 	fmt.Println(" =========   END   ========= ")
 }
