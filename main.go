@@ -30,12 +30,12 @@ func main() {
 
 	fmt.Println("tokenStr1", tokenStr1)
 	fmt.Println("tokenStr2", tokenStr2)
-	mes2 := mEncrypt.ParseToken(tokenStr2, SecretKey)
+	Message1, ok1 := mEncrypt.ParseToken(tokenStr1, SecretKey+"1")
 
-	mes1 := mEncrypt.ParseToken(tokenStr1, SecretKey)
+	Message2, ok2 := mEncrypt.ParseToken(tokenStr2, SecretKey)
 
-	fmt.Println("mes1", mes1)
-	fmt.Println("mes2", mes2)
+	fmt.Println("mes1", Message1, ok1)
+	fmt.Println("mes2", Message2, ok2)
 
 	fmt.Println(" =========   END   ========= ")
 }

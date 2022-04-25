@@ -68,15 +68,18 @@ func (Obj *TokenObj) Generate() string {
 	return token
 }
 
-func ParseToken(tokenString string, SecretKey string) Claims {
+func ParseToken(tokenString string, SecretKey string) (Claims, bool) {
 	Claims := &Claims{}
-	jwt.ParseWithClaims(
+	token, err := jwt.ParseWithClaims(
 		tokenString,
 		Claims,
 		func(token *jwt.Token) (i interface{}, err error) {
-			return []byte("SecretKey"), nil
+			return []byte(SecretKey), nil
 		},
 	)
+	if err != nil || !token.Valid {
+		return *Claims, false
+	}
 
-	return *Claims
+	return *Claims, token.Valid
 }
