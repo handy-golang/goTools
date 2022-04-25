@@ -10,7 +10,7 @@ import (
 func main() {
 	fmt.Println(" =========  START  ========= ")
 
-	SecretKey := "meichangliang"
+	SecretKey := "asdafas"
 
 	tokenStr1 := mEncrypt.NewToken(mEncrypt.NewTokenOpt{
 		SecretKey: SecretKey,                        // key
