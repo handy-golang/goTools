@@ -3,7 +3,7 @@ package mStart
 import "fmt"
 
 func Start() {
-	logStr := `
+	logStr := ` 
 	#########################################################
 	####                欢迎使用 goTools                   ###     
 	####       github.com/EasyGolang/goTools v0.7.2       ###     
