@@ -8,6 +8,7 @@ require (
 	github.com/gocolly/colly v1.2.0
 	github.com/google/uuid v1.3.0
 	github.com/gorilla/websocket v1.5.0
+	github.com/jordan-wright/email v4.0.1-0.20210109023952-943e75fe5223+incompatible
 	github.com/json-iterator/go v1.1.12
 	github.com/shopspring/decimal v1.3.1
 	go.mongodb.org/mongo-driver v1.9.0
