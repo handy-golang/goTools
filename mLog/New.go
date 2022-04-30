@@ -16,7 +16,7 @@ func NewLog(param NewLogParam) *log.Logger {
 	LogName := param.Name
 
 	file := FilePath + "/" + LogName + "-" + time.Now().Format("06年1月02日15时") + ".log"
-	logFile, err := os.OpenFile(file, os.O_RDWR|os.O_CREATE|os.O_APPEND, 0o766)
+	logFile, err := os.OpenFile(file, os.O_RDWR|os.O_CREATE|os.O_APPEND, 0o777)
 	if nil != err {
 		panic(err)
 	}

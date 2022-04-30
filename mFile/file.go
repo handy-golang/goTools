@@ -12,7 +12,7 @@ import (
 
 // 写入文件内容 fileName 为文件的路径
 func Write(fileName string, content string) {
-	f, err := os.OpenFile(fileName, os.O_WRONLY|os.O_TRUNC|os.O_CREATE, 0o644)
+	f, err := os.OpenFile(fileName, os.O_WRONLY|os.O_TRUNC|os.O_CREATE, 0o777)
 	if err != nil {
 		panic("file create failed. err: " + err.Error())
 	} else {
