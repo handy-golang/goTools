@@ -18,7 +18,6 @@ func Write(fileName string, content string) {
 	} else {
 		n, _ := f.Seek(0, os.SEEK_END)
 		f.WriteAt([]byte(content), n)
-		log.Println(fileName, "write succeed!")
 		defer f.Close()
 	}
 }
