@@ -31,7 +31,6 @@ func MsToTime(ms string, diff string) time.Time {
 
 func StrFormat(ms string) string {
 	T := MsToTime(ms, "0")
-
 	timeStr := T.Format("2006-01-02T15:04:05")
 
 	return timeStr
@@ -43,4 +42,8 @@ func GetUnix() string {
 	str := strconv.FormatInt(unix, 10)
 
 	return str
+}
+
+func GetUnixInt64() int64 {
+	return time.Now().UnixNano() / 1e6
 }
