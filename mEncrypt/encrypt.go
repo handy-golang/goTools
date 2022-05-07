@@ -7,9 +7,6 @@ import (
 	"encoding/base64"
 	"encoding/hex"
 	"fmt"
-	"strings"
-
-	"github.com/EasyGolang/goTools/mStr"
 )
 
 func Sha256(message string, secretKey string) string {
@@ -33,25 +30,4 @@ func MD5(v string) string {
 	m := md5.New()
 	m.Write(d)
 	return hex.EncodeToString(m.Sum(nil))
-}
-
-type OkxSignInfo struct {
-	Timestamp   string
-	Method      string
-	RequestPath string
-	Body        string
-	SecretKey   string
-}
-
-func GetOkxSign(param OkxSignInfo) string {
-	signStr := mStr.Join(
-		param.Timestamp,
-		strings.ToUpper(param.Method),
-		param.RequestPath,
-		param.Body,
-	)
-
-	sign := Sha256(signStr, param.SecretKey)
-
-	return sign
 }
