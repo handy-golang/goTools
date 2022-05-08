@@ -8,3 +8,9 @@ func IsEmail(str string) bool {
 	reg := regexp.MustCompile(pattern)
 	return reg.MatchString(str)
 }
+
+func IsNickName(str string) bool {
+	pattern := "^[a-zA-Z0-9_\u4e00-\u9fa5]{1,12}$"
+	reg := regexp.MustCompile(pattern)
+	return reg.MatchString(str)
+}
