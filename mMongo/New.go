@@ -62,7 +62,7 @@ func New(opt Opt) *DB {
 	NewDB.dbName = opt.DBName
 
 	if opt.Timeout < 1 {
-		NewDB.Timeout = 10
+		NewDB.Timeout = 60
 	} else {
 		NewDB.Timeout = opt.Timeout
 	}
