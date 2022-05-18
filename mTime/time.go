@@ -48,10 +48,22 @@ func GetUnixInt64() int64 {
 	return time.Now().UnixNano() / 1e6
 }
 
-func IsoTime() string {
-	utcTime := time.Now().UTC()
+func IsoTime(isUTC bool) string {
+	utcTime := time.Now()
+	if isUTC {
+		utcTime = time.Now().UTC()
+	}
+
 	iso := utcTime.String()
 	isoBytes := []byte(iso)
 	iso = string(isoBytes[:10]) + "T" + string(isoBytes[11:23]) + "Z"
 	return iso
+}
+
+func RFCTime(lType bool) string {
+	TimeData := time.Now().Format(time.RFC3339Nano)
+	if lType {
+		TimeData = time.Now().Format(time.RFC3339)
+	}
+	return TimeData
 }
