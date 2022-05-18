@@ -47,3 +47,11 @@ func GetUnix() string {
 func GetUnixInt64() int64 {
 	return time.Now().UnixNano() / 1e6
 }
+
+func IsoTime() string {
+	utcTime := time.Now().UTC()
+	iso := utcTime.String()
+	isoBytes := []byte(iso)
+	iso = string(isoBytes[:10]) + "T" + string(isoBytes[11:23]) + "Z"
+	return iso
+}
