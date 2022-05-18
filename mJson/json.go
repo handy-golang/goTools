@@ -1,6 +1,9 @@
 package mJson
 
 import (
+	"bytes"
+	"encoding/json"
+
 	"github.com/EasyGolang/goTools/mStr"
 	jsoniter "github.com/json-iterator/go"
 )
@@ -19,4 +22,11 @@ func ToStr(data any) string {
 	jsonStr := mStr.ToStr(byteStr)
 
 	return jsonStr
+}
+
+func JsonFormat(jsonByte []byte) string {
+	var out bytes.Buffer
+	json.Indent(&out, jsonByte, "", "    ")
+
+	return out.String()
 }
