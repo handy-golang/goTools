@@ -15,22 +15,30 @@ import (
 	"time"
 
 	"github.com/EasyGolang/goTools/mCount"
+	"github.com/EasyGolang/goTools/mStr"
 )
 
-// 将13位毫秒的时间戳字符串转为 时间对象，如果不是13 位则返回当前时间
-func MsToTime(ms string, diff string) time.Time {
-	msStr := mCount.Add(ms, diff)
+// 将时间戳转为 时间对象，如果不正确 则返回当前时间对象
+func MsToTime(ms any, diff string) time.Time {
+	msToStr := mStr.ToStr(ms)
 
-	if len(ms) == 13 {
-		msInt, _ := strconv.ParseInt(msStr, 10, 64)
-		tm := time.Unix(0, msInt*int64(time.Millisecond))
-		return tm
+	msStr := mCount.Add(msToStr, diff)
+
+	msInt, err := strconv.ParseInt(msStr, 10, 64)
+	if err != nil {
+		return time.Now()
 	}
-	return time.Now()
+	tm := time.Unix(0, msInt*int64(time.Millisecond))
+	return tm
 }
 
-func StrFormat(ms string) string {
-	T := MsToTime(ms, "0")
+// 格式化时间戳
+func UnixFormat(ms string) string {
+	timeMs := ms
+	if len(ms) < 1 {
+		timeMs = GetUnix()
+	}
+	T := MsToTime(timeMs, "0")
 	timeStr := T.Format("2006-01-02T15:04:05")
 
 	return timeStr
