@@ -4,4 +4,6 @@
 
 包含很多的工具跟模块,让代码编写更加容易
 
-github.com/EasyGolang/goTools
+```bash
+go get -u github.com/EasyGolang/goTools
+```
