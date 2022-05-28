@@ -16,7 +16,7 @@ func GetUUID() string {
 }
 
 func TimeID() string {
-	now := time.Now().Format("060102150405")
+	now := time.Now().Format("20060102150405")
 	uuid := GetUUID()
 	uuidArr := strings.Split(uuid, "")
 	start := mCount.GetRound(0, int64(len(uuidArr)-3))
@@ -31,3 +31,7 @@ func TimeID() string {
 
 	return returnStr
 }
+
+/*
+20220529005150mec7
+*/
