@@ -14,6 +14,7 @@ import (
 )
 
 type ClearParam struct {
+	Path      string
 	ClearTime int64 // 毫秒时长，默认一个周
 }
 
@@ -24,6 +25,10 @@ func Clear(opt ClearParam) {
 	}
 
 	logPath := "./logs"
+	if len(opt.Path) > 1 {
+		logPath = opt.Path
+	}
+
 	isLogPath := mPath.Exists(logPath)
 	if !isLogPath {
 		return
