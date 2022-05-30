@@ -15,6 +15,10 @@ func NewLog(param NewLogParam) *log.Logger {
 	FilePath := param.Path
 	LogName := param.Name
 
+	if len(FilePath) < 1 {
+		FilePath = "./logs"
+	}
+
 	file := FilePath + "/" + LogName + "-" + time.Now().Format("06年1月02日15时") + ".log"
 	logFile, err := os.OpenFile(file, os.O_RDWR|os.O_CREATE|os.O_APPEND, 0o777)
 	if nil != err {
