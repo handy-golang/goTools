@@ -72,6 +72,15 @@ func (obj *TikkerObj) Run() {
 		FileName:  fileName,
 		ShellCont: obj.Shell,
 	})
+
+	Cont := Body.String()
+	filePath := mStr.Join(
+		obj.Path,
+		mStr.ToStr(os.PathSeparator),
+		fileName,
+	)
+
+	mFile.Write(filePath, Cont)
 }
 
 // pm2 安装

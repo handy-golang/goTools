@@ -12,7 +12,7 @@ func main() {
 
 	mTikker.NewTikker(mTikker.TikkerOpt{
 		ShellContent: "",
-	}).InstPm2()
+	}).Run()
 
 	fmt.Println(" =========   END   ========= ")
 }
