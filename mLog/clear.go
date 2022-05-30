@@ -1,7 +1,6 @@
 package mLog
 
 import (
-	"fmt"
 	"io/ioutil"
 	"os"
 	"regexp"
@@ -50,7 +49,6 @@ func Clear(opt ClearParam) {
 			fileUnix := mTime.ToUnixMsec(tm2)
 
 			if (timeNow - fileUnix) > ClearTime {
-				fmt.Println("删除删除")
 				os.Remove(path)
 			}
 
