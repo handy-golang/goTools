@@ -36,7 +36,6 @@ func Clear(opt ClearParam) {
 
 	fileInfoList, _ := ioutil.ReadDir(logPath)
 	timeNow := mTime.ToUnixMsec(time.Now())
-	fmt.Println(timeNow)
 
 	for i := range fileInfoList {
 		name := fileInfoList[i].Name()
@@ -66,9 +65,13 @@ func logNameTime(name string) string {
 		starStr, `(.*?)`, endStr,
 	)
 	reg := regexp.MustCompile(messagePat)
-	str := reg.FindAllString(name, -1)[0]
-	str = strings.Replace(str, starStr, "", -1)
-	str = strings.Replace(str, endStr, "", -1)
-
-	return str
+	strArr := reg.FindAllString(name, -1)
+	if len(strArr) > 0 {
+		str := strArr[0]
+		str = strings.Replace(str, starStr, "", -1)
+		str = strings.Replace(str, endStr, "", -1)
+		return str
+	} else {
+		return "19年11月11日11时"
+	}
 }
