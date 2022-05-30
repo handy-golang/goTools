@@ -4,6 +4,8 @@ import (
 	"log"
 	"os"
 	"time"
+
+	"github.com/EasyGolang/goTools/mPath"
 )
 
 type NewLogParam struct {
@@ -17,6 +19,13 @@ func NewLog(param NewLogParam) *log.Logger {
 
 	if len(FilePath) < 1 {
 		FilePath = "./logs"
+	}
+
+	// 检测 logs 目录
+	isLogPath := mPath.Exists(FilePath)
+	if !isLogPath {
+		// 不存在则创建 logs 目录
+		os.Mkdir(FilePath, 0o777)
 	}
 
 	file := FilePath + "/" + LogName + "-" + time.Now().Format("06年1月02日15时") + ".log"
