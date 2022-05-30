@@ -14,3 +14,8 @@ type TikkerShParam struct {
 
 //go:embed instPm2.sh
 var InstPm2 string
+
+type InstPm2Param struct {
+	Path     string
+	FileName string
+}

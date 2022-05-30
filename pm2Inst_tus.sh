@@ -2,9 +2,9 @@
 
 ################## 环境搭建环节 ########################
 
-path={{.Path}}
+path=/root/EasyGolang/goTools
 cd ${path}
-shellFile=${path}"/{{.FileName}}"
+shellFile=${path}"/pm2Inst_tus.sh"
 
 # ======== 环境检测 ========
 

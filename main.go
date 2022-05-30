@@ -4,17 +4,15 @@ import (
 	_ "embed"
 	"fmt"
 
-	"github.com/EasyGolang/goTools/mEncrypt"
+	"github.com/EasyGolang/goTools/mTikker"
 )
 
 func main() {
 	fmt.Println(" =========  START  ========= ")
 
-	for i := 0; i < 20; i++ {
-		TimeID := mEncrypt.TimeID()
-
-		fmt.Println(TimeID)
-	}
+	mTikker.NewTikker(mTikker.TikkerOpt{
+		ShellContent: "",
+	}).InstPm2()
 
 	fmt.Println(" =========   END   ========= ")
 }

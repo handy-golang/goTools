@@ -2,9 +2,9 @@
 
 ################## 环境搭建环节 ########################
 
-path={{.Path}}
+path=/root/EasyGolang/goTools
 cd ${path}
-shellFile=${path}"/{{.FileName}}"
+shellFile=${path}"/pm2Inst_dc0.sh"
 
 # ======== 环境检测 ========
 
@@ -27,7 +27,7 @@ fi
 
 if [[ $(command -v pm2) ]]; then
   echo "pm2 已安装"
-  exit 0
+  exit 4
 else
   echo -e "
 pm2 安装失败
