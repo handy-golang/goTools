@@ -12,7 +12,7 @@ func main() {
 
 	mTikker.NewTikker(mTikker.TikkerOpt{
 		ShellContent: `
-			echo "我爱你"
+		mEcho "我爱你"
 		`,
 	}).Run()
 

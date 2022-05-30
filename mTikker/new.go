@@ -2,10 +2,10 @@ package mTikker
 
 import (
 	"bytes"
-	"html/template"
 	"log"
 	"os"
 	"os/exec"
+	"text/template"
 
 	"github.com/EasyGolang/goTools/mEncrypt"
 	"github.com/EasyGolang/goTools/mFile"
