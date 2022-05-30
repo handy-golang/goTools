@@ -19,3 +19,5 @@ mEcho "==== 开始执行脚本 ===="
 mEcho "==== 脚本执行结束 ===="
 
 pm2 delete ${serverName}
+
+exit 0

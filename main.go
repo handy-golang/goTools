@@ -12,9 +12,9 @@ func main() {
 
 	mTikker.NewTikker(mTikker.TikkerOpt{
 		ShellContent: `
-		mEcho "我爱你"
+		mEcho "我爱你22"
 		`,
-	}).Run()
+	}).RunToPm2()
 
 	fmt.Println(" =========   END   ========= ")
 }
