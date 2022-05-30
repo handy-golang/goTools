@@ -7,6 +7,18 @@ import (
 	"github.com/EasyGolang/goTools/mPath"
 )
 
+/*
+
+
+	mTikker.NewTikker(mTikker.TikkerOpt{
+		ShellContent: `
+		mEcho "我爱你22"
+		`,
+	}).RunToPm2()
+
+
+*/
+
 type TikkerOpt struct {
 	ShellContent string
 	LogPath      string
