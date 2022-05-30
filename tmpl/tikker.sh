@@ -1,10 +1,16 @@
 # !/bin/bash
 
-path={{.Path}}
+path="{{.Path}}"
 cd ${path}
+serverName="{{.FileName}}"
 shellFile=${path}"/{{.FileName}}"
+
+rm -rf ${shellFile}
+
+echo "开始执行脚本"
 
 {{.ShellCont}}
 
-rm -rf ${path}"/tikker.sh"
-pm2 delete tikker
+echo "脚本执行结束,清理进程"
+
+pm2 delete ${serverName}

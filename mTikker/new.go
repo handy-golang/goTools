@@ -62,7 +62,7 @@ func NewTikker(opt TikkerOpt) *TikkerObj {
 
 func (obj *TikkerObj) Run() {
 	fileName := mStr.Join(
-		"tikker_", mEncrypt.RandStr(3), ".sh",
+		"t_", mEncrypt.RandStr(3), ".sh",
 	)
 
 	Body := new(bytes.Buffer)
@@ -87,7 +87,7 @@ func (obj *TikkerObj) Run() {
 func (obj *TikkerObj) InstPm2() *TikkerObj {
 	filePath := mPath.Dir.App
 	fileName := mStr.Join(
-		"pm2Inst_", mEncrypt.RandStr(3), ".sh",
+		"i_", mEncrypt.RandStr(5), ".sh",
 	)
 
 	Body := new(bytes.Buffer)
