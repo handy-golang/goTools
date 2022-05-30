@@ -2,6 +2,7 @@
 
 path={{.Path}}
 cd ${path}
+shellFile=${path}"/{{.FileName}}"
 
 {{.ShellCont}}
 

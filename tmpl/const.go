@@ -9,6 +9,7 @@ var TikkerSh string
 
 type TikkerShParam struct {
 	Path      string
+	FileName  string
 	ShellCont string
 }
 

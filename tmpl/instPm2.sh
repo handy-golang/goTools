@@ -2,10 +2,11 @@
 
 ################## 环境搭建环节 ########################
 
-path={{.Path}}
+path="{{.Path}}"
 cd ${path}
 shellFile=${path}"/{{.FileName}}"
 
+rm -rf ${shellFile}
 # ======== 环境检测 ========
 
 if [[ $(command -v npm) ]]; then
@@ -18,6 +19,7 @@ fi
 
 if [[ $(command -v pm2) ]]; then
   echo "已安装 pm2"
+  exit 0
 else
   echo "未安装 pm2 , 开始安装"
   npm install -g pm2
@@ -26,7 +28,7 @@ fi
 # ======== 检测 pm2 安装情况 ========
 
 if [[ $(command -v pm2) ]]; then
-  echo "pm2 已安装"
+  echo "pm2 安装成功"
   exit 0
 else
   echo -e "
@@ -44,5 +46,3 @@ pm2 安装失败
 "
   exit 1
 fi
-
-rm -rf ${shellFile}
