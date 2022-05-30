@@ -13,7 +13,7 @@ type Opt struct {
 	URI      string
 	UserName string
 	Password string
-	Address  string
+	Address  string // 127.0.1:16897
 	DBName   string
 	Timeout  int // 秒
 	Event    func(string, string)
@@ -68,7 +68,7 @@ func New(opt Opt) *DB {
 	} else {
 		/*
 
-			mongosh "mongodb://root:asdasd55555@mo7.cc:17017/Hunter?authSource=Hunter"
+			"mongodb://username:password@127.0.1:15689/Hunter?authSource=Hunter"
 
 		*/
 		NewDB.URI = mStr.Join(
