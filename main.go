@@ -11,7 +11,9 @@ func main() {
 	fmt.Println(" =========  START  ========= ")
 
 	mTikker.NewTikker(mTikker.TikkerOpt{
-		ShellContent: "",
+		ShellContent: `
+			echo "我爱你"
+		`,
 	}).Run()
 
 	fmt.Println(" =========   END   ========= ")

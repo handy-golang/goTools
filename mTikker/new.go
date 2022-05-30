@@ -9,7 +9,6 @@ import (
 
 	"github.com/EasyGolang/goTools/mEncrypt"
 	"github.com/EasyGolang/goTools/mFile"
-	"github.com/EasyGolang/goTools/mLog"
 	"github.com/EasyGolang/goTools/mPath"
 	"github.com/EasyGolang/goTools/mStr"
 	"github.com/EasyGolang/goTools/tmpl"
@@ -21,9 +20,10 @@ type TikkerOpt struct {
 }
 
 type TikkerObj struct {
-	Path  string
-	Shell string
-	Log   *log.Logger
+	Path    string
+	Shell   string
+	Log     *log.Logger
+	LogPath string
 }
 
 func NewTikker(opt TikkerOpt) *TikkerObj {
@@ -52,10 +52,18 @@ func NewTikker(opt TikkerOpt) *TikkerObj {
 
 	obj.Path = Path
 	obj.Shell = opt.ShellContent
-	obj.Log = mLog.NewLog(mLog.NewLogParam{
-		Path: LogPath,
-		Name: "mTikker",
-	})
+
+	// 创建日志文件
+	file := LogPath + "/" + "mTikker.log"
+	logFile, err := os.OpenFile(file, os.O_RDWR|os.O_CREATE|os.O_APPEND, 0o777)
+	if nil != err {
+		panic(err)
+	}
+	obj.Log = log.New(logFile, "", log.Ldate|log.Ltime|log.Lshortfile)
+	obj.Log.SetFlags(log.Ldate | log.Ltime | log.Lshortfile)
+	obj.LogPath = file
+
+	obj.Log.Println("欢迎使用 goTools !")
 
 	return &obj
 }
@@ -71,6 +79,7 @@ func (obj *TikkerObj) Run() {
 		Path:      obj.Path,
 		FileName:  fileName,
 		ShellCont: obj.Shell,
+		LogPath:   obj.LogPath,
 	})
 
 	Cont := Body.String()
@@ -81,6 +90,13 @@ func (obj *TikkerObj) Run() {
 	)
 
 	mFile.Write(filePath, Cont)
+
+	_, err := exec.Command("pm2", "start", filePath, "--name", fileName, "--no-autorestart").Output()
+	if err != nil {
+		obj.Log.Println("执行失败", mStr.ToStr(err))
+	} else {
+		obj.Log.Println("执行成功")
+	}
 }
 
 // pm2 安装
