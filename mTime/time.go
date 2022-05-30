@@ -52,6 +52,10 @@ func GetUnix() string {
 	return str
 }
 
+func ToUnixMsec(ms time.Time) int64 {
+	return ms.UnixNano() / 1e6
+}
+
 func GetUnixInt64() int64 {
 	return time.Now().UnixNano() / 1e6
 }
