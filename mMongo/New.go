@@ -13,8 +13,7 @@ type Opt struct {
 	URI      string
 	UserName string
 	Password string
-	Host     string
-	Port     string
+	Address  string
 	DBName   string
 	Timeout  int // 秒
 	Event    func(string, string)
@@ -46,11 +45,8 @@ func New(opt Opt) *DB {
 		case len(opt.Password) < 2:
 			optNilStr = append(optNilStr, "Password")
 			fallthrough
-		case len(opt.Host) < 2:
-			optNilStr = append(optNilStr, "Host")
-			fallthrough
-		case len(opt.Port) < 2:
-			optNilStr = append(optNilStr, "Port")
+		case len(opt.Address) < 3:
+			optNilStr = append(optNilStr, "Address")
 		}
 	}
 
@@ -70,10 +66,15 @@ func New(opt Opt) *DB {
 	if len(opt.URI) > 5 {
 		NewDB.URI = opt.URI
 	} else {
+		/*
+
+			mongosh "mongodb://root:asdasd55555@mo7.cc:17017/Hunter?authSource=Hunter"
+
+		*/
 		NewDB.URI = mStr.Join(
 			"mongodb://",
 			opt.UserName, ":", opt.Password,
-			"@", opt.Host, ":", opt.Port,
+			"@", opt.Address,
 			"/", NewDB.dbName,
 		)
 	}
