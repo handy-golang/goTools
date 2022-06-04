@@ -38,10 +38,10 @@ func ToStr(p any) string {
 	return returnStr
 }
 
-func Join(s ...string) string {
+func Join(s ...any) string {
 	var build strings.Builder
 	for _, v := range s {
-		build.WriteString(v)
+		build.WriteString(ToStr(v))
 	}
 	return build.String()
 }
