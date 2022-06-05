@@ -24,6 +24,7 @@ func CrossDomain(c *gin.Context) {
 	c.Set("Content-Type", "application/json; charset=utf-8")
 	// 放行所有OPTIONS方法
 	if method == "OPTIONS" {
-		c.AbortWithStatus(http.StatusNoContent)
+		c.JSON(http.StatusOK, Response(0, "OPTIONS").WithData("OPTIONS"))
+		c.Abort()
 	}
 }
