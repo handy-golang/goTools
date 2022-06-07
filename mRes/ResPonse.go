@@ -1,4 +1,4 @@
-package mGin
+package mRes
 
 /*
 var (
@@ -28,7 +28,7 @@ var (
 	ConfigErr     = response(205, "持仓时禁止切换")
 )
 
-mGin.ConfigSucceed.WithData(result)
+mRes.ConfigSucceed.WithData(result)
 
 */
 type ResType struct {

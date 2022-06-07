@@ -3,6 +3,7 @@ package mGin
 import (
 	"net/http"
 
+	"github.com/EasyGolang/goTools/mRes"
 	"github.com/gin-gonic/gin"
 )
 
@@ -24,7 +25,7 @@ func CrossDomain(c *gin.Context) {
 	c.Set("Content-Type", "application/json; charset=utf-8")
 	// 放行所有OPTIONS方法
 	if method == "OPTIONS" {
-		c.JSON(http.StatusOK, Response(0, "OPTIONS").WithData("OPTIONS"))
+		c.JSON(http.StatusOK, mRes.Response(0, "OPTIONS").WithData("OPTIONS"))
 		c.Abort()
 	}
 }
