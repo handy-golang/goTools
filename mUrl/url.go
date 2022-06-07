@@ -45,6 +45,14 @@ func (o *UrlPar) GetParam(key string) string {
 	return value
 }
 
+func (o *UrlPar) ParseQuery() url.Values {
+	sum, err := url.ParseQuery(o.Url.RawQuery)
+	if err != nil {
+		panic(err)
+	}
+	return sum
+}
+
 func (o *UrlPar) AddParam(key string, val string) *UrlPar {
 	sum, err := url.ParseQuery(o.Url.RawQuery)
 	if err != nil {
