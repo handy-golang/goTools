@@ -61,7 +61,7 @@ func (o *ResType) WithData(data any) ResType {
 	}
 }
 
-func (o *ResType) With(message string, data ...any) ResType {
+func (o *ResType) With(message string, data any) ResType {
 	return ResType{
 		Code: o.Code,
 		Msg:  message,
