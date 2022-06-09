@@ -1,5 +1,7 @@
 package mRes
 
+import "github.com/EasyGolang/goTools/mStr"
+
 /*
 var (
 	// OK
@@ -37,18 +39,18 @@ type ResType struct {
 	Msg  string `json:"Msg"`  // 描述
 }
 
-func Response(code int, msg string) *ResType {
+func Response(code int, message any) *ResType {
 	return &ResType{
 		Code: code,
-		Msg:  msg,
+		Msg:  mStr.ToStr(message),
 		Data: nil,
 	}
 }
 
-func (o *ResType) WithMsg(message string) ResType {
+func (o *ResType) WithMsg(message any) ResType {
 	return ResType{
 		Code: o.Code,
-		Msg:  message,
+		Msg:  mStr.ToStr(message),
 		Data: o.Data,
 	}
 }
@@ -61,10 +63,10 @@ func (o *ResType) WithData(data any) ResType {
 	}
 }
 
-func (o *ResType) With(message string, data any) ResType {
+func (o *ResType) With(message any, data any) ResType {
 	return ResType{
 		Code: o.Code,
-		Msg:  message,
+		Msg:  mStr.ToStr(message),
 		Data: data,
 	}
 }
