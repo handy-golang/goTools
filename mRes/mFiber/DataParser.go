@@ -15,7 +15,7 @@ import (
 
 */
 
-func DataParser(c *fiber.Ctx, con ...any) map[string]any {
+func Parser(c *fiber.Ctx, con ...any) map[string]any {
 	json := make(map[string]any)
 
 	// 1 解析 链接参数
