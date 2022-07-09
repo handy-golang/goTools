@@ -1,10 +1,9 @@
 package mFiber
 
 import (
-	"github.com/EasyGolang/goTools/mJson"
 	"github.com/EasyGolang/goTools/mUrl"
 	"github.com/gofiber/fiber/v2"
-	jsoniter "github.com/json-iterator/go"
+	"github.com/mitchellh/mapstructure"
 )
 
 /*
@@ -42,8 +41,7 @@ func Parser(c *fiber.Ctx, con ...any) map[string]any {
 	c.BodyParser(&json)
 
 	if len(con) > 0 {
-		jsonStr := mJson.ToJson(json)
-		jsoniter.Unmarshal(jsonStr, con[0])
+		mapstructure.Decode(json, con[0])
 	}
 
 	return json
