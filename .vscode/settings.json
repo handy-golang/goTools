@@ -1,12 +1,14 @@
 {
   "cSpell.words": [
     "bson",
+    "fasthttp",
     "gofiber",
     "jsoniter",
     "loger",
     "mapstructure",
     "proess",
     "tikker",
-    "tmpl"
+    "tmpl",
+    "valyala"
   ]
 }
