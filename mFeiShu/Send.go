@@ -41,14 +41,12 @@ func (o *NewFeiShu) SendMessage(opt MsgOpt) []byte {
 
 	Path := "/open-apis/im/v1/messages?receive_id_type=" + receive_id_type
 
-	fmt.Println("Path", Path)
-
 	data := map[string]any{
 		"receive_id": receive_id,
 		"content":    content,
 		"msg_type":   msg_type,
 	}
-	res := mFetch.NewHttp(mFetch.HttpOpt{
+	res, _ := mFetch.NewHttp(mFetch.HttpOpt{
 		Origin: o.Origin,
 		Path:   Path,
 		Data:   data,

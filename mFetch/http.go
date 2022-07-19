@@ -3,161 +3,128 @@ package mFetch
 import (
 	"fmt"
 
+	"github.com/EasyGolang/goTools/mStr"
 	"github.com/EasyGolang/goTools/mUrl"
 	"github.com/gocolly/colly"
 	jsoniter "github.com/json-iterator/go"
 )
-
-/*
-
-	data := map[string]any{
-		"op": "subscribe",
-		"args": []string{
-			Channel, InstID, "mei",
-		},
-	}
-
-	res := mFetch.NewHttp(mFetch.HttpOpt{
-		Origin: "http://mo7.cc:9000",
-		Path:   "/api/markets/tickers",
-		Data:   data,
-		Header: map[string]string{
-			"Content-Type":  "appli1arset=utf-8",
-			"Content-Type1": "appl2et=utf-8",
-			"Content-Type2": "applicati3et=utf-8",
-			"Content-Type3": "application4t=utf-8",
-		},
-	}).Get()
-
-*/
-
-type Http struct {
-	Url     string
-	OptData map[string]any
-	Data    []byte
-	Header  map[string]string
-	Event   func(string, string)
-}
 
 type HttpOpt struct {
 	Origin string
 	Path   string
 	Data   map[string]any
 	Header map[string]string
-	Event  func(string, string)
+	Event  func(string, []byte) // s1 = succeed , err
 }
 
-func NewHttp(opt HttpOpt) *Http {
-	var HttpO Http
+type Http struct {
+	Url    string
+	Data   map[string]any
+	Header map[string]string
+	Event  func(string, []byte)
+}
 
-	// 参数的错误处理
-	if len(opt.Path) < 2 {
-		errStr := fmt.Errorf("缺少 Path 参数")
+func NewHttp(opt HttpOpt) (_this *Http) {
+	_this = &Http{}
+	// 检查参数
+	errStr := []string{}
+	switch {
+	case len(opt.Origin) < 1:
+		errStr = append(errStr, "Origin")
+		fallthrough
+	case len(opt.Path) < 1:
+		errStr = append(errStr, "Path")
+	}
+	if len(errStr) > 0 {
+		errStr := fmt.Errorf("缺少参数:%+v", errStr)
 		panic(errStr)
 	}
 
-	HttpO.Url = opt.Origin + opt.Path
-	HttpO.Header = opt.Header
-
-	// 函数空指针的处理
-	if opt.Event != nil {
-		HttpO.Event = opt.Event
-	} else {
-		HttpO.Event = func(s1, s2 string) {}
+	_this.Url = mStr.Join(opt.Origin, opt.Path)
+	_this.Data = opt.Data
+	_this.Header = opt.Header
+	_this.Event = opt.Event
+	if _this.Event == nil {
+		_this.Event = func(s1 string, s2 []byte) {}
 	}
 
-	HttpO.OptData = opt.Data
-
-	return &HttpO
+	return
 }
 
-func proessHttpParam(lType string, o *Http) *Http {
-	if lType == "get" {
-		urlO := mUrl.InitUrl(o.Url)
-		for key, val := range o.OptData {
-			v := fmt.Sprintf("%+v", val)
-			urlO.AddParam(key, v)
-		}
-		o.Url = urlO.String()
+// 处理 Get 参数
+func (_this *Http) DisposeGetParam() *Http {
+	urlO := mUrl.InitUrl(_this.Url)
+	for key, val := range _this.Data {
+		v := fmt.Sprintf("%+v", val)
+		urlO.AddParam(key, v)
 	}
-
-	if lType == "post" {
-		data, _ := jsoniter.Marshal(o.OptData)
-		o.Data = data
-	}
-
-	return o
+	_this.Url = urlO.String()
+	return _this
 }
 
 // GET
-func (o *Http) Get() []byte {
+func (_this *Http) Get() (resData []byte, resErr error) {
 	// 处理参数请求
-	proessHttpParam("get", o)
+	_this.DisposeGetParam()
 
-	Url := o.Url
-
-	var body []byte
-	var resError []byte
 	c := colly.NewCollector()
 
 	c.OnRequest(func(r *colly.Request) {
 		r.Headers.Set("Content-Type", "application/json; charset=utf-8")
+		r.Headers.Set("User-Agent", "goTools - github.com/EasyGolang/goTools")
 		// 添加header头
-		for key, val := range o.Header {
+		for key, val := range _this.Header {
 			r.Headers.Set(key, val)
 		}
 	})
 
 	c.OnResponse(func(r *colly.Response) {
-		body = r.Body
-		o.Event("succeed", string(r.Body))
+		resData = r.Body
+		_this.Event("succeed", resData)
 	})
-	c.OnError(func(r *colly.Response, _ error) {
-		resError = r.Body
-		o.Event("err", string(r.Body))
+	c.OnError(func(r *colly.Response, errStr error) {
+		resData = r.Body
+		resErr = errStr
+		_this.Event("err", []byte(mStr.ToStr(errStr)))
 	})
 
-	c.Visit(Url)
+	c.Visit(_this.Url)
 
-	if len(body) > 0 {
-		return body
-	} else {
-		return resError
-	}
+	return
 }
 
-func (o *Http) Post() []byte {
-	proessHttpParam("post", o)
+// Post
 
-	url := o.Url
-	data := o.Data
-
-	var body []byte
-	var resError []byte
+func (_this *Http) Post() (resData []byte, resErr error) {
 	c := colly.NewCollector()
 
 	c.OnRequest(func(r *colly.Request) {
 		r.Headers.Set("Content-Type", "application/json; charset=utf-8")
+		r.Headers.Set("User-Agent", "goTools - github.com/EasyGolang/goTools")
 		// 添加header头
-		for key, val := range o.Header {
+		for key, val := range _this.Header {
 			r.Headers.Set(key, val)
 		}
 	})
 
 	c.OnResponse(func(r *colly.Response) {
-		body = r.Body
-		o.Event("succeed", string(r.Body))
+		resData = r.Body
+		_this.Event("succeed", resData)
 	})
-	c.OnError(func(r *colly.Response, _ error) {
-		resError = r.Body
-		o.Event("err", string(r.Body))
+	c.OnError(func(r *colly.Response, err error) {
+		resData = r.Body
+		resErr = err
+		_this.Event("err", []byte(mStr.ToStr(err)))
 	})
 
-	c.PostRaw(url, data)
-
-	if len(body) > 0 {
-		return body
-	} else {
-		return resError
+	data, err := jsoniter.Marshal(_this.Data)
+	if err != nil {
+		resErr = err
+		_this.Event("err", []byte(mStr.ToStr(err)))
+		return
 	}
+
+	c.PostRaw(_this.Url, data)
+
+	return
 }

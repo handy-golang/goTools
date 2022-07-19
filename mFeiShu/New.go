@@ -112,11 +112,14 @@ func (o *NewFeiShu) GetAccessToken() *NewFeiShu {
 		Path = "/open-apis/auth/v3/tenant_access_token"
 	}
 
-	res := mFetch.NewHttp(mFetch.HttpOpt{
+	res, err := mFetch.NewHttp(mFetch.HttpOpt{
 		Origin: o.Origin,
 		Path:   Path,
 		Data:   data,
 	}).Post()
+	if err != nil {
+		return o
+	}
 
 	o.Event("GetAccessToken", string(res))
 
