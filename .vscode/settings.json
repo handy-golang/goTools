@@ -5,6 +5,7 @@
     "jsoniter",
     "loger",
     "mapstructure",
+    "proess",
     "tikker",
     "tmpl"
   ]

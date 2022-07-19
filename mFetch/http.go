@@ -112,7 +112,7 @@ func (o *Http) Get() []byte {
 		body = r.Body
 		o.Event("succeed", string(r.Body))
 	})
-	c.OnError(func(r *colly.Response, err error) {
+	c.OnError(func(r *colly.Response, _ error) {
 		resError = r.Body
 		o.Event("err", string(r.Body))
 	})
@@ -148,7 +148,7 @@ func (o *Http) Post() []byte {
 		body = r.Body
 		o.Event("succeed", string(r.Body))
 	})
-	c.OnError(func(r *colly.Response, err error) {
+	c.OnError(func(r *colly.Response, _ error) {
 		resError = r.Body
 		o.Event("err", string(r.Body))
 	})

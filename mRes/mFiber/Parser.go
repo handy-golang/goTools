@@ -3,6 +3,7 @@ package mFiber
 import (
 	"github.com/EasyGolang/goTools/mUrl"
 	"github.com/gofiber/fiber/v2"
+	jsoniter "github.com/json-iterator/go"
 	"github.com/mitchellh/mapstructure"
 )
 
@@ -15,9 +16,12 @@ import (
 */
 
 func Parser(c *fiber.Ctx, con ...any) map[string]any {
-	json := make(map[string]any)
+	var json map[string]any
 
-	// 1 解析 链接参数
+	// 1, 解析 Body
+	jsoniter.Unmarshal(c.Body(), &json)
+
+	// 2 解析 链接参数
 	fullPath := c.BaseURL() + c.OriginalURL()
 	urlData := mUrl.InitUrl(fullPath).ParseQuery()
 	if len(urlData) > 0 {
@@ -28,7 +32,7 @@ func Parser(c *fiber.Ctx, con ...any) map[string]any {
 		}
 	}
 
-	// 2 解析 fromData
+	// 3 解析 fromData
 	fromData, _ := c.MultipartForm()
 	if fromData != nil {
 		data := fromData.Value
@@ -36,9 +40,6 @@ func Parser(c *fiber.Ctx, con ...any) map[string]any {
 			json[key] = val[0]
 		}
 	}
-
-	// 3 解析 jsonData
-	c.BodyParser(&json)
 
 	if len(con) > 0 {
 		mapstructure.Decode(json, con[0])
