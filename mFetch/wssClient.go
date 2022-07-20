@@ -91,7 +91,6 @@ func (_this *Wss) Write(content []byte) {
 	if _this.Conn == nil {
 		return
 	}
-
 	err := _this.Conn.WriteMessage(websocket.TextMessage, content)
 	if err != nil {
 		_this.Close(err)
