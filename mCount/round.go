@@ -11,7 +11,7 @@ import (
 */
 func GetRound(min, max int64) int64 {
 	if min > max {
-		panic("the min is greater than max!")
+		return 0
 	}
 
 	if min < 0 {

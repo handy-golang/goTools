@@ -50,12 +50,12 @@ type Opt struct {
 func New(opt Opt) *NewFeiShu {
 	// 检查参数
 	if len(opt.AppID) < 5 {
-		errStr := fmt.Errorf("缺少 AppID 参数 文档: %+v", "https://open.feishu.cn/document/home/index")
-		panic(errStr)
+		fmt.Printf("缺少 AppID 参数 文档: %+v  \n", "https://open.feishu.cn/document/home/index")
+		return nil
 	}
 	if len(opt.AppSecret) < 5 {
-		errStr := fmt.Errorf("缺少 AppSecret 参数 文档: %+v", "https://open.feishu.cn/document/home/index")
-		panic(errStr)
+		fmt.Printf("缺少 AppSecret 参数 文档: %+v \n", "https://open.feishu.cn/document/home/index")
+		return nil
 	}
 
 	var o NewFeiShu

@@ -3,7 +3,6 @@ package mEmail
 import (
 	"bytes"
 	_ "embed"
-	"fmt"
 	"net/smtp"
 	"text/template"
 
@@ -89,8 +88,8 @@ func New(opt Opt) *EmailInfo {
 
 	tel, err := template.New("").Parse(opt.TemplateStr)
 	if err != nil {
-		errStr := fmt.Errorf("模板字符构建失败，使用系统")
-		panic(errStr)
+		// errStr := fmt.Errorf("模板字符构建失败")
+		return nil
 	}
 
 	NewOpt.Account = opt.Account

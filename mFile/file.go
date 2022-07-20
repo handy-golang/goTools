@@ -14,7 +14,7 @@ import (
 func Write(fileName string, content string) {
 	f, err := os.OpenFile(fileName, os.O_WRONLY|os.O_TRUNC|os.O_CREATE, 0o777)
 	if err != nil {
-		panic("file create failed. err: " + err.Error())
+		//
 	} else {
 		n, _ := f.Seek(0, os.SEEK_END)
 		f.WriteAt([]byte(content), n)
@@ -25,13 +25,13 @@ func Write(fileName string, content string) {
 // 获取一个文件的类型
 func GetContentType(fileName string) string {
 	if !mPath.IsFile(fileName) {
-		errorsStr := fmt.Errorf("fileName必须为一个文件")
-		panic(errorsStr)
+		// fmt.Errorf("fileName必须为一个文件")
+		return ""
 	}
 
 	file, err := os.Open(fileName)
 	if err != nil {
-		panic("读取文件出错")
+		return ""
 	}
 	defer file.Close()
 

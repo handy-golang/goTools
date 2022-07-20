@@ -19,7 +19,7 @@ func InitUrl(urlStr string) *UrlPar {
 	var urlInfo UrlPar
 	u, err := url.Parse(urlStr)
 	if err != nil {
-		panic(err)
+		return nil
 	}
 
 	urlInfo.Url = u
@@ -37,7 +37,7 @@ func (o *UrlPar) String() string {
 func (o *UrlPar) GetParam(key string) string {
 	sum, err := url.ParseQuery(o.Url.RawQuery)
 	if err != nil {
-		panic(err)
+		return ""
 	}
 
 	value := sum.Get(key)
@@ -48,7 +48,7 @@ func (o *UrlPar) GetParam(key string) string {
 func (o *UrlPar) ParseQuery() url.Values {
 	sum, err := url.ParseQuery(o.Url.RawQuery)
 	if err != nil {
-		panic(err)
+		return nil
 	}
 	return sum
 }
@@ -56,7 +56,7 @@ func (o *UrlPar) ParseQuery() url.Values {
 func (o *UrlPar) AddParam(key string, val string) *UrlPar {
 	sum, err := url.ParseQuery(o.Url.RawQuery)
 	if err != nil {
-		panic(err)
+		return nil
 	}
 
 	if len(key) > 0 && len(val) > 0 {

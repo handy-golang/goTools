@@ -20,12 +20,12 @@ func (o *NewFeiShu) SendMessage(opt MsgOpt) []byte {
 	msg_type := opt.MsgType
 
 	if len(opt.ReceiveType) < 2 {
-		errStr := fmt.Errorf("缺少参数 ReceiveType , receive_id_type 阅读文档 : %+v", "https://open.feishu.cn/document/uAjLw4CM/ukTMukTMukTM/reference/im-v1/message/create")
-		panic(errStr)
+		fmt.Printf("缺少参数 ReceiveType , receive_id_type 阅读文档 : %+v \n", "https://open.feishu.cn/document/uAjLw4CM/ukTMukTMukTM/reference/im-v1/message/create")
+		return nil
 	}
 	if len(opt.ReceiveId) < 2 {
-		errStr := fmt.Errorf("缺少参数 ReceiveId , receive_id 阅读文档 : %+v", "https://open.feishu.cn/document/uAjLw4CM/ukTMukTMukTM/reference/im-v1/message/create")
-		panic(errStr)
+		fmt.Printf("缺少参数 ReceiveId , receive_id 阅读文档 : %+v \n", "https://open.feishu.cn/document/uAjLw4CM/ukTMukTMukTM/reference/im-v1/message/create")
+		return nil
 	}
 	if len(opt.MsgType) < 2 {
 		msg_type = "interactive"

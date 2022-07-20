@@ -62,7 +62,7 @@ func NewTikker(opt TikkerOpt) *TikkerObj {
 	file := LogPath + "/" + "mTikker.log"
 	logFile, err := os.OpenFile(file, os.O_RDWR|os.O_CREATE|os.O_APPEND, 0o777)
 	if nil != err {
-		panic(err)
+		return nil
 	}
 	obj.Log = log.New(logFile, "", log.Ldate|log.Ltime|log.Lshortfile)
 	obj.Log.SetFlags(log.Ldate | log.Ltime | log.Lshortfile)
