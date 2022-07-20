@@ -5,35 +5,26 @@ import (
 	"fmt"
 
 	"github.com/EasyGolang/goTools/mFetch"
-	"github.com/EasyGolang/goTools/mJson"
+	"github.com/EasyGolang/goTools/mStr"
 )
 
 func main() {
 	fmt.Println(" =========  START  ========= ")
 
-	data := map[string]any{
-		"op": "subscribe",
-		"args": []string{
-			"123", "345", "mei",
+	wssConn := mFetch.NewWss(mFetch.WssOpt{
+		Url: "ws://127.0.0.1:8999/api/wss",
+		Event: func(s string, a any) {
+			if s == "close" || s == "err" {
+				fmt.Println("出错了", mStr.ToStr(a))
+			}
 		},
-	}
+	})
 
-	resData, err := mFetch.NewHttp(mFetch.HttpOpt{
-		Origin: "http://localhost:9000",
-		Path:   "/api/ping",
-		Data:   data,
-		Header: map[string]string{
-			"Content-Type":  "appli1arset=utf-8",
-			"Content-Type1": "appl2et=utf-8",
-			"Content-Type2": "applicati3et=utf-8",
-			"Content-Type3": "application4t=utf-8",
-		},
-	}).Post()
-	if err != nil {
-		fmt.Println("err", err)
-	}
-	jsonStr := mJson.JsonFormat(resData)
-	fmt.Println("resData", jsonStr)
+	wssConn.Write([]byte("123"))
+
+	wssConn.Read(func(msg []byte) {
+		fmt.Println("read", string(msg))
+	})
 
 	fmt.Println(" =========   END   ========= ")
 }

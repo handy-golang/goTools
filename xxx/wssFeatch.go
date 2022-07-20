@@ -5,7 +5,7 @@ import (
 	"time"
 
 	"github.com/EasyGolang/goTools/mStr"
-	"github.com/gorilla/websocket"
+	"github.com/fasthttp/websocket"
 )
 
 type Wss struct {

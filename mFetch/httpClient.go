@@ -42,14 +42,14 @@ type HttpOpt struct {
 	Path   string
 	Data   map[string]any
 	Header map[string]string
-	Event  func(string, []byte) // s1 = succeed , err
+	Event  func(string, any) // s1 = succeed , err
 }
 
 type Http struct {
 	Url    string
 	Data   map[string]any
 	Header map[string]string
-	Event  func(string, []byte)
+	Event  func(string, any)
 }
 
 func NewHttp(opt HttpOpt) (_this *Http) {
@@ -73,7 +73,7 @@ func NewHttp(opt HttpOpt) (_this *Http) {
 	_this.Header = opt.Header
 	_this.Event = opt.Event
 	if _this.Event == nil {
-		_this.Event = func(s1 string, s2 []byte) {}
+		_this.Event = func(s1 string, s2 any) {}
 	}
 
 	return
@@ -113,7 +113,7 @@ func (_this *Http) Get() (resData []byte, resErr error) {
 	c.OnError(func(r *colly.Response, errStr error) {
 		resData = r.Body
 		resErr = errStr
-		_this.Event("err", []byte(mStr.ToStr(errStr)))
+		_this.Event("err", errStr)
 	})
 
 	c.Visit(_this.Url)
@@ -142,13 +142,13 @@ func (_this *Http) Post() (resData []byte, resErr error) {
 	c.OnError(func(r *colly.Response, err error) {
 		resData = r.Body
 		resErr = err
-		_this.Event("err", []byte(mStr.ToStr(err)))
+		_this.Event("err", err)
 	})
 
 	data, err := jsoniter.Marshal(_this.Data)
 	if err != nil {
 		resErr = err
-		_this.Event("err", []byte(mStr.ToStr(err)))
+		_this.Event("err", err)
 		return
 	}
 
