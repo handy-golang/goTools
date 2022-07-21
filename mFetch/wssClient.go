@@ -95,15 +95,14 @@ func (_this *Wss) Read(callback func(msg []byte)) {
 			return
 		}
 		// 有回应则重置
-		_this.Ticker.Reset(TickerDuration)
-
 		if mStr.ToStr(message) == "pong" {
 			// pong
 		} else {
 			callback(message)
 		}
-
 		_this.Event("Read", message)
+		_this.Ticker.Reset(TickerDuration)
+
 	}
 }
 
@@ -111,8 +110,8 @@ func (_this *Wss) Close(lType any) {
 	if _this.Conn == nil {
 		return
 	}
-	_this.Event("Close", lType)
 	_this.Conn.Close()
+	_this.Event("Close", lType)
 }
 
 func (_this *Wss) Write(content []byte) {
