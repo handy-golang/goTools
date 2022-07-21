@@ -79,3 +79,12 @@ func RFCTime(lType bool) string {
 	}
 	return TimeData
 }
+
+func EpochTime() string {
+	millisecond := time.Now().UnixNano() / 1000000
+	epoch := strconv.Itoa(int(millisecond))
+	epochBytes := []byte(epoch)
+	epoch = string(epochBytes[:10])
+
+	return epoch
+}
