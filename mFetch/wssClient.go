@@ -103,7 +103,7 @@ func (_this *Wss) Read(callback func(msg []byte)) {
 			callback(message)
 		}
 
-		_this.Event("read", message)
+		_this.Event("Read", message)
 	}
 }
 
@@ -111,7 +111,7 @@ func (_this *Wss) Close(lType any) {
 	if _this.Conn == nil {
 		return
 	}
-	_this.Event("close", lType)
+	_this.Event("Close", lType)
 	_this.Conn.Close()
 }
 
@@ -119,6 +119,7 @@ func (_this *Wss) Write(content []byte) {
 	if _this.Conn == nil {
 		return
 	}
+	_this.Event("Write", content)
 	err := _this.Conn.WriteMessage(websocket.TextMessage, content)
 	if err != nil {
 		_this.Close(err)
