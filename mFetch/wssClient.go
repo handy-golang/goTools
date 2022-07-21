@@ -2,7 +2,9 @@ package mFetch
 
 import (
 	"fmt"
+	"time"
 
+	"github.com/EasyGolang/goTools/mStr"
 	"github.com/fasthttp/websocket"
 )
 
@@ -30,9 +32,12 @@ type WssOpt struct {
 	Event func(string, any) // s1 = succeed , err
 }
 type Wss struct {
-	Conn  *websocket.Conn
-	Event func(string, any) // s1 = red , close , err
+	Conn   *websocket.Conn
+	Ticker *time.Ticker
+	Event  func(string, any) // s1 = red , close , err
 }
+
+const TickerDuration time.Duration = time.Second * time.Duration(20)
 
 func NewWss(opt WssOpt) (_this *Wss) {
 	_this = &Wss{}
@@ -54,12 +59,27 @@ func NewWss(opt WssOpt) (_this *Wss) {
 	}
 
 	c, _, err := websocket.DefaultDialer.Dial(opt.Url, nil)
-	_this.Conn = c
-
 	if err != nil {
 		_this.Event("err", err)
 		return
 	}
+	_this.Conn = c
+	_this.Ticker = time.NewTicker(TickerDuration)
+
+	// 发送 Ping
+	go func() {
+		for {
+			_this.Write([]byte("ping"))
+			time.Sleep(TickerDuration)
+		}
+	}()
+	// 读到 关闭信号
+	go func() {
+		for range _this.Ticker.C {
+			errStr := fmt.Errorf("长时间未响应")
+			_this.Close(errStr)
+		}
+	}()
 
 	return
 }
@@ -74,7 +94,15 @@ func (_this *Wss) Read(callback func(msg []byte)) {
 			_this.Close(err)
 			return
 		}
-		callback(message)
+		// 有回应则重置
+		_this.Ticker.Reset(TickerDuration)
+
+		if mStr.ToStr(message) == "pong" {
+			// pong
+		} else {
+			callback(message)
+		}
+
 		_this.Event("read", message)
 	}
 }
