@@ -37,7 +37,7 @@ type Wss struct {
 	Event  func(string, any) // s1 = red , close , err
 }
 
-const TickerDuration time.Duration = time.Second * time.Duration(25)
+const TickerDuration time.Duration = time.Second * time.Duration(26)
 
 func NewWss(opt WssOpt) (_this *Wss) {
 	_this = &Wss{}
@@ -70,7 +70,7 @@ func NewWss(opt WssOpt) (_this *Wss) {
 	go func() {
 		for {
 			_this.Write([]byte("ping"))
-			time.Sleep(TickerDuration / 2)
+			time.Sleep((TickerDuration / 4) * 3)
 		}
 	}()
 	// 读到 关闭信号
