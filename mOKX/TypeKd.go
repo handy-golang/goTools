@@ -29,6 +29,7 @@ type TypeKd struct {
 
 // 基于 K线数据分析结果
 type AnalySliceType struct {
+	InstID        string    `json:"InstID"`    // InstID
 	StartTime     time.Time `json:"StartTime"` // 开始时间
 	StartTimeUnix int64     `json:"StartTimeUnix"`
 	EndTime       time.Time `json:"EndTime"` // 结束时间
