@@ -5,6 +5,7 @@
     "fasthttp",
     "gofiber",
     "jsoniter",
+    "Kdata",
     "loger",
     "mapstructure",
     "proess",

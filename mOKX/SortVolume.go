@@ -4,8 +4,8 @@ import (
 	"github.com/EasyGolang/goTools/mCount"
 )
 
-// 涨跌幅排序
-func U_R24Sort(data []TickerType) []TickerType {
+// 成交量排序
+func SortVolume(data []TickerType) []TickerType {
 	size := len(data)
 	list := make([]TickerType, size)
 	copy(list, data)
@@ -14,8 +14,8 @@ func U_R24Sort(data []TickerType) []TickerType {
 	for i := size - 1; i > 0; i-- {
 		swapped = false
 		for j := 0; j < i; j++ {
-			a := list[j+1].U_R24
-			b := list[j].U_R24
+			a := list[j+1].Volume
+			b := list[j].Volume
 			if mCount.Le(a, b) < 0 {
 				list[j], list[j+1] = list[j+1], list[j]
 				swapped = true
@@ -26,14 +26,16 @@ func U_R24Sort(data []TickerType) []TickerType {
 		}
 	}
 
-	// 设置 U_RIdx 并翻转
+	// 设置 VolIdx 并翻转
+
 	listIDX := []TickerType{}
 	j := 0
 	for i := len(list) - 1; i > -1; i-- {
-		Ticker := list[i]
-		Ticker.U_RIdx = j + 1
-		listIDX = append(listIDX, Ticker)
+		Kdata := list[i]
+		Kdata.VolIdx = j + 1
+		listIDX = append(listIDX, Kdata)
 		j++
 	}
+
 	return listIDX
 }

@@ -4,8 +4,8 @@ import (
 	"github.com/EasyGolang/goTools/mCount"
 )
 
-// 按照最高价排序
-func H_sort(data []Kd) []Kd {
+// 按照 最低 价排序
+func Sort_L(data []Kd) []Kd {
 	size := len(data)
 	list := make([]Kd, size)
 	copy(list, data)
@@ -14,8 +14,8 @@ func H_sort(data []Kd) []Kd {
 	for i := size - 1; i > 0; i-- {
 		swapped = false
 		for j := 0; j < i; j++ {
-			a := list[j+1].H
-			b := list[j].H
+			a := list[j+1].L
+			b := list[j].L
 			if mCount.Le(a, b) < 0 {
 				list[j], list[j+1] = list[j+1], list[j]
 				swapped = true
@@ -29,9 +29,9 @@ func H_sort(data []Kd) []Kd {
 	listIDX := []Kd{}
 	j := 0
 	for i := len(list) - 1; i > -1; i-- {
-		Ticker := list[i]
-		Ticker.H_idx = j + 1
-		listIDX = append(listIDX, Ticker)
+		Kdata := list[i]
+		Kdata.L_idx = j + 1
+		listIDX = append(listIDX, Kdata)
 		j++
 	}
 	return listIDX
