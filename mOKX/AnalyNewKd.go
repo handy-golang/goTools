@@ -14,7 +14,6 @@ func AnalyNewKd(now TypeKd, list []TypeKd) (kdata TypeKd) {
 		H:        now.H,
 		L:        now.L,
 		C:        now.C,
-		Vol:      now.Vol,
 		VolCcy:   now.VolCcy,
 		Type:     now.Type,
 	}

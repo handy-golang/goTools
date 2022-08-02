@@ -37,6 +37,10 @@ type AnalySliceType struct {
 	Len           int       `json:"Len"`      // 数据的总长度
 	Volume        string    `json:"Volume"`   // 成交量总和
 	RosePer       string    `json:"RosePer"`  // 涨幅
+	H             string    `json:"H"`        // 最高价
+	L             string    `json:"L"`        // 最低价
+	U_shade       []string  `json:"U_shade"`  // 上影线
+	D_shade       []string  `json:"D_shade"`  // 下影线
 }
 
 type AnalySingleType struct {
