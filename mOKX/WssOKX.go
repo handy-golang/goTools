@@ -9,17 +9,7 @@ import (
 )
 
 /*
-	wss := wssApi.New(wssApi.FetchOpt{
-		Type: 1,
-		Event: func(s string, a any) {
-			global.WssLog.Println("Event", s, mStr.ToStr(a))
-		},
-	})
-
-	go wss.Read(func(msg []byte) {
-		global.WssLog.Println("读数据", mStr.ToStr(msg))
-	})
-
+testCase.OKXWss()
 */
 
 type LoginArgsType struct {

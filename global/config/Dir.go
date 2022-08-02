@@ -8,9 +8,10 @@ import (
 )
 
 type DirType struct {
-	Home string // Home 根目录
-	App  string // APP 根目录
-	Log  string // 日志文件目录
+	Home     string // Home 根目录
+	App      string // APP 根目录
+	Log      string // 日志文件目录
+	JsonData string // json 数据存放目录
 }
 
 var Dir DirType
@@ -32,6 +33,11 @@ func DirInit() {
 		Dir.App,
 		mStr.ToStr(os.PathSeparator),
 		"logs",
+	)
+	Dir.JsonData = mStr.Join(
+		Dir.App,
+		mStr.ToStr(os.PathSeparator),
+		"jsonData",
 	)
 
 	File.SysEnv = mStr.Join(

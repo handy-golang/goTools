@@ -19,7 +19,8 @@ func main() {
 
 	fmt.Println(" =========  START  ========= ")
 
-	testCase.OKXFetch()
+	// testCase.OKXFetch()
+	testCase.OKXWss()
 
 	fmt.Println(" =========   END   ========= ")
 }
