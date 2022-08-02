@@ -64,8 +64,8 @@ var dev = map[string]string{
 
 */
 
-func Temp(config string, lMap map[string]string) string {
-	s := os.Expand(config, func(k string) string {
+func Temp(tmplStr string, lMap map[string]string) string {
+	s := os.Expand(tmplStr, func(k string) string {
 		return lMap[k]
 	})
 	return s

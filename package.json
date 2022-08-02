@@ -1,4 +1,7 @@
 {
+  "name": "vue-project",
+  "version": "0.14.1",
+  "Port": 17353,
   "scripts": {
     "git": "./_shell/gitSet.sh",
     "sync": "./_shell/sync_git.sh"
