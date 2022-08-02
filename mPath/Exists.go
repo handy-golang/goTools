@@ -2,7 +2,7 @@ package mPath
 
 import "os"
 
-// 判断目录是否存在
+// 判断目录或文件是否存在
 func Exists(path string) bool {
 	_, err := os.Stat(path)
 	if err == nil {
