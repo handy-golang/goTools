@@ -21,8 +21,6 @@ func Start() {
 		SleepTime: time.Hour * 8,
 	}).Start()
 
-	Log.Println(`系统初始化完成`)
-
 	Body := new(bytes.Buffer)
 	Tmpl := template.Must(template.New("").Parse(tmpl.AppInfo))
 	Tmpl.Execute(Body, tmpl.AppInfoParam{
