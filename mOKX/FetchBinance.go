@@ -9,7 +9,7 @@ import (
 	"github.com/EasyGolang/goTools/mPath"
 )
 
-type FetchOpt struct {
+type FetchBinanceOpt struct {
 	Path          string
 	Data          map[string]any
 	Method        string
@@ -18,7 +18,7 @@ type FetchOpt struct {
 	Event         func(string, any)
 }
 
-func Fetch(opt FetchOpt) (resData []byte, resErr error) {
+func FetchBinance(opt FetchBinanceOpt) (resData []byte, resErr error) {
 	// 是否为本地模式
 	if opt.IsLocalJson {
 		isJsonPath := mPath.Exists(opt.LocalJsonPath)
