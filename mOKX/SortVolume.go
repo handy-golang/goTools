@@ -5,9 +5,9 @@ import (
 )
 
 // 成交量排序
-func SortVolume(data []TickerType) []TickerType {
+func SortVolume(data []TypeTicker) []TypeTicker {
 	size := len(data)
-	list := make([]TickerType, size)
+	list := make([]TypeTicker, size)
 	copy(list, data)
 
 	var swapped bool
@@ -27,8 +27,7 @@ func SortVolume(data []TickerType) []TickerType {
 	}
 
 	// 设置 VolIdx 并翻转
-
-	listIDX := []TickerType{}
+	listIDX := []TypeTicker{}
 	j := 0
 	for i := len(list) - 1; i > -1; i-- {
 		Kdata := list[i]

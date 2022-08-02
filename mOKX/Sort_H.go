@@ -5,9 +5,9 @@ import (
 )
 
 // 按照最高价排序
-func Sort_H(data []Kd) []Kd {
+func Sort_H(data []TypeKd) []TypeKd {
 	size := len(data)
-	list := make([]Kd, size)
+	list := make([]TypeKd, size)
 	copy(list, data)
 
 	var swapped bool
@@ -26,7 +26,7 @@ func Sort_H(data []Kd) []Kd {
 		}
 	}
 	// 设置 Idx 并翻转
-	listIDX := []Kd{}
+	listIDX := []TypeKd{}
 	j := 0
 	for i := len(list) - 1; i > -1; i-- {
 		Kdata := list[i]

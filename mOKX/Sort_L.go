@@ -5,9 +5,9 @@ import (
 )
 
 // 按照 最低 价排序
-func Sort_L(data []Kd) []Kd {
+func Sort_L(data []TypeKd) []TypeKd {
 	size := len(data)
-	list := make([]Kd, size)
+	list := make([]TypeKd, size)
 	copy(list, data)
 
 	var swapped bool
@@ -26,7 +26,7 @@ func Sort_L(data []Kd) []Kd {
 		}
 	}
 	// 设置 Idx 并翻转
-	listIDX := []Kd{}
+	listIDX := []TypeKd{}
 	j := 0
 	for i := len(list) - 1; i > -1; i-- {
 		Kdata := list[i]

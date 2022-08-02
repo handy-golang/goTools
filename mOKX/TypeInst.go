@@ -1,6 +1,6 @@
 package mOKX
 
-type InstType struct {
+type TypeInst struct {
 	Alias        string `json:"alias"`
 	BaseCcy      string `json:"baseCcy"`
 	Category     string `json:"category"`
@@ -28,4 +28,10 @@ type InstType struct {
 	Stk          string `json:"stk"`
 	TickSz       string `json:"tickSz"`
 	Uly          string `json:"uly"`
+}
+
+type TypeReq struct {
+	Code string `json:"code"`
+	Data any    `json:"data"`
+	Msg  string `json:"msg"`
 }

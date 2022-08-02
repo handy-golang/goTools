@@ -4,7 +4,7 @@ import "time"
 
 type CandleDataType [7]string
 
-type Kd struct {
+type TypeKd struct {
 	InstID   string    `json:"InstID"`   // 持仓币种
 	TimeUnix int64     `json:"TimeUnix"` // 毫秒时间戳
 	Time     time.Time `json:"Time"`     // 时间

@@ -1,6 +1,6 @@
 package mOKX
 
-type BinanceTickerType struct {
+type TypeBinanceTicker struct {
 	Symbol             string `json:"symbol"`
 	InstID             string `json:"InstID"`
 	PriceChange        string `json:"priceChange"`
@@ -25,7 +25,7 @@ type BinanceTickerType struct {
 	Count              int    `json:"count"`
 }
 
-type OKXTickerType struct {
+type TypeOKXTicker struct {
 	InstType  string `json:"instType"`
 	InstID    string `json:"instId"`
 	Last      string `json:"last"`
@@ -44,7 +44,7 @@ type OKXTickerType struct {
 	SodUtc8   string `json:"sodUtc8"`
 }
 
-type TickerType struct {
+type TypeTicker struct {
 	InstID         string `json:"InstID"`         // 产品ID
 	CcyName        string `json:"CcyName"`        // 币种名称
 	Last           string `json:"Last"`           // 最新成交价
@@ -63,13 +63,13 @@ type TickerType struct {
 }
 
 //  基于 TickerList  的市场分析
-type WholeTickerAnalyseType struct {
+type TypeWholeTickerAnaly struct {
 	UPIndex  string     `json:"UPIndex"`  // 上涨指数
 	UDAvg    string     `json:"UDAvg"`    // 综合涨幅均值
 	UPLe     int        `json:"UPLe"`     // 上涨趋势
 	UDLe     int        `json:"UDLe"`     // 上涨强度
 	DirIndex int        `json:"DirIndex"` // 当前市场情况  -1 下跌   0 震荡   1 上涨
-	MaxUP    TickerType `json:"MaxUP"`    // 最大涨幅币种
-	MaxDown  TickerType `json:"MaxDown"`  // 最大跌幅币种
+	MaxUP    TypeTicker `json:"MaxUP"`    // 最大涨幅币种
+	MaxDown  TypeTicker `json:"MaxDown"`  // 最大跌幅币种
 	Ts       int64      `json:"Ts"`       // 生成时间
 }
