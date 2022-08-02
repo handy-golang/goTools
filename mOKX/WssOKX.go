@@ -39,7 +39,7 @@ type OptWssOKX struct {
 	OKXKey    TypeOkxKey
 }
 
-func New(opt OptWssOKX) (_this *mFetch.Wss) {
+func WssOKX(opt OptWssOKX) (_this *mFetch.Wss) {
 	WssOpt := mFetch.WssOpt{}
 	WssOpt.Event = opt.Event
 	if opt.FetchType == 0 {
