@@ -3,6 +3,7 @@ package testCase
 import (
 	"fmt"
 
+	"github.com/EasyGolang/goTools/global"
 	"github.com/EasyGolang/goTools/mOKX"
 	"github.com/EasyGolang/goTools/mStr"
 )
@@ -16,7 +17,7 @@ func OKXFetch() {
 		},
 		Method: "get",
 		Event: func(s string, a any) {
-			fmt.Println("Event", s, a)
+			global.Log.Println("Event", s, a)
 		},
 	})
 	if err != nil {

@@ -6,6 +6,7 @@ import (
 
 	"github.com/EasyGolang/goTools/global"
 	"github.com/EasyGolang/goTools/global/config"
+	"github.com/EasyGolang/goTools/testCase"
 	jsoniter "github.com/json-iterator/go"
 )
 
@@ -18,7 +19,7 @@ func main() {
 
 	fmt.Println(" =========  START  ========= ")
 
-	// testCase.OKXFetch()
+	testCase.OKXFetch()
 
 	fmt.Println(" =========   END   ========= ")
 }
