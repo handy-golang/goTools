@@ -5,7 +5,7 @@ import (
 )
 
 // 构造新的 Kdata
-func NewKd(now TypeKd, list []TypeKd) (kdata TypeKd) {
+func AnalyNewKd(now TypeKd, list []TypeKd) (kdata TypeKd) {
 	kdata = TypeKd{
 		InstID:   now.InstID,
 		TimeUnix: now.TimeUnix,
@@ -30,7 +30,7 @@ func NewKd(now TypeKd, list []TypeKd) (kdata TypeKd) {
 
 	kdata.HLPer = mCount.RoseCent(now.H, now.L)
 
-	U_shade, D_shade := KdShade(kdata)
+	U_shade, D_shade := NewKdShade(kdata)
 	kdata.U_shade = mCount.PriceCent(U_shade, now.C)
 	kdata.D_shade = mCount.PriceCent(D_shade, now.C)
 
@@ -39,12 +39,12 @@ func NewKd(now TypeKd, list []TypeKd) (kdata TypeKd) {
 	}
 	Pre := list[len(list)-1]
 	kdata.RosePer = mCount.RoseCent(now.C, Pre.C)
-	kdata.C_dir = KdC_dir(kdata, Pre)
+	kdata.C_dir = NewKddC_dir(kdata, Pre)
 
 	return
 }
 
-func KdShade(now TypeKd) (U_shade, D_shade string) {
+func NewKdShade(now TypeKd) (U_shade, D_shade string) {
 	if now.Dir > 0 { // 上涨时
 		// 最高 - 收盘价 = 上影线
 		U_shade = mCount.Rose(now.H, now.C)
@@ -59,7 +59,7 @@ func KdShade(now TypeKd) (U_shade, D_shade string) {
 	return
 }
 
-func KdC_dir(now, pre TypeKd) int {
+func NewKddC_dir(now, pre TypeKd) int {
 	// 格子方向
 	C_dir := mCount.Le(now.Center, pre.Center) // 以中心点为基准来计算，当前-过去的
 	return C_dir
