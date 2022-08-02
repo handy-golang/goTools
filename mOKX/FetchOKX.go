@@ -10,16 +10,16 @@ import (
 type OptFetchOKX struct {
 	Path          string
 	Data          map[string]any
-	LocalJsonData string // 本地的数据源
+	LocalJsonPath string // 本地的数据源
 	Method        string
-	IsLocalData   bool
+	IsLocalJson   bool
 	Event         func(string, any)
 }
 
 func FetchOKX(opt OptFetchOKX) (resData []byte, resErr error) {
 	// 本地模式
-	if opt.IsLocalData {
-		return ioutil.ReadFile(opt.LocalJsonData)
+	if opt.IsLocalJson {
+		return ioutil.ReadFile(opt.LocalJsonPath)
 	}
 
 	if len(opt.Method) < 1 {
