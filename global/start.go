@@ -1,10 +1,14 @@
 package global
 
 import (
+	"bytes"
+	"fmt"
+	"text/template"
 	"time"
 
 	"github.com/EasyGolang/goTools/global/config"
 	"github.com/EasyGolang/goTools/mCycle"
+	"github.com/EasyGolang/goTools/tmpl"
 )
 
 func Start() {
@@ -18,4 +22,13 @@ func Start() {
 	}).Start()
 
 	Log.Println(`系统初始化完成`)
+
+	Body := new(bytes.Buffer)
+	Tmpl := template.Must(template.New("").Parse(tmpl.AppInfo))
+	Tmpl.Execute(Body, tmpl.AppInfoParam{
+		Version: config.AppInfo.Version,
+	})
+	Cont := Body.String()
+	Log.Println(Cont)
+	fmt.Println(Cont)
 }
