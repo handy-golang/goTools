@@ -28,7 +28,7 @@ type TypeKd struct {
 }
 
 // 基于 K线数据分析结果
-type AnalyseSliceType struct {
+type AnalySliceType struct {
 	StartTime     time.Time `json:"StartTime"` // 开始时间
 	StartTimeUnix int64     `json:"StartTimeUnix"`
 	EndTime       time.Time `json:"EndTime"` // 结束时间
@@ -39,7 +39,7 @@ type AnalyseSliceType struct {
 	RosePer       string    `json:"RosePer"`  // 涨幅
 }
 
-type AnalyseSingleType struct {
+type AnalySingleType struct {
 	InstID        string    `json:"InstID"`    // InstID
 	StartTime     time.Time `json:"StartTime"` // 开始时间
 	StartTimeUnix int64     `json:"StartTimeUnix"`
