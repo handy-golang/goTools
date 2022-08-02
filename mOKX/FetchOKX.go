@@ -14,6 +14,26 @@ import (
 	"github.com/EasyGolang/goTools/mUrl"
 )
 
+/*
+	resData, err := restApi.Fetch(restApi.FetchOpt{
+		Path: "/api/v5/account/balance",
+		Data: map[string]any{
+			"ccy": "USDT",
+		},
+		Method: "get",
+		Event: func(s string, a any) {
+			fmt.Println("Event", s, a)
+		},
+	})
+	if err != nil {
+		fmt.Println(err)
+		return
+	}
+
+	fmt.Println(mStr.ToStr(resData))
+
+*/
+
 type TypeOkxKey struct {
 	ApiKey     string
 	SecretKey  string
