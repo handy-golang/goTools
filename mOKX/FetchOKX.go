@@ -2,7 +2,7 @@ package mOKX
 
 import (
 	"fmt"
-	"io/ioutil"
+	"os"
 	"strings"
 
 	"github.com/EasyGolang/goTools/mEncrypt"
@@ -15,9 +15,7 @@ import (
 )
 
 /*
-
 testCase.OKXFetch()
-
 */
 type TypeOkxKey struct {
 	ApiKey     string
@@ -39,7 +37,7 @@ func FetchOKX(opt OptFetchOKX) (resData []byte, resErr error) {
 	if opt.IsLocalJson {
 		isJsonPath := mPath.Exists(opt.LocalJsonPath)
 		if isJsonPath {
-			return ioutil.ReadFile(opt.LocalJsonPath)
+			return os.ReadFile(opt.LocalJsonPath)
 		} else {
 			resErr = fmt.Errorf("LocalJsonPath")
 			return

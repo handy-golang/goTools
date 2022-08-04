@@ -2,7 +2,7 @@ package mOKX
 
 import (
 	"fmt"
-	"io/ioutil"
+	"os"
 	"strings"
 
 	"github.com/EasyGolang/goTools/mFetch"
@@ -23,7 +23,7 @@ func FetchBinance(opt FetchBinanceOpt) (resData []byte, resErr error) {
 	if opt.IsLocalJson {
 		isJsonPath := mPath.Exists(opt.LocalJsonPath)
 		if isJsonPath {
-			return ioutil.ReadFile(opt.LocalJsonPath)
+			return os.ReadFile(opt.LocalJsonPath)
 		} else {
 			resErr = fmt.Errorf("LocalJsonPath")
 			return
