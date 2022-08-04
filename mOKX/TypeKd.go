@@ -4,6 +4,10 @@ import "time"
 
 type CandleDataType [7]string
 
+type BinanceCandleStrType [12]string
+
+type BinanceCandleIntType [12]int64
+
 type TypeKd struct {
 	InstID    string    `json:"InstID"`    // 持仓币种
 	TimeUnix  int64     `json:"TimeUnix"`  // 毫秒时间戳
