@@ -45,7 +45,8 @@ type TypeOKXTicker struct {
 }
 
 type TypeTicker struct {
-	InstID         string `json:"InstID"`         // 产品ID
+	InstID         string `json:"InstID"` // 产品ID
+	Symbol         string `json:"symbol"`
 	CcyName        string `json:"CcyName"`        // 币种名称
 	Last           string `json:"Last"`           // 最新成交价
 	Open24H        string `json:"Open24H"`        // 24小时开盘价
@@ -62,7 +63,7 @@ type TypeTicker struct {
 	Ts             int64  `json:"Ts"`
 }
 
-//  基于 TickerList  的市场分析
+// 基于 TickerList  的市场分析
 type TypeWholeTickerAnaly struct {
 	UPIndex  string     `json:"UPIndex"`  // 上涨指数
 	UDAvg    string     `json:"UDAvg"`    // 综合涨幅均值
