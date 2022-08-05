@@ -38,7 +38,7 @@ type AnalySliceType struct {
 	DiffHour      int       `json:"DiffHour"`   // 总时长
 	Len           int       `json:"Len"`        // 数据的总长度
 	Volume        string    `json:"Volume"`     // 成交量总和
-	VolumeAvg     string    `json:"VolumeAvg"`  // 平均成交量
+	VolumeAvg     string    `json:"VolumeAvg"`  // 平均 小时 成交量
 	RosePer       string    `json:"RosePer"`    // 涨幅
 	H             string    `json:"H"`          // 最高价
 	L             string    `json:"L"`          // 最低价
