@@ -46,6 +46,8 @@ type AnalySliceType struct {
 	D_shadeAvg    string    `json:"D_shadeAvg"` // 下影线平均长度
 	HLPerMax      string    `json:"HLPerMax"`   // 最高振幅
 	HLPerAvg      string    `json:"HLPerAvg"`   // 平均振幅
+	U_RIdx        int       `json:"U_RIdx"`     // 涨幅 = (最新价-开盘价)/开盘价 =
+	VolIdx        int       `json:"VolIdx"`     // 成交量排名
 }
 
 type AnalySingleType struct {
