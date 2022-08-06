@@ -65,12 +65,13 @@ type TypeTicker struct {
 
 // 基于 TickerList  的市场分析
 type TypeWholeTickerAnaly struct {
-	UPIndex  string     `json:"UPIndex"`  // 上涨指数
-	UDAvg    string     `json:"UDAvg"`    // 综合涨幅均值
-	UPLe     int        `json:"UPLe"`     // 上涨趋势
-	UDLe     int        `json:"UDLe"`     // 上涨强度
-	DirIndex int        `json:"DirIndex"` // 当前市场情况  -1 下跌   0 震荡   1 上涨
-	MaxUP    TypeTicker `json:"MaxUP"`    // 最大涨幅币种
-	MaxDown  TypeTicker `json:"MaxDown"`  // 最大跌幅币种
-	Ts       int64      `json:"Ts"`       // 生成时间
+	DiffHour int            `json:"DiffHour"` // 总时长	 分析的切片时长
+	UPIndex  string         `json:"UPIndex"`  // 上涨指数  上涨个数 / 下跌个数   * 100%
+	UDAvg    string         `json:"UDAvg"`    // 综合涨幅均值  上涨平均值 + 下跌平均值
+	UPLe     int            `json:"UPLe"`     // 上涨趋势  上涨指数 大于 50%
+	UDLe     int            `json:"UDLe"`     // 上涨强度  综合涨幅均值 大于 0
+	DirIndex int            `json:"DirIndex"` // 当前市场情况  -1 下跌   0 震荡   1 上涨
+	MaxUP    AnalySliceType `json:"MaxUP"`    // 最大涨幅币种
+	MaxDown  AnalySliceType `json:"MaxDown"`  // 最大跌幅币种
+	Ts       int64          `json:"Ts"`       // 生成时间
 }
