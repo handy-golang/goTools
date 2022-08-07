@@ -1,6 +1,6 @@
 {
   "name": "go-tools",
-  "version": "0.15.5",
+  "version": "0.15.6",
   "Port": 17353,
   "scripts": {
     "git": "./_shell/gitSet.sh",

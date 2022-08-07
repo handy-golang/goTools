@@ -31,7 +31,6 @@ func Sort_DiffHour(data []TypeWholeTickerAnaly) []TypeWholeTickerAnaly {
 	j := 0
 	for i := len(list) - 1; i > -1; i-- {
 		Kdata := list[i]
-		Kdata.DiffHour = j + 1
 		listIDX = append(listIDX, Kdata)
 		j++
 	}
