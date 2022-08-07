@@ -26,13 +26,6 @@ func Sort_DiffHour(data []TypeWholeTickerAnaly) []TypeWholeTickerAnaly {
 			break
 		}
 	}
-	// 设置 Idx 并翻转
-	listIDX := []TypeWholeTickerAnaly{}
-	j := 0
-	for i := len(list) - 1; i > -1; i-- {
-		Kdata := list[i]
-		listIDX = append(listIDX, Kdata)
-		j++
-	}
-	return listIDX
+
+	return list
 }
