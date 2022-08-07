@@ -8,6 +8,7 @@ import (
 func AnalyNewKd(now TypeKd, list []TypeKd) (kdata TypeKd) {
 	kdata = TypeKd{
 		InstID:   now.InstID,
+		CcyName:  now.CcyName,
 		TimeUnix: now.TimeUnix,
 		Time:     now.Time,
 		O:        now.O,
