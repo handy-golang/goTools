@@ -15,6 +15,7 @@ type Opt struct {
 	SleepTime time.Duration
 }
 
+// http://cron.ciding.cc/
 func New(param Opt) *Cycle {
 	var CycleObj Cycle
 
