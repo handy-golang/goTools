@@ -17,12 +17,20 @@ func MA(KDList []mOKX.TypeKd, n int) string {
 	c_list := KDList[c_len-c_n:]
 	ma_add := "0"
 
+	var precision int32
+
 	for _, KD := range c_list {
+		// 数据源
 		C := KD.CBas
+		// 精度
+		precision = mCount.GetDecimal(KD.TickSz)
+
 		ma_add = mCount.Add(ma_add, C)
 	}
 
 	maRe := mCount.Div(ma_add, mStr.ToStr(c_n))
+
+	maRe = mCount.CentRound(maRe, precision)
 
 	return maRe
 }
