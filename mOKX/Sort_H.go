@@ -30,7 +30,6 @@ func Sort_H(data []TypeKd) []TypeKd {
 	j := 0
 	for i := len(list) - 1; i > -1; i-- {
 		Kdata := list[i]
-		Kdata.H_idx = j + 1
 		listIDX = append(listIDX, Kdata)
 		j++
 	}

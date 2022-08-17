@@ -23,9 +23,6 @@ type TypeKd struct {
 	D_shade   string    `json:"D_shade"`   // 下影线
 	RosePer   string    `json:"RosePer"`   // 涨幅 当前收盘价 - 上一位收盘价 * 100%
 	C_dir     int       `json:"C_dir"`     // 中心点方向 (当前中心点-前中心点) 1：涨 & -1：跌 & 0：横盘
-	H_idx     int       `json:"H_idx"`     // 最高价排序序号
-	L_idx     int       `json:"L_idx"`     // 按照最低价排序
-	C_idx     int       `json:"C_idx"`     // 按照收盘价排序
 	HLPer_idx int       `json:"HLPer_idx"` // 按照振幅排序
 }
 
