@@ -30,3 +30,8 @@ func JsonFormat(jsonByte []byte) string {
 
 	return out.String()
 }
+
+func Format(data any) string {
+	jsonByte := ToJson(data)
+	return JsonFormat(jsonByte)
+}
