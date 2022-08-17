@@ -2,7 +2,6 @@ package testCase
 
 import (
 	"fmt"
-	"strings"
 
 	"github.com/EasyGolang/goTools/global"
 	"github.com/EasyGolang/goTools/global/config"
@@ -18,9 +17,15 @@ import (
 var KdataList []mOKX.TypeKd
 
 func GetKdata(InstID string) []mOKX.TypeKd {
+	InstInfo := GetInstInfo(InstID)
+	KdataList = []mOKX.TypeKd{}
+
+	if InstInfo.InstID != InstID {
+		return KdataList
+	}
+
 	Kdata_file := mStr.Join(config.Dir.JsonData, "/", InstID, ".json")
 
-	KdataList = []mOKX.TypeKd{}
 	resData, err := mOKX.FetchOKX(mOKX.OptFetchOKX{
 		Path: "/api/v5/market/candles",
 		Data: map[string]any{
@@ -44,7 +49,7 @@ func GetKdata(InstID string) []mOKX.TypeKd {
 		return nil
 	}
 
-	FormatKdata(result.Data, InstID)
+	FormatKdata(result.Data, InstInfo)
 
 	if len(KdataList) != 300 {
 		global.LogErr("kdata.GetKdata resData", mStr.ToStr(resData))
@@ -55,21 +60,23 @@ func GetKdata(InstID string) []mOKX.TypeKd {
 	return KdataList
 }
 
-func FormatKdata(data any, InstID string) {
+func FormatKdata(data any, Inst mOKX.TypeInst) {
 	var list []mOKX.CandleDataType
 	jsonStr := mJson.ToJson(data)
 	jsoniter.Unmarshal(jsonStr, &list)
 
-	global.LogErr("kdata.FormatKdata", len(list), InstID)
-
-	CcyName := strings.Replace(InstID, config.SPOT_suffix, "", -1)
+	global.LogErr("kdata.FormatKdata", len(list), Inst.InstID)
 
 	for i := len(list) - 1; i >= 0; i-- {
 		item := list[i]
 
 		kdata := mOKX.TypeKd{
-			InstID:   InstID,
-			CcyName:  CcyName,
+			InstID:   Inst.InstID,
+			TickSz:   Inst.TickSz,
+			InstType: Inst.InstType,
+			CtVal:    Inst.CtVal,
+			MinSz:    Inst.MinSz,
+			MaxMktSz: Inst.MaxMktSz,
 			Time:     mTime.MsToTime(item[0], "0"),
 			TimeUnix: mTime.ToUnixMsec(mTime.MsToTime(item[0], "0")),
 			O:        item[1],
@@ -78,7 +85,7 @@ func FormatKdata(data any, InstID string) {
 			C:        item[4],
 			Vol:      item[5],
 			VolCcy:   item[6],
-			Type:     "GetKdata",
+			DataType: "GetKdata",
 		}
 		StorageKdata(kdata)
 	}

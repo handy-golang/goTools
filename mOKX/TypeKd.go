@@ -6,7 +6,6 @@ type CandleDataType [7]string
 
 type TypeKd struct {
 	InstID   string    `json:"InstID"`   // 持仓币种
-	CcyName  string    `json:"CcyName"`  // 币种名称
 	TickSz   string    `json:"tickSz"`   // 价格精度
 	InstType string    `json:"instType"` // 产品类型
 	CtVal    string    `json:"ctVal"`    // 合约面值
@@ -18,10 +17,10 @@ type TypeKd struct {
 	H        string    `json:"H"`        // 最高
 	L        string    `json:"L"`        // 最低
 	C        string    `json:"C"`        // 收盘价格
-	CBas     string    `json:"CBas"`     // 实体中心价 (收盘+最高+最低) / 4
+	CBas     string    `json:"CBas"`     // 实体中心价 (收盘+最高+最低) / 3
 	Vol      string    `json:"Vol"`      // 交易货币的数量
 	VolCcy   string    `json:"VolCcy"`   // 计价货币数量
-	Type     string    `json:"Type"`     // 数据类型
+	DataType string    `json:"Type"`     // 数据类型
 	Dir      int       `json:"Dir"`      // 方向 (收盘-开盘) ，1：涨 & -1：跌 & 0：横盘
 	HLPer    string    `json:"HLPer"`    // 振幅 (最高-最低)/最低 * 100%
 	U_shade  string    `json:"U_shade"`  // 上影线

@@ -22,6 +22,24 @@ func GetInst() {
 	GetSWAP()
 }
 
+func GetInstInfo(InstID string) (resData mOKX.TypeInst) {
+	resData = mOKX.TypeInst{}
+
+	for _, item := range SPOT_list {
+		if item.InstID == InstID {
+			resData = item
+		}
+	}
+
+	for _, item := range SWAP_list {
+		if item.InstID == InstID {
+			resData = item
+		}
+	}
+
+	return resData
+}
+
 func GetSPOT() {
 	SPOT_file := mStr.Join(config.Dir.JsonData, "/SPOT.json")
 
@@ -32,7 +50,7 @@ func GetSPOT() {
 		},
 		Method:        "get",
 		LocalJsonPath: SPOT_file,
-		IsLocalJson:   true,
+		IsLocalJson:   false,
 	})
 	if err != nil {
 		global.LogErr("SPOT", err)

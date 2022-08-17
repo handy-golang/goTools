@@ -23,7 +23,7 @@ func main() {
 
 	testCase.GetSPOT()
 
-	// testCase.GetKdata("EOS-USDT")
+	testCase.GetKdata("EOS-USDT")
 
 	// testCase.OKXFetch()
 	// testCase.OKXWss()
