@@ -20,9 +20,7 @@ func EMA(KDList []mOKX.TypeKd, n int) string {
 	ema_list := KDList[n:]
 
 	for _, KD := range ema_list {
-		C := mCount.Average([]string{
-			KD.H, KD.L, KD.C,
-		})
+		C := KD.CBas
 
 		tody := C                // 今日的价格
 		q := "2"                 // 2* tody

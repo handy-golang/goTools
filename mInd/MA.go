@@ -17,9 +17,7 @@ func MA(KDList []mOKX.TypeKd, n int) string {
 	c_list := KDList[c_len-c_n:]
 	ma_add := "0"
 	for _, KD := range c_list {
-		C := mCount.Average([]string{
-			KD.H, KD.L, KD.C,
-		})
+		C := KD.CBas
 		ma_add = mCount.Add(ma_add, C)
 	}
 

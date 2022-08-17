@@ -25,8 +25,8 @@ func AnalyNewKd(now TypeKd, list []TypeKd) (kdata TypeKd) {
 
 	kdata.Dir = mCount.Le(kdata.C, kdata.O)
 
-	Center := mCount.Average([]string{now.C, now.O, now.H, now.L})
-	kdata.Center = mCount.PriceCent(Center, now.C)
+	CBas := mCount.Average([]string{now.C, now.H, now.L})
+	kdata.CBas = mCount.PriceCent(CBas, now.C)
 
 	kdata.HLPer = mCount.RoseCent(now.H, now.L)
 
@@ -61,6 +61,6 @@ func NewKdShade(now TypeKd) (U_shade, D_shade string) {
 
 func NewKddC_dir(now, pre TypeKd) int {
 	// 格子方向
-	C_dir := mCount.Le(now.Center, pre.Center) // 以中心点为基准来计算，当前-过去的
+	C_dir := mCount.Le(now.CBas, pre.CBas) // 以中心点为基准来计算，当前-过去的
 	return C_dir
 }
