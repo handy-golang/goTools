@@ -46,14 +46,14 @@ func AnalyNewKd(now TypeKd, list []TypeKd) (kdata TypeKd) {
 func NewKdShade(now TypeKd) (U_shade, D_shade string) {
 	if now.Dir > 0 { // 上涨时
 		// 最高 - 收盘价 = 上影线
-		U_shade = mCount.Rose(now.H, now.C)
+		U_shade = mCount.RoseCent(now.H, now.C)
 		// 最低 - 开盘价 = 下影线
-		D_shade = mCount.Rose(now.O, now.L)
+		D_shade = mCount.RoseCent(now.O, now.L)
 	} else { // 下跌时
 		// 最高 - 开盘价 = 上影线
-		U_shade = mCount.Rose(now.H, now.O)
+		U_shade = mCount.RoseCent(now.H, now.O)
 		// 最低 - 收盘价 = 下影线
-		D_shade = mCount.Rose(now.C, now.L)
+		D_shade = mCount.RoseCent(now.C, now.L)
 	}
 	return
 }
