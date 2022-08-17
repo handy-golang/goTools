@@ -18,6 +18,7 @@ func EMA(KDList []mOKX.TypeKd, n int) string {
 	y := MA(y_list, c_n)    // 初始值
 
 	ema_list := KDList[n:]
+	var precision int32
 
 	for _, KD := range ema_list {
 		C := KD.CBas
@@ -32,6 +33,10 @@ func EMA(KDList []mOKX.TypeKd, n int) string {
 		t2 := mCount.Mul(e, y)    // (12-1) * 昨日 ema(12)
 		u2 := mCount.Div(t2, w)   //!!  (12-1) * 昨日 ema(12)  / （12+1）
 		y = mCount.Add(u1, u2)
+
+		// 精度
+		precision = mCount.GetDecimal(KD.TickSz)
+		y = mCount.CentRound(y, precision)
 	}
 
 	return y
