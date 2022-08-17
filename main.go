@@ -19,7 +19,9 @@ func main() {
 
 	fmt.Println(" =========  START  ========= ")
 
-	testCase.ClockStart()
+	// testCase.ClockStart()
+
+	testCase.GetKdata("EOS-USDT")
 
 	// testCase.OKXFetch()
 	// testCase.OKXWss()

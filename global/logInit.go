@@ -12,8 +12,9 @@ import (
 )
 
 var (
-	Log    *log.Logger // 系统日志& 重大错误或者事件
-	WssLog *log.Logger // 系统日志& 重大错误或者事件
+	Log      *log.Logger // 系统日志& 重大错误或者事件
+	WssLog   *log.Logger // 系统日志& 重大错误或者事件
+	KdataLog *log.Logger //  OKX Kdata 日志
 )
 
 func LogInt() {
@@ -37,6 +38,11 @@ func LogInt() {
 	WssLog = mLog.NewLog(mLog.NewLogParam{
 		Path: config.Dir.Log,
 		Name: "Wss",
+	})
+
+	KdataLog = mLog.NewLog(mLog.NewLogParam{
+		Path: config.Dir.Log,
+		Name: "Kdata",
 	})
 
 	// 设定清除log
