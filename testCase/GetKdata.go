@@ -1,11 +1,13 @@
 package testCase
 
 import (
+	"fmt"
 	"strings"
 
 	"github.com/EasyGolang/goTools/global"
 	"github.com/EasyGolang/goTools/global/config"
 	"github.com/EasyGolang/goTools/mFile"
+	"github.com/EasyGolang/goTools/mInd"
 	"github.com/EasyGolang/goTools/mJson"
 	"github.com/EasyGolang/goTools/mOKX"
 	"github.com/EasyGolang/goTools/mStr"
@@ -85,6 +87,10 @@ func FormatKdata(data any, InstID string) {
 func StorageKdata(kdata mOKX.TypeKd) {
 	new_Kdata := mOKX.AnalyNewKd(kdata, KdataList)
 	KdataList = append(KdataList, new_Kdata)
+
+	MA5 := mInd.MA(KdataList, 5)
+
+	fmt.Println(KdataList[len(KdataList)-1].Time, MA5)
 
 	global.KdataLog.Println(mJson.Format(new_Kdata))
 }
