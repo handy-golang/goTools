@@ -23,9 +23,5 @@ func MA(KDList []mOKX.TypeKd, n int) string {
 
 	maRe := mCount.Div(ma_add, mStr.ToStr(c_n))
 
-	lastKD := KDList[len(KDList)-1]
-
-	maRe = mCount.PriceCent(maRe, lastKD.C)
-
 	return maRe
 }
