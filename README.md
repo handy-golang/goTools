@@ -7,3 +7,10 @@
 ```bash
 go get -u github.com/EasyGolang/goTools
 ```
+
+## 配置文件
+
+```app_env.yaml
+RunMod: 1
+
+```

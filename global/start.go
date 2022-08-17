@@ -27,6 +27,9 @@ func Start() {
 		Version: config.AppInfo.Version,
 	})
 	Cont := Body.String()
+
+	config.LoadAppEnv()
+
 	Log.Println(Cont)
 	fmt.Println(Cont)
 }

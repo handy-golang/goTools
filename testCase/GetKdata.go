@@ -37,7 +37,7 @@ func GetKdata(InstID string) []mOKX.TypeKd {
 		},
 		Method:        "get",
 		LocalJsonPath: Kdata_file,
-		IsLocalJson:   false,
+		IsLocalJson:   config.AppEnv.RunMod == 1,
 	})
 	if err != nil {
 		global.LogErr("kdata.GetKdata", InstID, err)
