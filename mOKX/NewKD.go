@@ -6,23 +6,7 @@ import (
 
 // 构造新的 Kdata
 func NewKD(now TypeKd, list []TypeKd) (kdata TypeKd) {
-	kdata = TypeKd{
-		InstID:   now.InstID,
-		TickSz:   now.TickSz,
-		InstType: now.InstType,
-		CtVal:    now.CtVal,
-		MinSz:    now.MinSz,
-		MaxMktSz: now.MaxMktSz,
-		Time:     now.Time,
-		TimeUnix: now.TimeUnix,
-		O:        now.O,
-		H:        now.H,
-		L:        now.L,
-		C:        now.C,
-		Vol:      now.Vol,
-		VolCcy:   now.VolCcy,
-		DataType: now.DataType,
-	}
+	kdata = now
 
 	if mCount.Le("0", now.C) > -1 {
 		return
