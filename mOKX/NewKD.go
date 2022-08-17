@@ -5,7 +5,7 @@ import (
 )
 
 // 构造新的 Kdata
-func AnalyNewKd(now TypeKd, list []TypeKd) (kdata TypeKd) {
+func NewKD(now TypeKd, list []TypeKd) (kdata TypeKd) {
 	kdata = TypeKd{
 		InstID:   now.InstID,
 		TickSz:   now.TickSz,

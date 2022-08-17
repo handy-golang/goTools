@@ -92,7 +92,7 @@ func FormatKdata(data any, Inst mOKX.TypeInst) {
 }
 
 func StorageKdata(kdata mOKX.TypeKd) {
-	new_Kdata := mOKX.AnalyNewKd(kdata, KdataList)
+	new_Kdata := mOKX.NewKD(kdata, KdataList)
 	KdataList = append(KdataList, new_Kdata)
 
 	EMA5 := mInd.EMA(KdataList, 5)
