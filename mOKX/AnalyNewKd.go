@@ -25,8 +25,7 @@ func AnalyNewKd(now TypeKd, list []TypeKd) (kdata TypeKd) {
 
 	kdata.Dir = mCount.Le(kdata.C, kdata.O)
 
-	CBas := mCount.Average([]string{now.C, now.H, now.L})
-	kdata.CBas = mCount.PriceCent(CBas, now.C)
+	kdata.CBas = mCount.Average([]string{now.H, now.L, now.C})
 
 	kdata.HLPer = mCount.RoseCent(now.H, now.L)
 
