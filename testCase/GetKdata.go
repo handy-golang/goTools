@@ -90,7 +90,7 @@ func StorageKdata(kdata mOKX.TypeKd) {
 
 	MA5 := mInd.MA(KdataList, 5)
 
-	fmt.Println(KdataList[len(KdataList)-1].Time, MA5)
+	fmt.Println(new_Kdata.Time, MA5)
 
 	global.KdataLog.Println(mJson.Format(new_Kdata))
 }
