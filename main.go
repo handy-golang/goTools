@@ -21,7 +21,9 @@ func main() {
 
 	// testCase.ClockStart()
 
-	testCase.GetKdata("EOS-USDT")
+	testCase.GetSPOT()
+
+	// testCase.GetKdata("EOS-USDT")
 
 	// testCase.OKXFetch()
 	// testCase.OKXWss()
