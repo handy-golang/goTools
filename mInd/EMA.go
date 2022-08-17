@@ -14,10 +14,11 @@ func EMA(KDList []mOKX.TypeKd, n int) string {
 	if c_len < n {
 		c_n = c_len
 	}
+
 	y_list := KDList[0:c_n] // 将最开始的N个KD 作为初始参数
 	y := MA(y_list, c_n)    // 初始值
 
-	ema_list := KDList[n:]
+	ema_list := KDList[c_n:]
 	var precision int32
 
 	for _, KD := range ema_list {
