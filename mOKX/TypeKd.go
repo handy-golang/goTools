@@ -6,6 +6,7 @@ type CandleDataType [7]string
 
 type TypeKd struct {
 	InstID   string    `json:"InstID"`   // 持仓币种
+	CcyName  string    `json:"CcyName"`  // 币种名称
 	TickSz   string    `json:"tickSz"`   // 价格精度
 	InstType string    `json:"instType"` // 产品类型
 	CtVal    string    `json:"ctVal"`    // 合约面值

@@ -2,6 +2,7 @@ package testCase
 
 import (
 	"fmt"
+	"strings"
 
 	"github.com/EasyGolang/goTools/global"
 	"github.com/EasyGolang/goTools/global/config"
@@ -67,11 +68,20 @@ func FormatKdata(data any, Inst mOKX.TypeInst) {
 
 	global.LogErr("kdata.FormatKdata", len(list), Inst.InstID)
 
+	CcyName := Inst.InstID
+	if Inst.InstType == "SWAP" {
+		CcyName = strings.Replace(Inst.InstID, config.SWAP_suffix, "", -1)
+	}
+	if Inst.InstType == "SPOT" {
+		CcyName = strings.Replace(Inst.InstID, config.SPOT_suffix, "", -1)
+	}
+
 	for i := len(list) - 1; i >= 0; i-- {
 		item := list[i]
 
 		kdata := mOKX.TypeKd{
 			InstID:   Inst.InstID,
+			CcyName:  CcyName,
 			TickSz:   Inst.TickSz,
 			InstType: Inst.InstType,
 			CtVal:    Inst.CtVal,
