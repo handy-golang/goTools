@@ -22,9 +22,15 @@ func Cent(a string, x int32) string {
 	return n.RoundDown(x).String()
 }
 
+// 四舍五入 保留 x 位小数
+func CentRound(a string, x int32) string {
+	n := toDec(a)
+	return n.Round(x).String()
+}
+
 // 按照 source 的小数位数来保留小数
 func PriceCent(target, source string) string {
 	decimalLen := GetDecimal(source)
-	v := Cent(target, int32(decimalLen))
+	v := CentRound(target, int32(decimalLen))
 	return v
 }
