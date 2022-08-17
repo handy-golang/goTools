@@ -16,16 +16,13 @@ func MA(KDList []mOKX.TypeKd, n int) string {
 
 	c_list := KDList[c_len-c_n:]
 	ma_add := "0"
+
 	for _, KD := range c_list {
 		C := KD.CBas
 		ma_add = mCount.Add(ma_add, C)
 	}
 
 	maRe := mCount.Div(ma_add, mStr.ToStr(c_n))
-
-	lastKD := KDList[len(KDList)-1]
-
-	maRe = mCount.PriceCent(maRe, lastKD.C)
 
 	return maRe
 }

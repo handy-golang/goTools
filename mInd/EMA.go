@@ -32,8 +32,6 @@ func EMA(KDList []mOKX.TypeKd, n int) string {
 		t2 := mCount.Mul(e, y)    // (12-1) * 昨日 ema(12)
 		u2 := mCount.Div(t2, w)   //!!  (12-1) * 昨日 ema(12)  / （12+1）
 		y = mCount.Add(u1, u2)
-
-		y = mCount.PriceCent(y, KD.C) // 保留精确度
 	}
 
 	return y

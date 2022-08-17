@@ -30,8 +30,8 @@ func AnalyNewKd(now TypeKd, list []TypeKd) (kdata TypeKd) {
 	kdata.HLPer = mCount.RoseCent(now.H, now.L)
 
 	U_shade, D_shade := NewKdShade(kdata)
-	kdata.U_shade = mCount.PriceCent(U_shade, now.C)
-	kdata.D_shade = mCount.PriceCent(D_shade, now.C)
+	kdata.U_shade = U_shade
+	kdata.D_shade = D_shade
 
 	if len(list) < 1 {
 		return
