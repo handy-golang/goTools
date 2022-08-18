@@ -1,6 +1,7 @@
 package testCase
 
 import (
+	"fmt"
 	"strings"
 
 	"github.com/EasyGolang/goTools/global"
@@ -110,7 +111,9 @@ func StorageKdata(kdata mOKX.TypeKd) {
 	new_Kdata := mOKX.NewKD(kdata, KdataList)
 	KdataList = append(KdataList, new_Kdata)
 
-	mInd.SAR(KdataList)
+	SarVal, Dir := mInd.SAR(KdataList)
+
+	fmt.Println(new_Kdata.Time, Dir, SarVal)
 
 	global.KdataLog.Println(mJson.Format(new_Kdata))
 }

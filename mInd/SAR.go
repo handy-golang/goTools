@@ -42,7 +42,10 @@ func SAR(KDList []mOKX.TypeKd) (SarVal string, trend int) {
 
 	nowArr := []mOKX.TypeKd{} // 当前正在遍历的Arr
 
+	var precision int32
 	for _, item := range list {
+		precision = mCount.GetDecimal(item.TickSz)
+
 		nowArr = append(nowArr, item)
 
 		if trend > 0 { // 上升计算
@@ -53,6 +56,7 @@ func SAR(KDList []mOKX.TypeKd) (SarVal string, trend int) {
 			EP_Sub_Sar := mCount.Sub(EP, SarVal)
 			AF_Mul_ESS := mCount.Mul(AF, EP_Sub_Sar)
 			SarVal = mCount.Add(SarVal, AF_Mul_ESS)
+			SarVal = mCount.CentRound(SarVal, precision)
 
 			if mCount.Le(SarVal, item.L) > 0 {
 				trend = -1 // 翻转为跌势
@@ -79,6 +83,7 @@ func SAR(KDList []mOKX.TypeKd) (SarVal string, trend int) {
 			EP_Sub_Sar := mCount.Sub(EP, SarVal)
 			AF_Mul_ESS := mCount.Mul(AF, EP_Sub_Sar)
 			SarVal = mCount.Add(SarVal, AF_Mul_ESS)
+			SarVal = mCount.CentRound(SarVal, precision)
 
 			if mCount.Le(SarVal, item.H) < 0 {
 				trend = 1               // 翻转为涨势
