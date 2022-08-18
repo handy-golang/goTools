@@ -1,7 +1,6 @@
 package testCase
 
 import (
-	"fmt"
 	"strings"
 
 	"github.com/EasyGolang/goTools/global"
@@ -43,8 +42,6 @@ func GetInstInfo(InstID string) (resData mOKX.TypeInst) {
 
 func GetSPOT() {
 	SPOT_file := mStr.Join(config.Dir.JsonData, "/SPOT.json")
-
-	fmt.Println(config.AppEnv.RunMod)
 
 	resData, err := mOKX.FetchOKX(mOKX.OptFetchOKX{
 		Path: "/api/v5/public/instruments",

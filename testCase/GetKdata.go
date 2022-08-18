@@ -26,12 +26,18 @@ func GetKdata(InstID string) []mOKX.TypeKd {
 
 	Kdata_file := mStr.Join(config.Dir.JsonData, "/", InstID, ".json")
 
+	timeNow := mTime.GetUnix()
+	// timeDiff := mCount.Mul("15", "300")
+	// Minute := mCount.Mul(mTime.UnixTime.Minute, timeDiff)
+	// after := mCount.Sub(timeNow, Minute)
+	after := timeNow
+
 	resData, err := mOKX.FetchOKX(mOKX.OptFetchOKX{
 		Path: "/api/v5/market/candles",
 		Data: map[string]any{
 			"instId": InstID,
 			"bar":    "15m",
-			"after":  mTime.GetUnix(),
+			"after":  after,
 			"limit":  300,
 		},
 		Method:        "get",
