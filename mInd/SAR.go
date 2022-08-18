@@ -1,4 +1,5 @@
 package mInd
 
-func SAR() {
+func SAR() string {
+	return "1"
 }

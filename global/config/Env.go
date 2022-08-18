@@ -23,7 +23,6 @@ func LoadAppEnv() {
 	if err != nil {
 		errStr := fmt.Errorf("AppEnv 读取配置文件出错: %+v", err)
 		LogErr(errStr)
-		panic(errStr)
 	}
 	viper.Unmarshal(&AppEnv)
 }
