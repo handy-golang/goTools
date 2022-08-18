@@ -12,7 +12,7 @@ AF : 加速因子
 
 */
 
-func SAR(KDList []mOKX.TypeKd) {
+func SAR(KDList []mOKX.TypeKd) (SarVal string, trend int) {
 	period := 4 // 周期
 
 	list, cutList := fundFirstSar(KDList, period) // 数组切片
@@ -27,10 +27,10 @@ func SAR(KDList []mOKX.TypeKd) {
 	Max := GetEP_H(preArr).H // 上一个周期的最高值
 	Min := GetEP_L(preArr).L // 上一个周期的最低值
 
-	SarVal := Min  // 初始的 SAR 值为 上一个周期最低点
+	SarVal = Min   // 初始的 SAR 值为 上一个周期最低点
+	trend = 1      // 默认为上涨
 	AF := AF_start // AF 初始值
 	EP := Max      // 初始 EP 值为 上一个周期最高点
-	trend := 1     // 默认为上涨
 
 	// 工具函数 : 更新加速因子 并 限制最大值
 	AFUpdate := func() {
@@ -101,6 +101,8 @@ func SAR(KDList []mOKX.TypeKd) {
 			continue
 		}
 	}
+
+	return
 }
 
 func fundFirstSar(KDList []mOKX.TypeKd, period int) (list []mOKX.TypeKd, cutList []mOKX.TypeKd) {
