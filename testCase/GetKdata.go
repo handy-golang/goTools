@@ -105,9 +105,9 @@ func StorageKdata(kdata mOKX.TypeKd) {
 	new_Kdata := mOKX.NewKD(kdata, KdataList)
 	KdataList = append(KdataList, new_Kdata)
 
-	EMA5 := mInd.EMA(KdataList, 5)
+	SAR := mInd.SAR(KdataList)
 
-	fmt.Println(new_Kdata.InstID, new_Kdata.Time, new_Kdata.C, EMA5)
+	fmt.Println(new_Kdata.InstID, new_Kdata.Time, new_Kdata.C, SAR)
 
 	global.KdataLog.Println(mJson.Format(new_Kdata))
 }
