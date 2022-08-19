@@ -12,14 +12,15 @@ AF : 加速因子
 
 */
 
+var (
+	Period   = 4      // 周期
+	AF_start = "0.02" // 加速因子初始值
+	AF_step  = "0.02" // 加速因子的上升值
+	AF_Max   = "0.2"  // 加速因子最大值
+)
+
 func SAR(KDList []mOKX.TypeKd) (SarVal string, trend int) {
-	period := 4 // 周期
-
-	list, cutList := fundFirstSar(KDList, period) // 数组切片
-
-	AF_start := "0.02" // 加速因子初始值
-	AF_step := "0.02"  // 加速因子的上升值
-	AF_Max := "0.2"    // 加速因子最大值
+	list, cutList := fundFirstSar(KDList) // 数组切片
 
 	// 极值计算
 	preArr := make([]mOKX.TypeKd, len(cutList)) // 上一个周期 的数组
@@ -45,30 +46,21 @@ func SAR(KDList []mOKX.TypeKd) (SarVal string, trend int) {
 	var precision int32
 	for _, item := range list {
 		precision = mCount.GetDecimal(item.TickSz)
-
 		nowArr = append(nowArr, item)
+		Max, Min := getPreMax(nowArr)
+		/*
+		  SarVal = SarVal + AF *  (EP - SarVal)
+		  SAR(t+1)=SAR(t)+Af(t)*(Ep(t) – SAR(t))
+		*/
+		EP_Sub_Sar := mCount.Sub(EP, SarVal)
+		AF_Mul_ESS := mCount.Mul(AF, EP_Sub_Sar)
+		SarVal = mCount.Add(SarVal, AF_Mul_ESS)
+		SarVal = mCount.CentRound(SarVal, precision)
 
 		if trend > 0 { // 上升计算
-			/*
-			  SarVal = SarVal + AF *  (EP - SarVal)
-			  SAR(t+1)=SAR(t)+Af(t)*(Ep(t) – SAR(t))
-			*/
-			EP_Sub_Sar := mCount.Sub(EP, SarVal)
-			AF_Mul_ESS := mCount.Mul(AF, EP_Sub_Sar)
-			SarVal = mCount.Add(SarVal, AF_Mul_ESS)
-			SarVal = mCount.CentRound(SarVal, precision)
 
 			if mCount.Le(SarVal, item.L) > 0 {
 				trend = -1 // 翻转为跌势
-
-				Max = GetEP_H(nowArr).H // 上一个周期的最高值
-				Min = GetEP_L(nowArr).L // 上一个周期的最低值
-
-				SarVal = Max  // 前段时间的最高价格
-				AF = AF_start // AF 初始值
-				EP = Min
-				nowArr = []mOKX.TypeKd{} // 清空
-
 			} else {
 				trend = 1 // 涨势
 				EP = Max
@@ -80,21 +72,8 @@ func SAR(KDList []mOKX.TypeKd) (SarVal string, trend int) {
 		}
 
 		if trend < 0 { // 下跌计算
-			EP_Sub_Sar := mCount.Sub(EP, SarVal)
-			AF_Mul_ESS := mCount.Mul(AF, EP_Sub_Sar)
-			SarVal = mCount.Add(SarVal, AF_Mul_ESS)
-			SarVal = mCount.CentRound(SarVal, precision)
-
 			if mCount.Le(SarVal, item.H) < 0 {
-				trend = 1               // 翻转为涨势
-				Max = GetEP_H(nowArr).H // 上一个周期的最高值
-				Min = GetEP_L(nowArr).L // 上一个周期的最低值
-
-				SarVal = Min  // 前段时间的最高价格
-				AF = AF_start // AF 初始值
-				EP = Max
-				nowArr = []mOKX.TypeKd{} // 清空
-
+				trend = 1 // 翻转为涨势
 			} else {
 				trend = -1 // 继续跌势
 				EP = Min
@@ -102,7 +81,6 @@ func SAR(KDList []mOKX.TypeKd) (SarVal string, trend int) {
 					AFUpdate() // 更新加速因子
 				}
 			}
-
 			continue
 		}
 	}
@@ -110,15 +88,30 @@ func SAR(KDList []mOKX.TypeKd) (SarVal string, trend int) {
 	return
 }
 
-func fundFirstSar(KDList []mOKX.TypeKd, period int) (list []mOKX.TypeKd, cutList []mOKX.TypeKd) {
-	cut := period
+func fundFirstSar(KDList []mOKX.TypeKd) (list []mOKX.TypeKd, cutList []mOKX.TypeKd) {
+	cut := Period
 
-	if len(KDList) < period {
+	if len(KDList) < Period {
 		cut = len(KDList)
 	}
 
 	cutList = KDList[:cut]
 	list = KDList[cut:]
+
+	return
+}
+
+func getPreMax(KDList []mOKX.TypeKd) (Max, Min string) {
+	Len := len(KDList)
+
+	if Len < Period {
+		Len = Period
+	}
+
+	cutList := KDList[Len-Period:]
+
+	Max = GetEP_H(cutList).H // 上一个周期的最高值
+	Min = GetEP_L(cutList).L // 上一个周期的最低值
 
 	return
 }
