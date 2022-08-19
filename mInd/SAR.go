@@ -60,7 +60,11 @@ func SAR(KDList []mOKX.TypeKd) (SarVal string, trend int) {
 		if trend > 0 { // 上升计算
 
 			if mCount.Le(SarVal, item.L) > 0 {
-				trend = -1 // 翻转为跌势
+				trend = -1    // 翻转为跌势
+				AF = AF_start // AF 初始值
+				SarVal = Max
+				EP = Min
+
 			} else {
 				trend = 1 // 涨势
 				EP = Max
@@ -73,7 +77,11 @@ func SAR(KDList []mOKX.TypeKd) (SarVal string, trend int) {
 
 		if trend < 0 { // 下跌计算
 			if mCount.Le(SarVal, item.H) < 0 {
-				trend = 1 // 翻转为涨势
+				trend = 1     // 翻转为涨势
+				AF = AF_start // AF 初始值
+				SarVal = Min
+				EP = Max
+
 			} else {
 				trend = -1 // 继续跌势
 				EP = Min
