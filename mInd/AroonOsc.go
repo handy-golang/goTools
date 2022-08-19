@@ -1,4 +1,0 @@
-package mInd
-
-func AroonOsc() {
-}
