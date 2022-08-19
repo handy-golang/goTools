@@ -19,6 +19,7 @@ var (
 	AF_Max   = "0.2"  // 加速因子最大值
 )
 
+// 废弃，不能用， SAR 指标太难了
 func SAR(KDList []mOKX.TypeKd) (SarVal string, trend int) {
 	list, cutList := fundFirstSar(KDList) // 数组切片
 
@@ -48,16 +49,16 @@ func SAR(KDList []mOKX.TypeKd) (SarVal string, trend int) {
 		precision = mCount.GetDecimal(item.TickSz)
 		nowArr = append(nowArr, item)
 		Max, Min := getPreMax(nowArr)
-		/*
-		  SarVal = SarVal + AF *  (EP - SarVal)
-		  SAR(t+1)=SAR(t)+Af(t)*(Ep(t) – SAR(t))
-		*/
-		EP_Sub_Sar := mCount.Sub(EP, SarVal)
-		AF_Mul_ESS := mCount.Mul(AF, EP_Sub_Sar)
-		SarVal = mCount.Add(SarVal, AF_Mul_ESS)
-		SarVal = mCount.CentRound(SarVal, precision)
 
 		if trend > 0 { // 上升计算
+			/*
+			  SarVal = SarVal + AF *  (EP - SarVal)
+			  SAR(t+1)=SAR(t)+Af(t)*(Ep(t) – SAR(t))
+			*/
+			EP_Sub_Sar := mCount.Sub(EP, SarVal)
+			AF_Mul_ESS := mCount.Mul(AF, EP_Sub_Sar)
+			SarVal = mCount.Add(SarVal, AF_Mul_ESS)
+			SarVal = mCount.CentRound(SarVal, precision)
 
 			if mCount.Le(SarVal, item.L) > 0 {
 				trend = -1    // 翻转为跌势
@@ -71,11 +72,18 @@ func SAR(KDList []mOKX.TypeKd) (SarVal string, trend int) {
 				if mCount.Le(item.H, Max) > 0 {
 					AFUpdate() // 更新加速因子
 				}
-			}
-			continue
-		}
 
-		if trend < 0 { // 下跌计算
+			}
+		} else { // 下跌计算
+
+			/*
+			  SarVal = SarVal + AF *  (EP - SarVal)
+			  SAR(t+1)=SAR(t)+Af(t)*(Ep(t) – SAR(t))
+			*/
+			EP_Sub_Sar := mCount.Sub(EP, SarVal)
+			AF_Mul_ESS := mCount.Mul(AF, EP_Sub_Sar)
+			SarVal = mCount.Add(SarVal, AF_Mul_ESS)
+			SarVal = mCount.CentRound(SarVal, precision)
 			if mCount.Le(SarVal, item.H) < 0 {
 				trend = 1     // 翻转为涨势
 				AF = AF_start // AF 初始值
@@ -88,9 +96,10 @@ func SAR(KDList []mOKX.TypeKd) (SarVal string, trend int) {
 				if mCount.Le(item.L, Min) < 0 {
 					AFUpdate() // 更新加速因子
 				}
+
 			}
-			continue
 		}
+
 	}
 
 	return
