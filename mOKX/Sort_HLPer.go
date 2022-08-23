@@ -4,7 +4,7 @@ import (
 	"github.com/EasyGolang/goTools/mCount"
 )
 
-// 按照 最低 价排序
+// 按照 振幅 排序
 func Sort_HLPer(data []TypeKd) []TypeKd {
 	size := len(data)
 	list := make([]TypeKd, size)
