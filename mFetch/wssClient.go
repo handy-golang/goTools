@@ -39,7 +39,10 @@ type Wss struct {
 	Event      func(string, any) // s1 = red , close , err
 }
 
-const TickerDuration time.Duration = time.Second * time.Duration(26)
+var (
+	TickerDuration     time.Duration = time.Second * time.Duration(28)
+	PingTickerDuration time.Duration = time.Second * time.Duration(20)
+)
 
 func NewWss(opt WssOpt) (_this *Wss) {
 	_this = &Wss{}
@@ -71,7 +74,7 @@ func NewWss(opt WssOpt) (_this *Wss) {
 
 	_this.Conn = c
 	_this.Ticker = time.NewTicker(TickerDuration)
-	_this.PingTicker = time.NewTicker((TickerDuration / 4) * 3)
+	_this.PingTicker = time.NewTicker(PingTickerDuration)
 
 	// 发送 Ping
 	go func() {
@@ -113,7 +116,7 @@ func (_this *Wss) Read(callback func(msg []byte)) {
 		}
 		_this.Event("Read", message)
 		_this.Ticker.Reset(TickerDuration)
-		_this.PingTicker.Reset(TickerDuration)
+		_this.PingTicker.Reset(PingTickerDuration)
 
 		// 有回应则重置
 		if mStr.ToStr(message) == "pong" {
