@@ -112,15 +112,15 @@ func (_this *Wss) Read(callback func(msg []byte)) {
 			return
 		}
 		_this.Event("Read", message)
+		_this.Ticker.Reset(TickerDuration)
+		_this.PingTicker.Reset(TickerDuration)
+
 		// 有回应则重置
 		if mStr.ToStr(message) == "pong" {
 			// pong
 		} else {
 			callback(message)
 		}
-		_this.Ticker.Reset(TickerDuration)
-		_this.PingTicker.Reset(TickerDuration)
-
 	}
 }
 
