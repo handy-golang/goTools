@@ -144,10 +144,10 @@ func (_this *Wss) Write(content []byte) {
 		return
 	}
 
+	_this.Event("Write", content)
 	err := _this.Conn.WriteMessage(websocket.TextMessage, content)
 	if err != nil {
 		_this.Close(err)
 		return
 	}
-	_this.Event("Write", content)
 }
