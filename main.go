@@ -21,12 +21,14 @@ func main() {
 
 	// testCase.ClockStart()
 
-	testCase.GetSPOT()
+	// testCase.GetSPOT()
 
-	testCase.GetKdata("EOS-USDT")
+	// testCase.GetKdata("EOS-USDT")
 
 	// testCase.OKXFetch()
 	// testCase.OKXWss()
+
+	testCase.StrFuzzy()
 
 	fmt.Println(" =========   END   ========= ")
 }
