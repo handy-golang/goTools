@@ -34,6 +34,7 @@ type WssOpt struct {
 type Wss struct {
 	Conn   *websocket.Conn
 	Ticker *time.Ticker
+	RunIng bool
 	Event  func(string, any) // s1 = red , close , err
 }
 
@@ -52,6 +53,8 @@ func NewWss(opt WssOpt) (_this *Wss) {
 		errStr := fmt.Errorf("缺少参数:%+v", errStr)
 		panic(errStr)
 	}
+
+	_this.RunIng = true
 	// 事件处理
 	_this.Event = opt.Event
 	if _this.Event == nil {
@@ -69,6 +72,9 @@ func NewWss(opt WssOpt) (_this *Wss) {
 	// 发送 Ping
 	go func() {
 		for {
+			if !_this.RunIng {
+				break
+			}
 			_this.Write([]byte("ping"))
 			time.Sleep((TickerDuration / 4) * 3)
 		}
@@ -76,6 +82,9 @@ func NewWss(opt WssOpt) (_this *Wss) {
 	// 读到 关闭信号
 	go func() {
 		for range _this.Ticker.C {
+			if !_this.RunIng {
+				break
+			}
 			errStr := fmt.Errorf("长时间未响应")
 			_this.Close(errStr)
 		}
@@ -89,6 +98,11 @@ func (_this *Wss) Read(callback func(msg []byte)) {
 		return
 	}
 	for {
+
+		if !_this.RunIng {
+			break
+		}
+
 		_, message, err := _this.Conn.ReadMessage()
 		if err != nil {
 			_this.Close(err)
@@ -111,6 +125,7 @@ func (_this *Wss) Close(lType any) {
 		return
 	}
 	_this.Event("Close", lType)
+	_this.RunIng = false
 	_this.Conn.Close()
 }
 
