@@ -32,10 +32,11 @@ type WssOpt struct {
 	Event func(string, any) // s1 = succeed , err
 }
 type Wss struct {
-	Conn   *websocket.Conn
-	Ticker *time.Ticker
-	RunIng bool
-	Event  func(string, any) // s1 = red , close , err
+	Conn       *websocket.Conn
+	Ticker     *time.Ticker
+	PingTicker *time.Ticker
+	RunIng     bool
+	Event      func(string, any) // s1 = red , close , err
 }
 
 const TickerDuration time.Duration = time.Second * time.Duration(26)
@@ -54,29 +55,31 @@ func NewWss(opt WssOpt) (_this *Wss) {
 		panic(errStr)
 	}
 
-	_this.RunIng = true
 	// 事件处理
 	_this.Event = opt.Event
 	if _this.Event == nil {
 		_this.Event = func(s1 string, s2 any) {}
 	}
 
+	_this.RunIng = true
+
 	c, _, err := websocket.DefaultDialer.Dial(opt.Url, nil)
-	if err != nil {
-		_this.Event("err", err)
+	if err != nil || c == nil {
+		_this.Close(err)
 		return
 	}
+
 	_this.Conn = c
 	_this.Ticker = time.NewTicker(TickerDuration)
+	_this.PingTicker = time.NewTicker((TickerDuration / 4) * 3)
 
 	// 发送 Ping
 	go func() {
-		for {
+		for range _this.PingTicker.C {
 			if !_this.RunIng {
 				break
 			}
 			_this.Write([]byte("ping"))
-			time.Sleep((TickerDuration / 4) * 3)
 		}
 	}()
 	// 读到 关闭信号
@@ -116,6 +119,7 @@ func (_this *Wss) Read(callback func(msg []byte)) {
 			callback(message)
 		}
 		_this.Ticker.Reset(TickerDuration)
+		_this.PingTicker.Reset(TickerDuration)
 
 	}
 }
@@ -125,6 +129,8 @@ func (_this *Wss) Close(lType any) {
 		return
 	}
 	_this.Event("Close", lType)
+	_this.Ticker.Stop()
+	_this.PingTicker.Stop()
 	_this.RunIng = false
 	_this.Conn.Close()
 }
@@ -133,6 +139,11 @@ func (_this *Wss) Write(content []byte) {
 	if _this.Conn == nil {
 		return
 	}
+
+	if !_this.RunIng {
+		return
+	}
+
 	err := _this.Conn.WriteMessage(websocket.TextMessage, content)
 	if err != nil {
 		_this.Close(err)
