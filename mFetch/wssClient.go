@@ -127,10 +127,10 @@ func (_this *Wss) Close(msg any) {
 	if _this.Conn == nil {
 		return
 	}
-	_this.RunIng = false
-	_this.Conn.Close()
 	_this.Ticker.Stop()
 	_this.PingTicker.Stop()
+	_this.Conn.Close()
+	_this.RunIng = false
 	_this.Event("Close", msg)
 }
 
