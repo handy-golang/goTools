@@ -29,14 +29,14 @@ import (
 
 type WssOpt struct {
 	Url   string
-	Event func(string, any) // s1 = succeed , err
+	Event func(string, any)
 }
 type Wss struct {
 	Conn       *websocket.Conn
 	Ticker     *time.Ticker
 	PingTicker *time.Ticker
 	RunIng     bool
-	Event      func(string, any) // s1 = red , close , err
+	Event      func(string, any) // Read   Close  Write
 }
 
 var (
@@ -79,20 +79,13 @@ func NewWss(opt WssOpt) (_this *Wss) {
 	// 发送 Ping
 	go func() {
 		for range _this.PingTicker.C {
-			if !_this.RunIng {
-				break
-			}
 			_this.Write([]byte("ping"))
 		}
 	}()
 	// 读到 关闭信号
 	go func() {
 		for range _this.Ticker.C {
-			if !_this.RunIng {
-				break
-			}
-			errStr := fmt.Errorf("长时间未响应")
-			_this.Close(errStr)
+			_this.Close(fmt.Errorf("长时间未响应"))
 		}
 	}()
 
@@ -114,9 +107,6 @@ func (_this *Wss) Read(callback func(msg []byte)) {
 			_this.Close(err)
 			return
 		}
-		_this.Event("Read", message)
-		_this.Ticker.Reset(TickerDuration)
-		_this.PingTicker.Reset(PingTickerDuration)
 
 		// 有回应则重置
 		if mStr.ToStr(message) == "pong" {
@@ -124,33 +114,34 @@ func (_this *Wss) Read(callback func(msg []byte)) {
 		} else {
 			callback(message)
 		}
+
+		_this.Ticker.Reset(TickerDuration)
+		_this.PingTicker.Reset(PingTickerDuration)
+		_this.Event("Read", message)
+
 	}
 }
 
-func (_this *Wss) Close(lType any) {
+func (_this *Wss) Close(msg any) {
 	if _this.Conn == nil {
 		return
 	}
-	_this.Event("Close", lType)
-	_this.Ticker.Stop()
-	_this.PingTicker.Stop()
 	_this.RunIng = false
 	_this.Conn.Close()
+	_this.Ticker.Stop()
+	_this.PingTicker.Stop()
+	_this.Event("Close", msg)
 }
 
 func (_this *Wss) Write(content []byte) {
-	if _this.Conn == nil {
+	if _this.Conn == nil || !_this.RunIng {
 		return
 	}
 
-	if !_this.RunIng {
-		return
-	}
-
-	_this.Event("Write", content)
 	err := _this.Conn.WriteMessage(websocket.TextMessage, content)
 	if err != nil {
 		_this.Close(err)
 		return
 	}
+	_this.Event("Write", content)
 }
