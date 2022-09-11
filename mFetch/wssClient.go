@@ -89,6 +89,7 @@ func NewWss(opt WssOpt) (_this *Wss) {
 		}
 	}()
 
+	_this.Event("Start", _this.Conn)
 	return
 }
 
