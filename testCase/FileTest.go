@@ -31,8 +31,8 @@ func DownFile() {
 
 	mFile.DownFile(mFile.DownFileOpt{
 		Url:      url,
-		SavePath: "./jsonData/xxx",
-		SaveName: "abc",
+		SavePath: "./jsonData",
+		SaveName: "2.png",
 		Event: func(s string) {
 			fmt.Println(s)
 		},
