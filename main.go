@@ -6,7 +6,6 @@ import (
 
 	"github.com/EasyGolang/goTools/global"
 	"github.com/EasyGolang/goTools/global/config"
-	"github.com/EasyGolang/goTools/testCase"
 	jsoniter "github.com/json-iterator/go"
 )
 
@@ -31,7 +30,7 @@ func main() {
 	// testCase.CountTest()
 	// testCase.StrFuzzy()
 
-	testCase.FileTest()
+	// testCase.FileTest()
 
 	fmt.Println(" =========   END   ========= ")
 }
