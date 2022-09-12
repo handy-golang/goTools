@@ -10,7 +10,16 @@ import (
 
 func FileTest() {
 	// TinyFetch()
-	DownFile()
+	// DownFile()
+
+	resData, err := mFile.CompressImg(mFile.CompressImgOpt{
+		Replace: true,
+		Src:     config.Dir.App + "/jsonData/10.png",
+		Email:   "meichangliang@mo7.cc",
+		ApiKey:  "Hl6wpxNdBg0Dvv2s7BcVsKks1tFZ2wBl",
+	})
+
+	fmt.Println("压缩图片", resData, err)
 }
 
 func TinyFetch() {
