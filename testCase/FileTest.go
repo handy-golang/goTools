@@ -29,12 +29,11 @@ func TinyFetch() {
 func DownFile() {
 	url := "https://api.tinify.com/output/dk417xcw5q5c34hm96puagmxn62t4zpd"
 
-	mFile.DownFile(mFile.DownFileOpt{
+	resData, err := mFile.DownFile(mFile.DownFileOpt{
 		Url:      url,
 		SavePath: "./jsonData",
 		SaveName: "2.png",
-		Event: func(s string) {
-			fmt.Println(s)
-		},
 	})
+
+	fmt.Println(resData, err)
 }

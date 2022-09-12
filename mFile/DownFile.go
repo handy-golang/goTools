@@ -16,15 +16,11 @@ type DownFileOpt struct {
 	Url      string
 	SavePath string
 	SaveName string
-	Event    func(string)
 }
 
-func DownFile(opt DownFileOpt) {
+func DownFile(opt DownFileOpt) (resData string, resErr error) {
 	Url := opt.Url
-	callBack := opt.Event
-	if callBack == nil {
-		callBack = func(string) {}
-	}
+
 	SavePath := opt.SavePath
 	if len(SavePath) < 1 {
 		SavePath = "."
@@ -60,16 +56,18 @@ func DownFile(opt DownFileOpt) {
 		SaveFile := SavePath + "/" + fileName
 		f, err := os.Create(SaveFile)
 		if err != nil {
-			callBack("")
+			resErr = err
 		}
 		io.Copy(f, bytes.NewReader(r.Body))
 
-		callBack(SaveFile)
+		resData = SaveFile
 	})
 	c.OnError(func(r *colly.Response, err error) {
 		if err != nil {
-			callBack("")
+			resErr = err
 		}
 	})
 	c.Visit(Url)
+
+	return
 }
