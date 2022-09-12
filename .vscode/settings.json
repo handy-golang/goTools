@@ -4,6 +4,7 @@
     "Aroon",
     "bson",
     "fasthttp",
+    "gocolly",
     "gofiber",
     "jsoniter",
     "Kdata",
