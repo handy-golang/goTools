@@ -1,7 +1,6 @@
 package mLog
 
 import (
-	"io/ioutil"
 	"os"
 	"regexp"
 	"strings"
@@ -33,7 +32,7 @@ func Clear(opt ClearParam) {
 		return
 	}
 
-	fileInfoList, _ := ioutil.ReadDir(logPath)
+	fileInfoList, _ := os.ReadDir(logPath)
 	timeNow := mTime.ToUnixMsec(time.Now())
 
 	for i := range fileInfoList {

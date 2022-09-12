@@ -2,7 +2,6 @@ package mFile
 
 import (
 	"fmt"
-	"io/ioutil"
 	"log"
 	"net/http"
 	"os"
@@ -56,7 +55,7 @@ func ReadFile(fileName string) []byte {
 		return []byte("")
 	}
 
-	f, err := ioutil.ReadFile(fileName)
+	f, err := os.ReadFile(fileName)
 	if err != nil {
 		return []byte("")
 	}
