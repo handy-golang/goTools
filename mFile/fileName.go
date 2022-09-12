@@ -6,6 +6,7 @@ import (
 	"strings"
 
 	"github.com/EasyGolang/goTools/mCount"
+	"github.com/EasyGolang/goTools/mEncrypt"
 	"github.com/EasyGolang/goTools/mPath"
 	"github.com/EasyGolang/goTools/mStr"
 )
@@ -13,6 +14,7 @@ import (
 type GetNameOpt struct {
 	FileName string
 	SavePath string
+	RandName bool
 }
 
 type GetNameType struct {
@@ -26,6 +28,10 @@ type GetNameType struct {
 func GetName(opt GetNameOpt) string {
 	extName := path.Ext(opt.FileName)                      // 后缀名
 	name := strings.Replace(opt.FileName, extName, "", -1) // 把后缀名换成空字符串
+
+	if opt.RandName {
+		name = mEncrypt.RandStr(5)
+	}
 
 	var Obj GetNameType
 	Obj.Count = "0"
