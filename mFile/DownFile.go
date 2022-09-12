@@ -3,9 +3,12 @@ package mFile
 import (
 	"bytes"
 	"io"
+	"net"
+	"net/http"
 	"os"
 	"path"
 	"path/filepath"
+	"time"
 
 	"github.com/EasyGolang/goTools/mEncrypt"
 	"github.com/EasyGolang/goTools/mPath"
@@ -42,6 +45,17 @@ func DownFile(opt DownFileOpt) (resData string, resErr error) {
 	}
 
 	c := colly.NewCollector()
+	c.WithTransport(&http.Transport{
+		Proxy: http.ProxyFromEnvironment,
+		DialContext: (&net.Dialer{
+			Timeout: 100 * time.Second,
+		}).DialContext,
+		MaxIdleConns:          0,
+		IdleConnTimeout:       0,
+		TLSHandshakeTimeout:   0,
+		ExpectContinueTimeout: 0,
+	})
+
 	c.OnResponse(func(r *colly.Response) {
 		fileName := SaveName
 		extName := path.Ext(SaveName) // 后缀名
