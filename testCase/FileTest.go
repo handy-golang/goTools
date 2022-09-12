@@ -13,7 +13,9 @@ func FileTest() {
 		Email:  "meichangliang@mo7.cc",
 		ApiKey: "Hl6wpxNdBg0Dvv2s7BcVsKks1tFZ2wBl",
 	})
+	if err != nil {
+		fmt.Println("err", err)
+	}
 
 	fmt.Println("resData", resData)
-	fmt.Println("err", err)
 }

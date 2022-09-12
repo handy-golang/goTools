@@ -6,6 +6,7 @@ import (
 	"io"
 	"net/http"
 	"os"
+	"path"
 	"strings"
 
 	"github.com/EasyGolang/goTools/mPath"
@@ -49,6 +50,14 @@ func Tinypng(opt TinyOpt) (resData string, resErr error) {
 
 	if len(opt.Email) < 6 || len(opt.ApiKey) < 10 {
 		resErr = fmt.Errorf("请输入有效的 opt.Email 或 opt.ApiKey")
+		return
+	}
+
+	extName := path.Ext(opt.Src) // 后缀名
+
+	if extName == ".png" || extName == ".jpg" || extName == ".jpeg" || extName == ".webp" {
+	} else {
+		resErr = fmt.Errorf("文件格式不正确")
 		return
 	}
 
