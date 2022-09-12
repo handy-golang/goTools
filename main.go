@@ -28,7 +28,8 @@ func main() {
 	// testCase.OKXFetch()
 	// testCase.OKXWss()
 
-	testCase.StrFuzzy()
+	testCase.CountTest()
+	// testCase.StrFuzzy()
 
 	fmt.Println(" =========   END   ========= ")
 }
