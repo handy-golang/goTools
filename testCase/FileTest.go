@@ -11,15 +11,17 @@ import (
 func FileTest() {
 	// TinyFetch()
 	// DownFile()
-
+	log.Println("开始压缩")
 	resData, err := mFile.CompressImg(mFile.CompressImgOpt{
-		Replace: true,
-		Src:     config.Dir.App + "/jsonData/10.png",
+		Replace: false,
+		Src:     config.Dir.App + "/jsonData/1158628.png",
 		Email:   "meichangliang@mo7.cc",
 		ApiKey:  "Hl6wpxNdBg0Dvv2s7BcVsKks1tFZ2wBl",
 	})
-
-	fmt.Println("压缩图片", resData, err)
+	if err != nil {
+		fmt.Println("错误", err)
+	}
+	log.Println("压缩结束", resData)
 }
 
 func TinyFetch() {
