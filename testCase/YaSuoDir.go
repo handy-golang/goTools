@@ -22,6 +22,11 @@ type TinyKey struct {
 var YaSuoDirPath = "/root/ProdProject/file.unido-itpo-beijing.cn"
 
 var TinyList = map[string]TinyKey{
+	"tiny1@mo7.cc": {
+		Email:  "tiny1@mo7.cc",
+		ApiKey: "JSRH4Lp6VPXz2PCp09YJ2MqhZJBKpGzH",
+		Index:  1,
+	},
 	"tiny2@mo7.cc": {
 		Email:  "tiny2@mo7.cc",
 		ApiKey: "dctdH18DxC4KZzPtwKKqJWMnW9s2Kk6m",
