@@ -88,7 +88,7 @@ func YaSuoFunc(path string) {
 	}
 	global.Log.Println("开始压缩", SelectKey.Email, SelectKey.Index)
 	resData, err := mFile.CompressImg(mFile.CompressImgOpt{
-		Replace: false,
+		Replace: true,
 		Src:     path,
 		Email:   SelectKey.Email,
 		ApiKey:  SelectKey.ApiKey,
