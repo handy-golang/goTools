@@ -92,12 +92,9 @@ var TinyList = map[string]TinyKey{
 func YaSuoDir() {
 	for i := 0; i < 100; i++ {
 		n := mCount.GetRound(0, int64(len(TinyListArr)-1))
-		fmt.Println(n)
+		Tiny := TinyListArr[n]
+		fmt.Println(Tiny)
 	}
-
-	fmt.Println(TinyListArr[0])
-	fmt.Println(TinyListArr[len(TinyListArr)-1])
-	fmt.Println(len(TinyListArr) - 1)
 
 	// EachDir(YaSuoDirPath)
 }
