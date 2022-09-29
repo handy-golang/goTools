@@ -1,12 +1,14 @@
 package testCase
 
 import (
+	"fmt"
 	"os"
 	"path"
 	"strings"
 
 	"github.com/EasyGolang/goTools/global"
 	"github.com/EasyGolang/goTools/global/config"
+	"github.com/EasyGolang/goTools/mCount"
 	"github.com/EasyGolang/goTools/mFile"
 	"github.com/EasyGolang/goTools/mJson"
 )
@@ -88,7 +90,16 @@ var TinyList = map[string]TinyKey{
 }
 
 func YaSuoDir() {
-	EachDir(YaSuoDirPath)
+	for i := 0; i < 100; i++ {
+		n := mCount.GetRound(0, int64(len(TinyListArr)-1))
+		fmt.Println(n)
+	}
+
+	fmt.Println(TinyListArr[0])
+	fmt.Println(TinyListArr[len(TinyListArr)-1])
+	fmt.Println(len(TinyListArr) - 1)
+
+	// EachDir(YaSuoDirPath)
 }
 
 func EachDir(T string) {
