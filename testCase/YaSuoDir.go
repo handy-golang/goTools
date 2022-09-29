@@ -21,6 +21,34 @@ type TinyKey struct {
 
 var YaSuoDirPath = "/root/ProdProject/file.unido-itpo-beijing.cn"
 
+var TinyListArr = []TinyKey{
+	{
+		Email:  "tiny1@mo7.cc",
+		ApiKey: "JSRH4Lp6VPXz2PCp09YJ2MqhZJBKpGzH",
+	}, {
+		Email:  "tiny2@mo7.cc",
+		ApiKey: "dctdH18DxC4KZzPtwKKqJWMnW9s2Kk6m",
+	}, {
+		Email:  "tiny3@mo7.cc",
+		ApiKey: "pxyZR1dDJdwnmtBdJxCQkdDQ7KnXC8rF",
+	}, {
+		Email:  "tiny4@mo7.cc",
+		ApiKey: "MSYJfgBHLZ98KzzxGz6LS9NH6lNNXDM2",
+	}, {
+		Email:  "tiny5@mo7.cc",
+		ApiKey: "lWZ9ZSVtL0ss2cw0s4gnJLQ4sgShqRNY",
+	}, {
+		Email:  "tiny6@mo7.cc",
+		ApiKey: "YkS7RTpgnH7ZxWvPt7rSHCtBg35BvzVM",
+	}, {
+		Email:  "tiny7@mo7.cc",
+		ApiKey: "pJBCcgvNw10DByh7bm7BBZBP264Ln3TL",
+	}, {
+		Email:  "tiny8@mo7.cc",
+		ApiKey: "jyPT65Cg0RJQLWZ7KfXWRYP1TDr6yYcz",
+	},
+}
+
 var TinyList = map[string]TinyKey{
 	"tiny1@mo7.cc": {
 		Email:  "tiny1@mo7.cc",
