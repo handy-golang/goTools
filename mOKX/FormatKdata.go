@@ -61,7 +61,7 @@ func FormatKdata(opt FormatKdataParam) []TypeKd {
 			CtVal:    opt.Inst.CtVal,
 			MinSz:    opt.Inst.MinSz,
 			MaxMktSz: opt.Inst.MaxMktSz,
-			Time:     mTime.MsToTime(item[0], "0"),
+			TimeStr:  mTime.UnixFormat(item[0]),
 			TimeUnix: mTime.ToUnixMsec(mTime.MsToTime(item[0], "0")),
 			O:        item[1],
 			H:        item[2],

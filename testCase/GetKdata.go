@@ -91,7 +91,7 @@ func FormatKdata(data any, Inst mOKX.TypeInst) {
 			CtVal:    Inst.CtVal,
 			MinSz:    Inst.MinSz,
 			MaxMktSz: Inst.MaxMktSz,
-			Time:     mTime.MsToTime(item[0], "0"),
+			TimeStr:  mTime.UnixFormat(item[0]),
 			TimeUnix: mTime.ToUnixMsec(mTime.MsToTime(item[0], "0")),
 			O:        item[1],
 			H:        item[2],
