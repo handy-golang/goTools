@@ -13,7 +13,7 @@ type TypeKd struct {
 	MinSz    string `json:"minSz"`    // 最小下单数量
 	MaxMktSz string `json:"maxMktSz"` // 最大委托数量
 	TimeUnix int64  `json:"TimeUnix"` // 毫秒时间戳
-	TimeStr  string `json:"Time"`     // 时间的字符串形式
+	TimeStr  string `json:"TimeStr"`  // 时间的字符串形式
 	O        string `json:"O"`        // 开盘
 	H        string `json:"H"`        // 最高
 	L        string `json:"L"`        // 最低
