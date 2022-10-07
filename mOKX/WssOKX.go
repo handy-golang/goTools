@@ -13,14 +13,14 @@ testCase.OKXWss()
 */
 
 type LoginArgsType struct {
-	APIKey     string `json:"apiKey"`
-	Passphrase string `json:"passphrase"`
-	Timestamp  string `json:"timestamp"`
-	Sign       string `json:"sign"`
+	APIKey     string `bson:"apiKey"`
+	Passphrase string `bson:"passphrase"`
+	Timestamp  string `bson:"timestamp"`
+	Sign       string `bson:"sign"`
 }
 type LoginType struct {
-	Op   string          `json:"op"`
-	Args []LoginArgsType `json:"args"`
+	Op   string          `bson:"op"`
+	Args []LoginArgsType `bson:"args"`
 }
 
 type OptWssOKX struct {

@@ -8,17 +8,17 @@ import (
 )
 
 type Msg_1_cardType struct {
-	Config   Msg_1_Config     `json:"config"`
-	Elements []Msg_1_Elements `json:"elements"`
+	Config   Msg_1_Config     `bson:"config"`
+	Elements []Msg_1_Elements `bson:"elements"`
 }
 
 type Msg_1_Config struct {
-	WideScreenMode bool `json:"wide_screen_mode"`
+	WideScreenMode bool `bson:"wide_screen_mode"`
 }
 
 type Msg_1_Elements struct {
-	Tag     string `json:"tag"`
-	Content string `json:"content"`
+	Tag     string `bson:"tag"`
+	Content string `bson:"content"`
 }
 
 func Msg_1_card(MsgContent string) string {

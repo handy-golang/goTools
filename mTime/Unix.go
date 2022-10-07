@@ -1,10 +1,10 @@
 package mTime
 
 type UnixTimeType struct {
-	Seconds string `json:"Seconds"`
-	Minute  string `json:"Minute"`
-	Hour    string `json:"Hour"`
-	Day     string `json:"Day"`
+	Seconds string `bson:"Seconds"`
+	Minute  string `bson:"Minute"`
+	Hour    string `bson:"Hour"`
+	Day     string `bson:"Day"`
 }
 
 // 毫秒数
@@ -16,10 +16,10 @@ var UnixTime = UnixTimeType{
 }
 
 type UnixTimeInt64Type struct {
-	Seconds int64 `json:"Seconds"`
-	Minute  int64 `json:"Minute"`
-	Hour    int64 `json:"Hour"`
-	Day     int64 `json:"Day"`
+	Seconds int64 `bson:"Seconds"`
+	Minute  int64 `bson:"Minute"`
+	Hour    int64 `bson:"Hour"`
+	Day     int64 `bson:"Day"`
 }
 
 var UnixTimeInt64 = UnixTimeInt64Type{

@@ -94,10 +94,10 @@ func New(opt Opt) *NewFeiShu {
 }
 
 type TenantAccessToken struct {
-	Code              int    `json:"code"`
-	Expire            int    `json:"expire"`
-	Msg               string `json:"msg"`
-	TenantAccessToken string `json:"tenant_access_token"`
+	Code              int    `bson:"code"`
+	Expire            int    `bson:"expire"`
+	Msg               string `bson:"msg"`
+	TenantAccessToken string `bson:"tenant_access_token"`
 }
 
 func (o *NewFeiShu) GetAccessToken() *NewFeiShu {

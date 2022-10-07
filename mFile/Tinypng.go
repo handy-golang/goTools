@@ -16,17 +16,17 @@ import (
 
 type TinifyType struct {
 	Input struct {
-		Size int    `json:"size"`
-		Type string `json:"type"`
-	} `json:"input"`
+		Size int    `bson:"size"`
+		Type string `bson:"type"`
+	} `bson:"input"`
 	Output struct {
-		Size   int     `json:"size"`
-		Type   string  `json:"type"`
-		Width  int     `json:"width"`
-		Height int     `json:"height"`
-		Ratio  float64 `json:"ratio"`
-		URL    string  `json:"url"`
-	} `json:"output"`
+		Size   int     `bson:"size"`
+		Type   string  `bson:"type"`
+		Width  int     `bson:"width"`
+		Height int     `bson:"height"`
+		Ratio  float64 `bson:"ratio"`
+		URL    string  `bson:"url"`
+	} `bson:"output"`
 }
 
 const CompressingUrl = "https://api.tinify.com/shrink"

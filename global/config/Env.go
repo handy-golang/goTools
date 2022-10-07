@@ -7,9 +7,9 @@ import (
 )
 
 var AppInfo struct {
-	Name    string `json:"name"`
-	Version string `json:"version"`
-	Port    int    `json:"Port"`
+	Name    string `bson:"name"`
+	Version string `bson:"version"`
+	Port    int    `bson:"Port"`
 }
 
 var AppEnv struct {

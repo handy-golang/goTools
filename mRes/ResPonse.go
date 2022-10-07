@@ -4,6 +4,7 @@ import "github.com/EasyGolang/goTools/mStr"
 
 /*
 var (
+
 	// OK
 	OK      = response(200, "Succeed")           // 通用成功
 	OKNoMsg = response(200, "")                  // 无提示的成功
@@ -28,15 +29,15 @@ var (
 	// SetConfig
 	ConfigSucceed = response(200, "设置成功")
 	ConfigErr     = response(205, "持仓时禁止切换")
+
 )
 
 mRes.ConfigSucceed.WithData(result)
-
 */
 type ResType struct {
-	Code int    `json:"Code"` // 返回码
-	Data any    `json:"Data"` // 返回数据
-	Msg  string `json:"Msg"`  // 描述
+	Code int    `bson:"Code"` // 返回码
+	Data any    `bson:"Data"` // 返回数据
+	Msg  string `bson:"Msg"`  // 描述
 }
 
 func Response(code int, message any) *ResType {

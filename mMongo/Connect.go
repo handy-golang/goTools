@@ -29,8 +29,8 @@ import (
 
 	插入操作
 	type body struct {
-		Name string `json:"name"`
-		Age  int    `json:"age"`
+		Name string `bson:"name"`
+		Age  int    `bson:"age"`
 	}
 	var jk []any
 	for i := 0; i < 10; i++ {
@@ -49,8 +49,8 @@ import (
 /*
 	// 查询操作
 	var result struct {
-		Name string `json:"name"`
-		Age  int    `json:"age"`
+		Name string `bson:"name"`
+		Age  int    `bson:"age"`
 	}
 
 	filter := bson.D{
