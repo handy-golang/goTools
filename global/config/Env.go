@@ -13,7 +13,10 @@ var AppInfo struct {
 }
 
 var AppEnv struct {
-	RunMod int
+	RunMod        int
+	MongoAddress  string
+	MongoPassword string
+	MongoUserName string
 }
 
 func LoadAppEnv() {
