@@ -2,6 +2,7 @@ package mOKX
 
 import "time"
 
+// 币安原始榜单数据
 type TypeBinanceTicker struct {
 	Symbol             string `bson:"symbol"`
 	InstID             string `bson:"InstID"`
@@ -27,6 +28,7 @@ type TypeBinanceTicker struct {
 	Count              int    `bson:"count"`
 }
 
+// OKX 原始榜单数据
 type TypeOKXTicker struct {
 	InstType  string `bson:"instType"`
 	InstID    string `bson:"instId"`
@@ -46,23 +48,20 @@ type TypeOKXTicker struct {
 	SodUtc8   string `bson:"sodUtc8"`
 }
 
+// 综合榜单数据
 type TypeTicker struct {
-	InstID         string `bson:"InstID"` // 产品ID
-	Symbol         string `bson:"symbol"`
-	CcyName        string `bson:"CcyName"`        // 币种名称
-	Last           string `bson:"Last"`           // 最新成交价
-	Open24H        string `bson:"Open24H"`        // 24小时开盘价
-	High24H        string `bson:"High24H"`        // 最高价
-	Low24H         string `bson:"Low24H"`         // 最低价
-	OKXVol24H      string `bson:"OKXVol24H"`      // OKX 24小时成交量 USDT 数量
-	BinanceVol24H  string `bson:"BinanceVol24H"`  // 24 小时成交 USDT 数量
-	U_R24          string `bson:"U_R24"`          // 涨幅 = (最新价-开盘价)/开盘价 =
-	U_RIdx         int    `bson:"U_RIdx"`         // 涨幅 = (最新价-开盘价)/开盘价 =
-	Volume         string `bson:"Volume"`         // 成交量总和
-	VolIdx         int    `bson:"VolIdx"`         // 成交量排名
-	OkxVolRose     string `bson:"OkxVolRose"`     // 欧意占比总交易量
-	BinanceVolRose string `bson:"BinanceVolRose"` // 币安占比总交易量
-	Ts             int64  `bson:"Ts"`
+	InstID        string `bson:"InstID"` // 产品ID
+	Symbol        string `bson:"symbol"`
+	CcyName       string `bson:"CcyName"`       // 币种名称
+	Last          string `bson:"Last"`          // 最新成交价
+	Open24H       string `bson:"Open24H"`       // 24小时开盘价
+	High24H       string `bson:"High24H"`       // 最高价
+	Low24H        string `bson:"Low24H"`        // 最低价
+	OKXVol24H     string `bson:"OKXVol24H"`     // OKX 24小时成交量 USDT 数量
+	BinanceVol24H string `bson:"BinanceVol24H"` // 24 小时成交 USDT 数量
+	U_R24         string `bson:"U_R24"`         // 涨幅 = (最新价-开盘价)/开盘价 =
+	Volume        string `bson:"Volume"`        // 成交量总和
+	Ts            int64  `bson:"Ts"`
 }
 
 // 基于 TickerList  的市场分析

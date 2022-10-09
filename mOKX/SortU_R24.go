@@ -31,7 +31,6 @@ func SortU_R24(data []TypeTicker) []TypeTicker {
 	j := 0
 	for i := len(list) - 1; i > -1; i-- {
 		Kdata := list[i]
-		Kdata.U_RIdx = j + 1
 		listIDX = append(listIDX, Kdata)
 		j++
 	}
