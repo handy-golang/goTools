@@ -15,7 +15,7 @@ type Opt struct {
 	Password string
 	Address  string // 127.0.1:16897
 	DBName   string
-	Timeout  int // 秒
+	Timeout  int // 默认60秒
 	Event    func(string, string)
 }
 
