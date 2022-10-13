@@ -33,14 +33,13 @@ func MsToTime(ms any, diff string) time.Time {
 }
 
 // 格式化时间戳
-func UnixFormat(ms string) string {
-	timeMs := ms
-	if len(ms) < 1 {
+func UnixFormat(ms any) string {
+	timeMs := mStr.ToStr(ms)
+	if len(timeMs) < 1 {
 		timeMs = GetUnix()
 	}
 	T := MsToTime(timeMs, "0")
 	timeStr := T.Format("2006-01-02T15:04:05")
-
 	return timeStr
 }
 
@@ -48,7 +47,6 @@ func UnixFormat(ms string) string {
 func GetUnix() string {
 	unix := time.Now().UnixNano() / 1e6
 	str := strconv.FormatInt(unix, 10)
-
 	return str
 }
 
