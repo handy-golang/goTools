@@ -1,7 +1,5 @@
 package mOKX
 
-import "time"
-
 // 币安原始榜单数据
 type TypeBinanceTicker struct {
 	Symbol             string `bson:"symbol"`
@@ -68,16 +66,16 @@ type TypeTicker struct {
 
 // 基于 TickerList  的市场分析
 type TypeWholeTickerAnaly struct {
-	DiffHour      int            `bson:"DiffHour"`  // 总时长	 分析的切片时长
-	UPIndex       string         `bson:"UPIndex"`   // 上涨指数  上涨个数 / 下跌个数   * 100%
-	UDAvg         string         `bson:"UDAvg"`     // 综合涨幅均值  上涨平均值 + 下跌平均值
-	UPLe          int            `bson:"UPLe"`      // 上涨趋势  上涨指数 大于 50%
-	UDLe          int            `bson:"UDLe"`      // 上涨强度  综合涨幅均值 大于 0
-	DirIndex      int            `bson:"DirIndex"`  // 当前市场情况  -1 下跌   0 震荡   1 上涨
-	MaxUP         AnalySliceType `bson:"MaxUP"`     // 最大涨幅币种
-	MaxDown       AnalySliceType `bson:"MaxDown"`   // 最大跌幅币种
-	StartTime     time.Time      `bson:"StartTime"` // 开始时间
+	DiffHour      int            `bson:"DiffHour"`     // 总时长	 分析的切片时长
+	UPIndex       string         `bson:"UPIndex"`      // 上涨指数  上涨个数 / 下跌个数   * 100%
+	UDAvg         string         `bson:"UDAvg"`        // 综合涨幅均值  上涨平均值 + 下跌平均值
+	UPLe          int            `bson:"UPLe"`         // 上涨趋势  上涨指数 大于 50%
+	UDLe          int            `bson:"UDLe"`         // 上涨强度  综合涨幅均值 大于 0
+	DirIndex      int            `bson:"DirIndex"`     // 当前市场情况  -1 下跌   0 震荡   1 上涨
+	MaxUP         AnalySliceType `bson:"MaxUP"`        // 最大涨幅币种
+	MaxDown       AnalySliceType `bson:"MaxDown"`      // 最大跌幅币种
+	StartTimeStr  string         `bson:"StartTimeStr"` // 开始时间
 	StartTimeUnix int64          `bson:"StartTimeUnix"`
-	EndTime       time.Time      `bson:"EndTime"` // 结束时间
+	EndTimeStr    string         `bson:"EndTimeStr"` // 结束时间
 	EndTimeUnix   int64          `bson:"EndTimeUnix"`
 }
