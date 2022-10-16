@@ -36,6 +36,9 @@ func main() {
 	// testCase.YaSuoDir()
 	// OrganizeDatabase()
 
-	testCase.StartDBRun()
+	// testCase.StartDBRun()
+
+	testCase.IPtest()
+
 	fmt.Println(" =========   END   ========= ")
 }
