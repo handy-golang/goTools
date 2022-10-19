@@ -18,9 +18,10 @@ import (
 testCase.OKXFetch()
 */
 type TypeOkxKey struct {
-	ApiKey     string
-	SecretKey  string
-	Passphrase string
+	Name       string `bson:"Name"`
+	ApiKey     string `bson:"ApiKey"`
+	SecretKey  string `bson:"SecretKey"`
+	Passphrase string `bson:"Passphrase"`
 }
 type OptFetchOKX struct {
 	Path          string
