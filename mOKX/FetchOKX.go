@@ -22,6 +22,7 @@ type TypeOkxKey struct {
 	ApiKey     string `bson:"ApiKey"`
 	SecretKey  string `bson:"SecretKey"`
 	Passphrase string `bson:"Passphrase"`
+	IsTrade    bool   `bson:"IsTrade"`
 }
 type OptFetchOKX struct {
 	Path          string
