@@ -2,54 +2,54 @@ package mOKX
 
 // 币安原始榜单数据
 type TypeBinanceTicker struct {
-	Symbol             string `bson:"symbol"`
-	InstID             string `bson:"InstID"`
-	PriceChange        string `bson:"priceChange"`
-	PriceChangePercent string `bson:"priceChangePercent"`
-	WeightedAvgPrice   string `bson:"weightedAvgPrice"`
-	PrevClosePrice     string `bson:"prevClosePrice"`
-	LastPrice          string `bson:"lastPrice"`
-	LastQty            string `bson:"lastQty"`
-	BidPrice           string `bson:"bidPrice"`
-	BidQty             string `bson:"bidQty"`
-	AskPrice           string `bson:"askPrice"`
-	AskQty             string `bson:"askQty"`
-	OpenPrice          string `bson:"openPrice"`
-	HighPrice          string `bson:"highPrice"`
-	LowPrice           string `bson:"lowPrice"`
-	Volume             string `bson:"volume"`
-	QuoteVolume        string `bson:"quoteVolume"`
-	OpenTime           int64  `bson:"openTime"`
-	CloseTime          int64  `bson:"closeTime"`
-	FirstID            int    `bson:"firstId"`
-	LastID             int    `bson:"lastId"`
-	Count              int    `bson:"count"`
+	Symbol             string
+	InstID             string
+	PriceChange        string
+	PriceChangePercent string
+	WeightedAvgPrice   string
+	PrevClosePrice     string
+	LastPrice          string
+	LastQty            string
+	BidPrice           string
+	BidQty             string
+	AskPrice           string
+	AskQty             string
+	OpenPrice          string
+	HighPrice          string
+	LowPrice           string
+	Volume             string
+	QuoteVolume        string
+	OpenTime           int64
+	CloseTime          int64
+	FirstID            int
+	LastID             int
+	Count              int
 }
 
 // OKX 原始榜单数据
 type TypeOKXTicker struct {
-	InstType  string `bson:"instType"`
-	InstID    string `bson:"instId"`
-	Last      string `bson:"last"`
-	LastSz    string `bson:"lastSz"`
-	AskPx     string `bson:"askPx"`
-	AskSz     string `bson:"askSz"`
-	BidPx     string `bson:"bidPx"`
-	BidSz     string `bson:"bidSz"`
-	Open24H   string `bson:"open24h"`
-	High24H   string `bson:"high24h"`
-	Low24H    string `bson:"low24h"`
-	VolCcy24H string `bson:"volCcy24h"`
-	Vol24H    string `bson:"vol24h"`
-	Ts        string `bson:"ts"`
-	SodUtc0   string `bson:"sodUtc0"`
-	SodUtc8   string `bson:"sodUtc8"`
+	InstType  string
+	InstID    string
+	Last      string
+	LastSz    string
+	AskPx     string
+	AskSz     string
+	BidPx     string
+	BidSz     string
+	Open24H   string
+	High24H   string
+	Low24H    string
+	VolCcy24H string
+	Vol24H    string
+	Ts        string
+	SodUtc0   string
+	SodUtc8   string
 }
 
 // 综合榜单数据
 type TypeTicker struct {
 	InstID         string   `bson:"InstID"` // 产品ID
-	Symbol         string   `bson:"symbol"`
+	Symbol         string   `bson:"Symbol"`
 	CcyName        string   `bson:"CcyName"`        // 币种名称
 	Last           string   `bson:"Last"`           // 最新成交价
 	Open24H        string   `bson:"Open24H"`        // 24小时开盘价

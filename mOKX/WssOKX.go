@@ -8,19 +8,15 @@ import (
 	"github.com/EasyGolang/goTools/mTime"
 )
 
-/*
-testCase.OKXWss()
-*/
-
 type LoginArgsType struct {
-	APIKey     string `bson:"apiKey"`
-	Passphrase string `bson:"passphrase"`
-	Timestamp  string `bson:"timestamp"`
-	Sign       string `bson:"sign"`
+	APIKey     string `bson:"APIKey"`
+	Passphrase string `bson:"Passphrase"`
+	Timestamp  string `bson:"Timestamp"`
+	Sign       string `bson:"Sign"`
 }
 type LoginType struct {
-	Op   string          `bson:"op"`
-	Args []LoginArgsType `bson:"args"`
+	Op   string          `bson:"Op"`
+	Args []LoginArgsType `bson:"Args"`
 }
 
 type OptWssOKX struct {

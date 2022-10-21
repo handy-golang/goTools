@@ -31,7 +31,7 @@ type TypeInst struct {
 }
 
 type TypeReq struct {
-	Code string `bson:"code"`
-	Data any    `bson:"data"`
-	Msg  string `bson:"msg"`
+	Code string `bson:"Code"`
+	Data any    `bson:"Data"`
+	Msg  string `bson:"Msg"`
 }

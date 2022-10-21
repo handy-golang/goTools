@@ -5,11 +5,11 @@ type CandleDataType [7]string
 type TypeKd struct {
 	InstID   string `bson:"InstID"`   // 持仓币种
 	CcyName  string `bson:"CcyName"`  // 币种名称
-	TickSz   string `bson:"tickSz"`   // 价格精度
-	InstType string `bson:"instType"` // 产品类型
-	CtVal    string `bson:"ctVal"`    // 合约面值
-	MinSz    string `bson:"minSz"`    // 最小下单数量
-	MaxMktSz string `bson:"maxMktSz"` // 最大委托数量
+	TickSz   string `bson:"TickSz"`   // 价格精度
+	InstType string `bson:"InstType"` // 产品类型
+	CtVal    string `bson:"CtVal"`    // 合约面值
+	MinSz    string `bson:"MinSz"`    // 最小下单数量
+	MaxMktSz string `bson:"MaxMktSz"` // 最大委托数量
 	TimeUnix int64  `bson:"TimeUnix"` // 毫秒时间戳
 	TimeStr  string `bson:"TimeStr"`  // 时间的字符串形式
 	O        string `bson:"O"`        // 开盘
