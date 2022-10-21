@@ -64,8 +64,8 @@ type TypeTicker struct {
 	Ts             int64    `bson:"Ts"`
 	TimeUnix       int64    `bson:"TimeUnix"`
 	TimeStr        string   `bson:"TimeStr"`
-	SPOT           TypeInst `bson:"	SPOT"`
-	SWAP           TypeInst `bson:"	SWAP"`
+	SPOT           TypeInst `bson:"SPOT"`
+	SWAP           TypeInst `bson:"SWAP"`
 }
 
 // 基于 TickerList  的市场分析
