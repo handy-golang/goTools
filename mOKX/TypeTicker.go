@@ -44,7 +44,6 @@ type TypeOKXTicker struct {
 	Ts        string `bson:"ts"`
 	SodUtc0   string `bson:"sodUtc0"`
 	SodUtc8   string `bson:"sodUtc8"`
-	ListTime  string `bson:"listTime"`
 }
 
 // 综合榜单数据
