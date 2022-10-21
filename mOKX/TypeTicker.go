@@ -62,6 +62,8 @@ type TypeTicker struct {
 	OkxVolRose     string   `bson:"OkxVolRose"`     // 欧意占比总交易量
 	BinanceVolRose string   `bson:"BinanceVolRose"` // 币安占比总交易量
 	Ts             int64    `bson:"Ts"`
+	TimeUnix       int64    `bson:"TimeUnix"`
+	TimeStr        string   `bson:"TimeStr"`
 	SPOT           TypeInst `bson:"	SPOT"`
 	SWAP           TypeInst `bson:"	SWAP"`
 }
