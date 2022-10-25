@@ -83,7 +83,7 @@ func FetchOKX(opt OptFetchOKX) (resData []byte, resErr error) {
 	fetch := mFetch.NewHttp(mFetch.HttpOpt{
 		Origin: "https://www.okx.com",
 		Path:   opt.Path,
-		Data:   opt.Data,
+		Data:   []byte(Body),
 		Event:  opt.Event,
 		Header: map[string]string{
 			"OK-ACCESS-KEY":        ApiKey,

@@ -40,14 +40,14 @@ import (
 type HttpOpt struct {
 	Origin string
 	Path   string
-	Data   map[string]any
+	Data   []byte
 	Header map[string]string
 	Event  func(string, any) // s1 = succeed , err
 }
 
 type Http struct {
 	Url    string
-	Data   map[string]any
+	Data   []byte
 	Header map[string]string
 	Event  func(string, any)
 }
@@ -82,7 +82,11 @@ func NewHttp(opt HttpOpt) (_this *Http) {
 // 处理 Get 参数
 func (_this *Http) DisposeGetParam() *Http {
 	urlO := mUrl.InitUrl(_this.Url)
-	for key, val := range _this.Data {
+
+	var dataUn map[string]any
+	jsoniter.Unmarshal(_this.Data, &dataUn)
+
+	for key, val := range dataUn {
 		v := fmt.Sprintf("%+v", val)
 		urlO.AddParam(key, v)
 	}
@@ -145,14 +149,7 @@ func (_this *Http) Post() (resData []byte, resErr error) {
 		_this.Event("err", err)
 	})
 
-	data, err := jsoniter.Marshal(_this.Data)
-	if err != nil {
-		resErr = err
-		_this.Event("err", err)
-		return
-	}
-
-	c.PostRaw(_this.Url, data)
+	c.PostRaw(_this.Url, _this.Data)
 
 	return
 }

@@ -6,6 +6,7 @@ import (
 	"strings"
 
 	"github.com/EasyGolang/goTools/mFetch"
+	"github.com/EasyGolang/goTools/mJson"
 	"github.com/EasyGolang/goTools/mPath"
 )
 
@@ -40,7 +41,7 @@ func FetchBinance(opt FetchBinanceOpt) (resData []byte, resErr error) {
 	fetch := mFetch.NewHttp(mFetch.HttpOpt{
 		Origin: "https://api2.binance.com",
 		Path:   opt.Path,
-		Data:   opt.Data,
+		Data:   mJson.ToJson(opt.Data),
 		Event:  opt.Event,
 	})
 

@@ -6,6 +6,7 @@ import (
 
 	"github.com/EasyGolang/goTools/mCycle"
 	"github.com/EasyGolang/goTools/mFetch"
+	"github.com/EasyGolang/goTools/mJson"
 	jsoniter "github.com/json-iterator/go"
 )
 
@@ -115,7 +116,7 @@ func (o *NewFeiShu) GetAccessToken() *NewFeiShu {
 	res, err := mFetch.NewHttp(mFetch.HttpOpt{
 		Origin: o.Origin,
 		Path:   Path,
-		Data:   data,
+		Data:   mJson.ToJson(data),
 	}).Post()
 	if err != nil {
 		return o

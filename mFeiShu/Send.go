@@ -4,6 +4,7 @@ import (
 	"fmt"
 
 	"github.com/EasyGolang/goTools/mFetch"
+	"github.com/EasyGolang/goTools/mJson"
 )
 
 type MsgOpt struct {
@@ -49,7 +50,7 @@ func (o *NewFeiShu) SendMessage(opt MsgOpt) []byte {
 	res, _ := mFetch.NewHttp(mFetch.HttpOpt{
 		Origin: o.Origin,
 		Path:   Path,
-		Data:   data,
+		Data:   mJson.ToJson(data),
 		Header: map[string]string{
 			"Content-Type":  "application/json; charset=utf-8",
 			"Authorization": "Bearer " + o.AccessToken,
