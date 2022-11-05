@@ -10,6 +10,7 @@ type TypeInst struct {
 	CtValCcy     string `bson:"CtValCcy"`
 	ExpTime      string `bson:"ExpTime"`
 	InstID       string `bson:"InstID"`
+	Symbol       string `bson:"Symbol"`
 	InstType     string `bson:"InstType"`
 	Lever        string `bson:"Lever"`
 	ListTime     string `bson:"ListTime"`
