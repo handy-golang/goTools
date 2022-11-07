@@ -1,13 +1,12 @@
-package mInd
+package mOKX
 
 import (
 	"github.com/EasyGolang/goTools/mCount"
-	"github.com/EasyGolang/goTools/mOKX"
 	"github.com/EasyGolang/goTools/mStr"
 )
 
 // 数据来源 (H+L+C)  / 3
-func MA(KDList []mOKX.TypeKd, n int) string {
+func MA(KDList []TypeKd, n int) string {
 	c_len := len(KDList) // K线总长
 	c_n := n             // 长度
 	if c_len < n {

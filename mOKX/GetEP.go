@@ -1,13 +1,12 @@
-package mInd
+package mOKX
 
 import (
 	"github.com/EasyGolang/goTools/mCount"
-	"github.com/EasyGolang/goTools/mOKX"
 )
 
 // 获取某一段的最低值
-func GetEP_L(KDList []mOKX.TypeKd) (resKD mOKX.TypeKd) {
-	resKD = mOKX.TypeKd{}
+func GetEP_L(KDList []TypeKd) (resKD TypeKd) {
+	resKD = TypeKd{}
 	if len(KDList) < 1 {
 		return
 	}
@@ -24,8 +23,8 @@ func GetEP_L(KDList []mOKX.TypeKd) (resKD mOKX.TypeKd) {
 }
 
 // 获取某一段的最高值
-func GetEP_H(KDList []mOKX.TypeKd) (resKD mOKX.TypeKd) {
-	resKD = mOKX.TypeKd{}
+func GetEP_H(KDList []TypeKd) (resKD TypeKd) {
+	resKD = TypeKd{}
 	if len(KDList) < 1 {
 		return
 	}

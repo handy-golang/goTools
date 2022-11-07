@@ -1,14 +1,13 @@
-package mInd
+package mOKX
 
 import (
 	"fmt"
 
 	"github.com/EasyGolang/goTools/mCount"
-	"github.com/EasyGolang/goTools/mOKX"
 )
 
 // 数据来源 (H+L+C) / 3
-func EMA(KDList []mOKX.TypeKd, n int) string {
+func EMA(KDList []TypeKd, n int) string {
 	c_len := len(KDList) // K线总长
 	c_n := n             // 长度
 	if c_len < n {
@@ -22,7 +21,7 @@ func EMA(KDList []mOKX.TypeKd, n int) string {
 	var precision int32
 
 	for _, KD := range ema_list {
-		C := KD.CBas
+		C := KD.C
 
 		tody := C                // 今日的价格
 		q := "2"                 // 2* tody

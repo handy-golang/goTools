@@ -29,6 +29,15 @@ func NewKD(now TypeKd, list []TypeKd) (kdata TypeKd) {
 	kdata.RosePer = mCount.RoseCent(now.C, Pre.C)
 	kdata.C_dir = NewKddC_dir(kdata, Pre)
 
+	// 复制数组
+	size := len(list)
+	newList := make([]TypeKd, size)
+	copy(newList, list)
+	newList = append(newList, kdata)
+	// EMA 指标
+	kdata.EMA_9 = EMA(newList, 9)
+	kdata.EMA_26 = EMA(newList, 26)
+
 	return
 }
 
