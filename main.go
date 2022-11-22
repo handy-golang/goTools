@@ -38,7 +38,8 @@ func main() {
 
 	// testCase.StartDBRun()
 
-	testCase.IPtest()
+	// testCase.IPtest()
+	testCase.BinanceFetch()
 
 	fmt.Println(" =========   END   ========= ")
 }

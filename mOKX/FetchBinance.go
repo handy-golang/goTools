@@ -19,6 +19,13 @@ type FetchBinanceOpt struct {
 	Event         func(string, any)
 }
 
+var BaseUrlArr = []string{
+	"https://api.binance.com",
+	"https://api1.binance.com",
+	"https://api2.binance.com",
+	"https://api3.binance.com",
+}
+
 func FetchBinance(opt FetchBinanceOpt) (resData []byte, resErr error) {
 	// 是否为本地模式
 	if opt.IsLocalJson {
@@ -39,7 +46,7 @@ func FetchBinance(opt FetchBinanceOpt) (resData []byte, resErr error) {
 	Method := strings.ToUpper(opt.Method)
 
 	fetch := mFetch.NewHttp(mFetch.HttpOpt{
-		Origin: "https://api2.binance.com",
+		Origin: BaseUrlArr[2],
 		Path:   opt.Path,
 		Data:   mJson.ToJson(opt.Data),
 		Event:  opt.Event,
