@@ -3,6 +3,8 @@ module github.com/EasyGolang/goTools
 go 1.18
 
 require (
+	github.com/adshao/go-binance/v2 v2.3.10
+	github.com/bitly/go-simplejson v0.5.0
 	github.com/fasthttp/websocket v1.5.0
 	github.com/gocolly/colly v1.2.0
 	github.com/gofiber/fiber/v2 v2.34.0

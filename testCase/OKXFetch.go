@@ -4,6 +4,8 @@ import (
 	"fmt"
 
 	"github.com/EasyGolang/goTools/global"
+	"github.com/EasyGolang/goTools/global/config"
+	"github.com/EasyGolang/goTools/mBinance"
 	"github.com/EasyGolang/goTools/mOKX"
 	"github.com/EasyGolang/goTools/mStr"
 )
@@ -33,5 +35,15 @@ func OKXFetch() {
 }
 
 func BalanceFetch() {
-	fmt.Println("123")
+	mBinance.FetchBinance(mBinance.OptFetchBinance{
+		Path:   "/fapi/v2/account",
+		Method: "get",
+		Event: func(s string, a any) {
+			fmt.Println(s, a)
+		},
+		BinanceKey: mBinance.TypeBinanceKey{
+			ApiKey:    config.BinanceKey.ApiKey,
+			SecretKey: config.BinanceKey.SecretKey,
+		},
+	})
 }
