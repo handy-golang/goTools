@@ -17,3 +17,6 @@ type OptFetchBinance struct {
 	Event         func(string, any)
 	BinanceKey    TypeBinanceKey
 }
+
+func FetchBinance() {
+}

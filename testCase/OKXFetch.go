@@ -31,3 +31,7 @@ func OKXFetch() {
 	}
 	fmt.Println(mStr.ToStr(resData))
 }
+
+func BalanceFetch() {
+	fmt.Println("123")
+}
