@@ -43,11 +43,5 @@ func FetchBinance(opt OptFetchBinance) (resData []byte, resErr error) {
 		opt.Method = "GET"
 	}
 
-	fullURL := BinanceBaseUrl + opt.Path
-
-	fmt.Println("fullURL", fullURL)
-
-	// req, err := http.NewRequest(opt.Method, fullURL)
-
 	return
 }
