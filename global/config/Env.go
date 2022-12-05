@@ -23,8 +23,8 @@ var BinanceKey = struct {
 	ApiKey    string `bson:"ApiKey"`
 	SecretKey string `bson:"SecretKey"`
 }{
-	ApiKey:    "e1ch7VN2DHqymTJMDRZLDjoyWHdjAaT2anp06elWJwOOZ51GoXXXQpOAeDenWEml",
-	SecretKey: "E9w2QmhtJC6Z326mB9fcCFH6syB2qt7TbvwaFfmxWtrWdAFrQNTIVvT8bSKLtV9e",
+	ApiKey:    "e1ch7VN2WEml",
+	SecretKey: "E9w2QmLtV9e",
 }
 
 func LoadAppEnv() {
