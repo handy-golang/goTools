@@ -5,7 +5,6 @@ import (
 	"context"
 	"crypto/hmac"
 	"crypto/sha256"
-	"crypto/tls"
 	"encoding/json"
 	"fmt"
 	"io/ioutil"
@@ -15,7 +14,6 @@ import (
 	"os"
 	"time"
 
-	"github.com/adshao/go-binance/v2/common"
 	"github.com/bitly/go-simplejson"
 )
 
@@ -57,28 +55,6 @@ func NewClient(apiKey, secretKey string) *Client {
 	}
 }
 
-// NewProxiedClient passing a proxy url
-func NewProxiedClient(apiKey, secretKey, proxyUrl string) *Client {
-	proxy, err := url.Parse(proxyUrl)
-	if err != nil {
-		log.Fatal(err)
-	}
-	tr := &http.Transport{
-		Proxy:           http.ProxyURL(proxy),
-		TLSClientConfig: &tls.Config{InsecureSkipVerify: true},
-	}
-	return &Client{
-		APIKey:    apiKey,
-		SecretKey: secretKey,
-		BaseURL:   getApiEndpoint(),
-		UserAgent: "Binance/golang",
-		HTTPClient: &http.Client{
-			Transport: tr,
-		},
-		Logger: log.New(os.Stderr, "Binance-golang ", log.LstdFlags),
-	}
-}
-
 type doFunc func(req *http.Request) (*http.Response, error)
 
 // Client define API client
@@ -92,6 +68,11 @@ type Client struct {
 	Logger     *log.Logger
 	TimeOffset int64
 	do         doFunc
+}
+
+type APIError struct {
+	Code    int64  `json:"code"`
+	Message string `json:"msg"`
 }
 
 func (c *Client) debug(format string, v ...interface{}) {
@@ -197,12 +178,12 @@ func (c *Client) callAPI(ctx context.Context, r *request, opts ...RequestOption)
 	c.debug("response status code: %d", res.StatusCode)
 
 	if res.StatusCode >= http.StatusBadRequest {
-		apiErr := new(common.APIError)
+		apiErr := new(APIError)
 		e := json.Unmarshal(data, apiErr)
 		if e != nil {
 			c.debug("failed to unmarshal json: %s", e)
 		}
-		return nil, &http.Header{}, apiErr
+		return nil, &http.Header{}, fmt.Errorf("%+v", apiErr)
 	}
 	return data, &res.Header, nil
 }

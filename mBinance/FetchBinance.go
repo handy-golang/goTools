@@ -1,7 +1,9 @@
 package mBinance
 
 import (
+	"context"
 	"fmt"
+	"net/http"
 	"os"
 
 	"github.com/EasyGolang/goTools/mPath"
@@ -42,6 +44,19 @@ func FetchBinance(opt OptFetchBinance) (resData []byte, resErr error) {
 	if len(opt.Method) < 1 {
 		opt.Method = "GET"
 	}
+
+	clent := NewClient(opt.BinanceKey.ApiKey, opt.BinanceKey.SecretKey)
+
+	r := &request{
+		method:   http.MethodGet,
+		endpoint: opt.Path,
+		secType:  secTypeSigned,
+	}
+
+	data, _, err := clent.callAPI(context.Background(), r)
+
+	resData = data
+	resErr = err
 
 	return
 }
