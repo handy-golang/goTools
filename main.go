@@ -25,7 +25,7 @@ func main() {
 
 	// testCase.GetKdata("EOS-USDT")
 
-	// testCase.OKXFetch()
+	testCase.OKXFetch()
 	// testCase.OKXWss()
 
 	// testCase.CountTest()
@@ -42,7 +42,7 @@ func main() {
 
 	// testCase.BalanceFetch()
 
-	testCase.TimeTest()
+	// testCase.TimeTest()
 
 	fmt.Println(" =========   END   ========= ")
 }
