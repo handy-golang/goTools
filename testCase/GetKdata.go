@@ -133,13 +133,13 @@ func StorageKdata(kdata mOKX.TypeKd) {
 		global.KdataLog.Println(new_Kdata.TimeStr, new_Kdata.C, MA_18)
 	*/
 
-	// EMA 指标测试
-	mTalib.RSI(mTalib.SAROpt{
+	// RSI 指标测试
+	RSI := mTalib.RSI(mTalib.CListOpt{
 		CList:  CList,
-		Period: 18,
+		Period: 14,
 	})
 
-	// global.KdataLog.Println(new_Kdata.TimeStr, new_Kdata.C, MA_18)
+	global.KdataLog.Println(new_Kdata.TimeStr, new_Kdata.C, RSI)
 
 	// global.KdataLog.Println(mJson.Format(new_Kdata))
 }
