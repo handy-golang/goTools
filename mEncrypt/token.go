@@ -1,7 +1,6 @@
 package mEncrypt
 
 import (
-	"fmt"
 	"time"
 
 	"github.com/golang-jwt/jwt"
@@ -62,7 +61,6 @@ func (Obj *TokenObj) Generate() string {
 	}
 	token, err := jwt.NewWithClaims(jwt.SigningMethodHS256, claims).SignedString(Obj.SecretKey)
 	if err != nil {
-		fmt.Println(err)
 		return ""
 	}
 	return token

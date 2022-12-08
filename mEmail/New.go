@@ -52,7 +52,6 @@ err := mEmail.New(mEmail.Opt{
 	},
 }).Send()
 
-fmt.Println(err)
 
 
 

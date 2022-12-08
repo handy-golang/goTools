@@ -1,7 +1,6 @@
 package mTalib
 
 import (
-	"fmt"
 	"strconv"
 
 	"github.com/EasyGolang/goTools/global"
@@ -26,11 +25,11 @@ type ClistObj struct {
 func ClistNew(opt ClistOpt) *ClistObj {
 	obj := ClistObj{}
 	obj.Period = opt.Period
-	obj.CLen = len(opt.CList)
 
 	var floatList []float64
 	if len(opt.CList) > 0 {
 		obj.DotNum = mCount.GetDecimal(opt.CList[0])
+		obj.CLen = len(opt.CList)
 		for _, val := range opt.CList {
 			valDot := mCount.GetDecimal(val)
 			if valDot > obj.DotNum { // 如果当前小数点位数大于现存小数点位数，则替换
@@ -40,8 +39,8 @@ func ClistNew(opt ClistOpt) *ClistObj {
 			floatList = append(floatList, floatVal)
 		}
 	} else if len(opt.KDList) > 0 {
-		fmt.Println(opt.KDList)
 		obj.DotNum = mCount.GetDecimal(opt.KDList[0].C)
+		obj.CLen = len(opt.KDList)
 		for _, val := range opt.KDList {
 			valDot := mCount.GetDecimal(val.C)
 			if valDot > obj.DotNum { // 如果当前小数点位数大于现存小数点位数，则替换
