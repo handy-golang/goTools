@@ -9,6 +9,7 @@ import (
 	"github.com/EasyGolang/goTools/mJson"
 	"github.com/EasyGolang/goTools/mOKX"
 	"github.com/EasyGolang/goTools/mStr"
+	"github.com/EasyGolang/goTools/mTalib"
 	"github.com/EasyGolang/goTools/mTime"
 	jsoniter "github.com/json-iterator/go"
 )
@@ -122,6 +123,13 @@ func StorageKdata(kdata mOKX.TypeKd) {
 		})
 		global.KdataLog.Println(new_Kdata.TimeStr, new_Kdata.C, EMA_18)
 	*/
+
+	// EMA 指标测试
+	MA_18 := mTalib.MA(mTalib.CListOpt{
+		CList:  CList,
+		Period: 18,
+	})
+	global.KdataLog.Println(new_Kdata.TimeStr, new_Kdata.C, MA_18)
 
 	// global.KdataLog.Println(mJson.Format(new_Kdata))
 }
