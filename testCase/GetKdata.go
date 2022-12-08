@@ -114,7 +114,6 @@ func StorageKdata(kdata mOKX.TypeKd) {
 	new_Kdata := mOKX.NewKD(kdata, KdataList)
 	KdataList = append(KdataList, new_Kdata)
 
-	CList = append(CList, new_Kdata.C)
 	/*
 		// EMA 指标测试
 		EMA_18 := mTalib.EMA(mTalib.CListOpt{
@@ -143,7 +142,7 @@ func StorageKdata(kdata mOKX.TypeKd) {
 	// EMA 指标测试
 
 	EMA_18 := mTalib.ClistNew(mTalib.ClistOpt{
-		CList:  CList,
+		KDList:  KdataList,
 		Period: 18,
 	}).EMA().ToStr()
 
