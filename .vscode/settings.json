@@ -12,6 +12,7 @@
     "mapstructure",
     "modcache",
     "proess",
+    "Talib",
     "tikker",
     "Tinify",
     "Tinypng",
