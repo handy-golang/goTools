@@ -27,6 +27,7 @@ func EMA(opt CListOpt) string {
 		if valDot > dotNum {             // 如果当前小数点位数大于现存小数点位数，则替换
 			dotNum = valDot
 		}
+
 		floatVal := mCount.ToFloat(val, dotNum)
 		floatList = append(floatList, floatVal) // 将数值完整的转化
 	}

@@ -1,8 +1,9 @@
 package mTalib
 
 import (
-	"fmt"
+	"strconv"
 
+	"github.com/EasyGolang/goTools/global"
 	"github.com/EasyGolang/goTools/mCount"
 	"github.com/EasyGolang/goTools/mOKX"
 )
@@ -26,24 +27,25 @@ func ClistNew(opt ClistOpt) *ClistObj {
 	obj.Period = opt.Period
 	obj.CLen = len(opt.CList)
 
+	obj.DotNum = mCount.GetDecimal(opt.CList[0])
 	var floatList []float64
 	if len(opt.CList) > 0 {
-		obj.DotNum = mCount.GetDecimal(opt.CList[0])
 		for _, val := range opt.CList {
 			valDot := mCount.GetDecimal(val)
 			if valDot > obj.DotNum { // 如果当前小数点位数大于现存小数点位数，则替换
 				obj.DotNum = valDot
 			}
+
 			floatVal := mCount.ToFloat(val, obj.DotNum)
 			floatList = append(floatList, floatVal)
 		}
 	} else if len(opt.KDList) > 0 {
-		obj.DotNum = mCount.GetDecimal(opt.KDList[0].C)
 		for _, val := range opt.KDList {
 			valDot := mCount.GetDecimal(val.C)
 			if valDot > obj.DotNum { // 如果当前小数点位数大于现存小数点位数，则替换
 				obj.DotNum = valDot
 			}
+
 			floatVal := mCount.ToFloat(val.C, obj.DotNum)
 			floatList = append(floatList, floatVal)
 		}
@@ -55,7 +57,10 @@ func ClistNew(opt ClistOpt) *ClistObj {
 }
 
 func (_this *ClistObj) ToStr() string {
-	rStr := fmt.Sprintf("%f", _this.Result)
+	rStr := strconv.FormatFloat(_this.Result, 'f', 10, 32)
 	rStr = mCount.CentRound(rStr, _this.DotNum)
+
+	global.KdataLog.Println(_this.Result, rStr)
+
 	return rStr
 }
