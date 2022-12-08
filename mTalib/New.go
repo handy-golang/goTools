@@ -1,6 +1,7 @@
 package mTalib
 
 import (
+	"fmt"
 	"strconv"
 
 	"github.com/EasyGolang/goTools/global"
@@ -39,6 +40,7 @@ func ClistNew(opt ClistOpt) *ClistObj {
 			floatList = append(floatList, floatVal)
 		}
 	} else if len(opt.KDList) > 0 {
+		fmt.Println(opt.KDList)
 		obj.DotNum = mCount.GetDecimal(opt.KDList[0].C)
 		for _, val := range opt.KDList {
 			valDot := mCount.GetDecimal(val.C)
