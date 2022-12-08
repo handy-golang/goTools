@@ -1,7 +1,6 @@
 package testCase
 
 import (
-	"fmt"
 	"strings"
 
 	"github.com/EasyGolang/goTools/global"
@@ -121,23 +120,19 @@ func StorageKdata(kdata mOKX.TypeKd) {
 		cList = append(cList, val.C)
 	}
 
-	// EMA_18 := mMetrics.EMA(mMetrics.EmaOpt{
-	// 	CList:     cList,
-	// 	Cycle:     18,
-	// 	Precision: kdata.TickSz,
-	// })
-
-	// EMA_18List = append(EMA_18List, EMA_18)
-
-	fmt.Println(new_Kdata.TimeStr)
-
-	CAP_3 := mMetrics.CAP(mMetrics.EmaOpt{
+	EMA_18 := mMetrics.EMA(mMetrics.EmaOpt{
 		CList:     cList,
-		Cycle:     3,
+		Cycle:     18,
 		Precision: kdata.TickSz,
 	})
 
-	fmt.Println("=====")
+	EMA_18List = append(EMA_18List, EMA_18)
+
+	CAP_3 := mMetrics.CAP(mMetrics.EmaOpt{
+		CList:     EMA_18List,
+		Cycle:     3,
+		Precision: kdata.TickSz,
+	})
 
 	global.KdataLog.Println(new_Kdata.TimeStr, CAP_3)
 
