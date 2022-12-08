@@ -23,7 +23,7 @@ func main() {
 
 	// testCase.GetSPOT()
 
-	// testCase.GetKdata("EOS-USDT")
+	testCase.GetKdata("ETH-USDT")
 
 	// testCase.OKXFetch()
 	// testCase.OKXWss()
@@ -44,7 +44,7 @@ func main() {
 
 	// testCase.TimeTest()
 
-	testCase.Tactics()
+	// testCase.Tactics()
 
 	fmt.Println(" =========   END   ========= ")
 }

@@ -16,6 +16,8 @@ import (
 var KdataList []mOKX.TypeKd
 
 func GetKdata(InstID string) []mOKX.TypeKd {
+	GetInst()
+
 	InstInfo := GetInstInfo(InstID)
 	KdataList = []mOKX.TypeKd{}
 
