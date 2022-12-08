@@ -1,16 +1,18 @@
 package mTalib
 
-import (
-	"fmt"
-
-	"github.com/EasyGolang/goTools/mCount"
-)
-
 type CListOpt struct {
 	CList     []string // 数据
 	Cycle     int      // 周期
 	Precision string   // 精度模板 1.235
 }
+
+func EMA(opt CListOpt) string {
+	return ""
+}
+
+/**
+
+// 这个库废弃了, 用table 重写
 
 func EMA(opt CListOpt) string {
 	KDList := opt.CList
@@ -55,3 +57,6 @@ func EMA(opt CListOpt) string {
 
 	return y
 }
+
+
+*/

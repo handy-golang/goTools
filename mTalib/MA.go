@@ -1,9 +1,12 @@
 package mTalib
 
-import (
-	"github.com/EasyGolang/goTools/mCount"
-	"github.com/EasyGolang/goTools/mStr"
-)
+func MA(opt CListOpt) string {
+	return ""
+}
+
+/**
+
+// 这个库废弃了, 用table 重写
 
 func MA(opt CListOpt) string {
 	KDList := opt.CList
@@ -36,3 +39,5 @@ func MA(opt CListOpt) string {
 
 	return maRe
 }
+
+*/
