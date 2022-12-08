@@ -16,19 +16,21 @@ func EMA(opt CListOpt) string {
 	n := opt.Period
 	cLen := len(opt.CList)
 
-	if cLen < n {
+	if cLen < n+1 {
 		return "0"
 	}
 
 	dotNum := mCount.GetDecimal(opt.CList[0]) // 计算小数点位数
 	var floatList []float64
 	for _, val := range opt.CList {
-		floatList = append(floatList, mCount.ToFloat(val, -1)) // 将数值完整的转化
-		valDot := mCount.GetDecimal(opt.CList[0])              // 计算当前的小数点位数
-		if valDot-dotNum > 0 {                                 // 如果当前小数点位数大于现存小数点位数，则替换
+		valDot := mCount.GetDecimal(val) // 计算当前的小数点位数
+		if valDot > dotNum {             // 如果当前小数点位数大于现存小数点位数，则替换
 			dotNum = valDot
 		}
+		floatVal := mCount.ToFloat(val, dotNum)
+		floatList = append(floatList, floatVal) // 将数值完整的转化
 	}
+
 	// 计算 Ema 指标
 	pArr := talib.Ema(floatList, n)
 	emaFloat := pArr[cLen-1]
