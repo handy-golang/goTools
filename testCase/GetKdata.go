@@ -144,8 +144,8 @@ func StorageKdata(kdata mOKX.TypeKd) {
 
 	EMA_18 := mTalib.ClistNew(mTalib.ClistOpt{
 		CList:  CList,
-		Period: 18,
-	}).EMA().ToStr()
+		Period: 14,
+	}).RSI().ToStr()
 
 	global.KdataLog.Println(new_Kdata.TimeStr, new_Kdata.C, EMA_18)
 
