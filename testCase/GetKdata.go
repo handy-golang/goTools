@@ -1,12 +1,14 @@
 package testCase
 
 import (
+	"fmt"
 	"strings"
 
 	"github.com/EasyGolang/goTools/global"
 	"github.com/EasyGolang/goTools/global/config"
 	"github.com/EasyGolang/goTools/mFile"
 	"github.com/EasyGolang/goTools/mJson"
+	"github.com/EasyGolang/goTools/mMetrics"
 	"github.com/EasyGolang/goTools/mOKX"
 	"github.com/EasyGolang/goTools/mStr"
 	"github.com/EasyGolang/goTools/mTime"
@@ -107,9 +109,37 @@ func FormatKdata(data any, Inst mOKX.TypeInst) {
 	}
 }
 
+var EMA_18List = []string{}
+
 func StorageKdata(kdata mOKX.TypeKd) {
 	new_Kdata := mOKX.NewKD(kdata, KdataList)
 	KdataList = append(KdataList, new_Kdata)
 
-	global.KdataLog.Println(mJson.Format(new_Kdata))
+	cList := []string{}
+
+	for _, val := range KdataList {
+		cList = append(cList, val.C)
+	}
+
+	// EMA_18 := mMetrics.EMA(mMetrics.EmaOpt{
+	// 	CList:     cList,
+	// 	Cycle:     18,
+	// 	Precision: kdata.TickSz,
+	// })
+
+	// EMA_18List = append(EMA_18List, EMA_18)
+
+	fmt.Println(new_Kdata.TimeStr)
+
+	CAP_3 := mMetrics.CAP(mMetrics.EmaOpt{
+		CList:     cList,
+		Cycle:     3,
+		Precision: kdata.TickSz,
+	})
+
+	fmt.Println("=====")
+
+	global.KdataLog.Println(new_Kdata.TimeStr, CAP_3)
+
+	// global.KdataLog.Println(mJson.Format(new_Kdata))
 }
