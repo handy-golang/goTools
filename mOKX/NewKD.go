@@ -1,6 +1,8 @@
 package mOKX
 
 import (
+	"fmt"
+
 	"github.com/EasyGolang/goTools/mCount"
 	"github.com/EasyGolang/goTools/mTalib"
 )
@@ -42,15 +44,15 @@ func NewKD(now TypeKd, list []TypeKd) (kdata TypeKd) {
 		cList = append(cList, val.C)
 	}
 	kdata.EMA_9 = mTalib.EMA(mTalib.CListOpt{
-		CList:     cList,
-		Period:    9,
-		Precision: kdata.TickSz,
+		CList:  cList,
+		Period: 9,
 	})
-	kdata.EMA_26 = mTalib.EMA(mTalib.CListOpt{
-		CList:     cList,
-		Period:    26,
-		Precision: kdata.TickSz,
-	})
+	fmt.Println(kdata.TimeStr, kdata.EMA_9)
+	// kdata.EMA_26 = mTalib.EMA(mTalib.CListOpt{
+	// 	CList:     cList,
+	// 	Period:    26,
+	// 	Precision: kdata.TickSz,
+	// })
 
 	return
 }
