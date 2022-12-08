@@ -2,6 +2,7 @@ package mOKX
 
 import (
 	"github.com/EasyGolang/goTools/mCount"
+	"github.com/EasyGolang/goTools/mMetrics"
 )
 
 // 构造新的 Kdata
@@ -34,9 +35,22 @@ func NewKD(now TypeKd, list []TypeKd) (kdata TypeKd) {
 	newList := make([]TypeKd, size)
 	copy(newList, list)
 	newList = append(newList, kdata)
+
 	// EMA 指标
-	kdata.EMA_9 = EMA(newList, 9)
-	kdata.EMA_26 = EMA(newList, 26)
+	cList := []string{}
+	for _, val := range newList {
+		cList = append(cList, val.C)
+	}
+	kdata.EMA_9 = mMetrics.EMA(mMetrics.EmaOpt{
+		CList:     cList,
+		Cycle:     9,
+		Precision: kdata.TickSz,
+	})
+	kdata.EMA_26 = mMetrics.EMA(mMetrics.EmaOpt{
+		CList:     cList,
+		Cycle:     26,
+		Precision: kdata.TickSz,
+	})
 
 	return
 }
