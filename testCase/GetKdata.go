@@ -8,10 +8,8 @@ import (
 	"github.com/EasyGolang/goTools/mCount"
 	"github.com/EasyGolang/goTools/mFile"
 	"github.com/EasyGolang/goTools/mJson"
-	"github.com/EasyGolang/goTools/mMetrics"
 	"github.com/EasyGolang/goTools/mOKX"
 	"github.com/EasyGolang/goTools/mStr"
-	"github.com/EasyGolang/goTools/mTalib"
 	"github.com/EasyGolang/goTools/mTime"
 	jsoniter "github.com/json-iterator/go"
 )
@@ -124,16 +122,16 @@ func StorageKdata(kdata mOKX.TypeKd) {
 		cList = append(cList, (val.C))
 	}
 
-	EMA_18_int := []float64{float64(0)}
-	if len(cList_int) > 18 {
-		EMA_18_int = mTalib.Ema(cList_int, 18)
-	}
+	// EMA_18_int := []float64{float64(0)}
+	// if len(cList_int) > 18 {
+	// 	EMA_18_int = mTalib.Ema(cList_int, 18)
+	// }
 
-	EMA_18 := mMetrics.EMA(mMetrics.EmaOpt{
-		CList:     cList,
-		Cycle:     18,
-		Precision: kdata.TickSz,
-	})
+	// EMA_18 := mMetrics.EMA(mMetrics.EmaOpt{
+	// 	CList:     cList,
+	// 	Cycle:     18,
+	// 	Precision: kdata.TickSz,
+	// })
 
 	// EMA_18List = append(EMA_18List, EMA_18)
 
@@ -143,8 +141,9 @@ func StorageKdata(kdata mOKX.TypeKd) {
 	// 	Precision: kdata.TickSz,
 	// })
 
-	global.KdataLog.Println(new_Kdata.TimeStr, EMA_18, EMA_18_int[len(EMA_18_int)-1])
-	global.KdataLog.Println(EMA_18_int)
+	// global.KdataLog.Println(new_Kdata.TimeStr, EMA_18, EMA_18_int[len(EMA_18_int)-1])
+	// global.KdataLog.Println(EMA_18_int)
+	// global.KdataLog.Println(new_Kdata.TimeStr, CAP_3)
 
 	// global.KdataLog.Println(mJson.Format(new_Kdata))
 }
