@@ -18,7 +18,10 @@ func MA(opt EmaOpt) string {
 	c_list := KDList[c_len-c_n:]
 	ma_add := "0"
 
-	var precision int32
+	if len(opt.Precision) < 1 {
+		opt.Precision = KDList[0]
+	}
+	dotNum := mCount.GetDecimal(opt.Precision) // 计算小数点位数
 
 	for _, KD := range c_list {
 		// 数据源
@@ -29,7 +32,7 @@ func MA(opt EmaOpt) string {
 
 	maRe := mCount.Div(ma_add, mStr.ToStr(c_n))
 
-	maRe = mCount.CentRound(maRe, precision)
+	maRe = mCount.CentRound(maRe, dotNum)
 
 	return maRe
 }

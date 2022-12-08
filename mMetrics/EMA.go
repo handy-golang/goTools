@@ -7,8 +7,9 @@ import (
 )
 
 type EmaOpt struct {
-	CList []string // 数据
-	Cycle int      // 周期
+	CList     []string // 数据
+	Cycle     int      // 周期
+	Precision string   // 精度模板 1.235
 }
 
 func EMA(opt EmaOpt) string {
@@ -23,11 +24,17 @@ func EMA(opt EmaOpt) string {
 
 	y_list := KDList[0:c_n] // 将最开始的N个KD 作为初始参数
 	y := MA(EmaOpt{         // 初始值计算
-		CList: y_list,
-		Cycle: c_n,
+		CList:     y_list,
+		Cycle:     c_n,
+		Precision: opt.Precision,
 	})
 
 	ema_list := KDList[c_n:]
+
+	if len(opt.Precision) < 1 {
+		opt.Precision = KDList[0]
+	}
+	dotNum := mCount.GetDecimal(opt.Precision) // 计算小数点位数
 
 	for _, KD := range ema_list {
 		C := KD
@@ -42,6 +49,8 @@ func EMA(opt EmaOpt) string {
 		t2 := mCount.Mul(e, y)    // (12-1) * 昨日 ema(12)
 		u2 := mCount.Div(t2, w)   //!!  (12-1) * 昨日 ema(12)  / （12+1）
 		y = mCount.Add(u1, u2)
+
+		y = mCount.CentRound(y, dotNum)
 	}
 
 	return y
