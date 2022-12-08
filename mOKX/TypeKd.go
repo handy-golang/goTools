@@ -22,8 +22,6 @@ type TypeKd struct {
 	DataType string `bson:"Type"`     // 数据类型
 	Dir      int    `bson:"Dir"`      // 方向 (收盘-开盘) ，1：涨 & -1：跌 & 0：横盘
 	HLPer    string `bson:"HLPer"`    // 振幅 (最高-最低)/最低 * 100%
-	EMA_9    string `bson:"EMA_9"`    // 振幅 (最高-最低)/最低 * 100%
-	EMA_26   string `bson:"EMA_26"`   // 振幅 (最高-最低)/最低 * 100%
 	U_shade  string `bson:"U_shade"`  // 上影线
 	D_shade  string `bson:"D_shade"`  // 下影线
 	RosePer  string `bson:"RosePer"`  // 涨幅 当前收盘价 - 上一位收盘价 * 100%

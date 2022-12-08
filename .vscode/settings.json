@@ -3,6 +3,7 @@
     "Analy",
     "Aroon",
     "bson",
+    "Clist",
     "fasthttp",
     "gocolly",
     "gofiber",
