@@ -1,12 +1,32 @@
 package mTalib
 
+import (
+	"fmt"
+
+	"github.com/EasyGolang/goTools/mCount"
+	"github.com/EasyGolang/goTools/mTalib/talib"
+)
+
 type CListOpt struct {
 	CList     []string // 数据
-	Cycle     int      // 周期
+	Period    int      // 周期
 	Precision string   // 精度模板 1.235
 }
 
 func EMA(opt CListOpt) string {
+	n := opt.Period
+	cLen := len(opt.CList)
+
+	dotNum := mCount.GetDecimal(opt.Precision) // 计算小数点位数
+	var floatList []float64
+	for _, val := range opt.CList {
+		floatList = append(floatList, mCount.ToFloat(val, dotNum))
+	}
+	pArr := talib.Ema(floatList, n)
+	result := pArr[cLen-1]
+
+	fmt.Println(result)
+
 	return ""
 }
 

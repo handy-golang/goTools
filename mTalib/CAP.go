@@ -8,7 +8,7 @@ import (
 
 func CAP(opt CListOpt) string {
 	KDList := opt.CList
-	n := opt.Cycle
+	n := opt.Period
 
 	c_len := len(KDList)
 	last := KDList[c_len-1]
