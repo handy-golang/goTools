@@ -17,9 +17,14 @@ func CAP(opt EmaOpt) string {
 	}
 	start := KDList[c_len-n]
 
-	diffPrice := mCount.Sub(last, start)
+	// a-b 的涨幅 * 100 保留两位小数 然后 除以 n
+	//
 
-	p := mCount.Mul(diffPrice, fmt.Sprint((n)))
+	diffC := mCount.Rose(last, start)
+	diffRc := mCount.Mul(diffC, "100")
+	diffCent := mCount.Cent(diffRc, 2)
+
+	p := mCount.Mul(diffCent, fmt.Sprint(n-1))
 
 	return p
 }

@@ -38,7 +38,7 @@ func GetKdata(InstID string) []mOKX.TypeKd {
 		Path: "/api/v5/market/candles",
 		Data: map[string]any{
 			"instId": InstID,
-			"bar":    "15m",
+			"bar":    "1H",
 			"after":  after,
 			"limit":  300,
 		},
