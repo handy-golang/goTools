@@ -5,7 +5,7 @@ import (
 	"github.com/EasyGolang/goTools/mStr"
 )
 
-func MA(opt EmaOpt) string {
+func MA(opt CListOpt) string {
 	KDList := opt.CList
 	n := opt.Cycle
 

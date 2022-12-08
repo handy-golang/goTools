@@ -6,13 +6,13 @@ import (
 	"github.com/EasyGolang/goTools/mCount"
 )
 
-type EmaOpt struct {
+type CListOpt struct {
 	CList     []string // 数据
 	Cycle     int      // 周期
 	Precision string   // 精度模板 1.235
 }
 
-func EMA(opt EmaOpt) string {
+func EMA(opt CListOpt) string {
 	KDList := opt.CList
 	n := opt.Cycle
 
@@ -23,7 +23,7 @@ func EMA(opt EmaOpt) string {
 	}
 
 	y_list := KDList[0:c_n] // 将最开始的N个KD 作为初始参数
-	y := MA(EmaOpt{         // 初始值计算
+	y := MA(CListOpt{       // 初始值计算
 		CList:     y_list,
 		Cycle:     c_n,
 		Precision: opt.Precision,

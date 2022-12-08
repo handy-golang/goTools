@@ -6,7 +6,7 @@ import (
 	"github.com/EasyGolang/goTools/mCount"
 )
 
-func CAP(opt EmaOpt) string {
+func CAP(opt CListOpt) string {
 	KDList := opt.CList
 	n := opt.Cycle
 

@@ -41,12 +41,12 @@ func NewKD(now TypeKd, list []TypeKd) (kdata TypeKd) {
 	for _, val := range newList {
 		cList = append(cList, val.C)
 	}
-	kdata.EMA_9 = mTalib.EMA(mTalib.EmaOpt{
+	kdata.EMA_9 = mTalib.EMA(mTalib.CListOpt{
 		CList:     cList,
 		Cycle:     9,
 		Precision: kdata.TickSz,
 	})
-	kdata.EMA_26 = mTalib.EMA(mTalib.EmaOpt{
+	kdata.EMA_26 = mTalib.EMA(mTalib.CListOpt{
 		CList:     cList,
 		Cycle:     26,
 		Precision: kdata.TickSz,
