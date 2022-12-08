@@ -9,13 +9,14 @@ import (
 func CAP(opt CListOpt) string {
 	KDList := opt.CList
 	n := opt.Period
+	cLen := len(KDList)
 
-	c_len := len(KDList)
-	last := KDList[c_len-1]
-	if c_len < n {
-		c_len = n
+	if cLen < n {
+		return "0"
 	}
-	start := KDList[c_len-n]
+
+	last := KDList[cLen-1]
+	start := KDList[cLen-n]
 
 	// a-b 的涨幅 * 100 保留两位小数 然后 除以 n
 	//
