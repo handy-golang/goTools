@@ -1,4 +1,4 @@
-package mMetrics
+package mTalib
 
 import (
 	"fmt"

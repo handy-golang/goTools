@@ -1,4 +1,4 @@
-package mMetrics
+package mTalib
 
 import (
 	"github.com/EasyGolang/goTools/mCount"
