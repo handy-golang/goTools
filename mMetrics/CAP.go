@@ -1,4 +1,4 @@
-package mOKX
+package mMetrics
 
 // 数据来源 (H+L+C) / 3
 func CAP(KDList []string, n int) string {
