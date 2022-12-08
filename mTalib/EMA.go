@@ -42,6 +42,15 @@ func EMA(opt CListOpt) string {
 	return emaStr
 }
 
+func (_this *ClistObj) EMA() *ClistObj {
+	if _this.CLen < _this.Period+1 {
+		return _this
+	}
+	pArr := talib.Ema(_this.FList, _this.Period)
+	_this.Result = pArr[_this.CLen-1]
+	return _this
+}
+
 /**
 
 // 这个库废弃了, 用table 重写

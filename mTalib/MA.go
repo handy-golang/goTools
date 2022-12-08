@@ -37,6 +37,15 @@ func MA(opt CListOpt) string {
 	return maStr
 }
 
+func (_this *ClistObj) MA() *ClistObj {
+	if _this.CLen < _this.Period+1 {
+		return _this
+	}
+	pArr := talib.Sma(_this.FList, _this.Period)
+	_this.Result = pArr[_this.CLen-1]
+	return _this
+}
+
 /**
 
 // 这个库废弃了, 用table 重写

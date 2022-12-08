@@ -1,6 +1,8 @@
 package mTalib
 
 import (
+	"fmt"
+
 	"github.com/EasyGolang/goTools/mCount"
 	"github.com/EasyGolang/goTools/mOKX"
 )
@@ -16,6 +18,7 @@ type ClistObj struct {
 	Period int   // 周期
 	CLen   int   // 数组长度
 	DotNum int32 // 小数点位数
+	Result float64
 }
 
 func ClistNew(opt ClistOpt) *ClistObj {
@@ -49,4 +52,10 @@ func ClistNew(opt ClistOpt) *ClistObj {
 	obj.FList = floatList
 
 	return &obj
+}
+
+func (_this *ClistObj) ToStr() string {
+	rStr := fmt.Sprintf("%f", _this.Result)
+	rStr = mCount.CentRound(rStr, _this.DotNum)
+	return rStr
 }
