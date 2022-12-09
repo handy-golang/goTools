@@ -108,55 +108,39 @@ func FormatKdata(data any, Inst mOKX.TypeInst) {
 	}
 }
 
-var CList = []string{}
+var EmaList = []string{}
 
 func StorageKdata(kdata mOKX.TypeKd) {
 	new_Kdata := mOKX.NewKD(kdata, KdataList)
 	KdataList = append(KdataList, new_Kdata)
 
-	/*
-		// EMA 指标测试
-		EMA_18 := mTalib.EMA(mTalib.CListOpt{
-			CList:  CList,
-			Period: 18,
-		})
-		global.KdataLog.Println(new_Kdata.TimeStr, new_Kdata.C, EMA_18)
-	*/
-
-	/*
-		// EMA 指标测试
-		MA_18 := mTalib.MA(mTalib.CListOpt{
-			CList:  CList,
-			Period: 18,
-		})
-		global.KdataLog.Println(new_Kdata.TimeStr, new_Kdata.C, MA_18)
-	*/
-
-	// RSI 指标测试
-	// RSI := mTalib.RSI(mTalib.CListOpt{
-	// 	CList:  CList,
-	// 	Period: 14,
-	// })
-	// global.KdataLog.Println(new_Kdata.TimeStr, new_Kdata.C, RSI)
-
 	// EMA 指标测试
-
-	EMA_18 := mTalib.ClistNew(mTalib.ClistOpt{
-		KDList: KdataList,
-		Period: 18,
-	}).EMA().ToStr()
 
 	MA_18 := mTalib.ClistNew(mTalib.ClistOpt{
 		KDList: KdataList,
 		Period: 18,
 	}).MA().ToStr()
 
-	CAP_EMA := mTalib.ClistNew(mTalib.ClistOpt{
+	EMA_18 := mTalib.ClistNew(mTalib.ClistOpt{
 		KDList: KdataList,
+		Period: 18,
+	}).EMA().ToStr()
+
+	EmaList = append(EmaList, EMA_18)
+
+	CAP_EMA := mTalib.ClistNew(mTalib.ClistOpt{
+		CList:  EmaList,
 		Period: 3,
 	}).CAP().ToStr()
 
-	global.KdataLog.Println(new_Kdata.TimeStr, new_Kdata.C, EMA_18, MA_18, CAP_EMA)
+	global.KdataLog.Println(new_Kdata.TimeStr, mJson.Format(
+		map[string]any{
+			"C":       new_Kdata.C,
+			"EMA_18":  EMA_18,
+			"MA_18":   MA_18,
+			"CAP_EMA": CAP_EMA,
+		},
+	))
 
 	// global.KdataLog.Println(mJson.Format(new_Kdata))
 }
