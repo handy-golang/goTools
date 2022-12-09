@@ -3,7 +3,6 @@ package mTalib
 import (
 	"strconv"
 
-	"github.com/EasyGolang/goTools/global"
 	"github.com/EasyGolang/goTools/mCount"
 	"github.com/EasyGolang/goTools/mOKX"
 )
@@ -56,6 +55,7 @@ func ClistNew(opt ClistOpt) *ClistObj {
 	}
 
 	obj.FList = floatList
+	obj.CList = CList
 
 	return &obj
 }
@@ -63,8 +63,6 @@ func ClistNew(opt ClistOpt) *ClistObj {
 func (_this *ClistObj) ToStr() string {
 	rStr := strconv.FormatFloat(_this.Result, 'f', 10, 32)
 	rStr = mCount.CentRound(rStr, _this.DotNum)
-
-	global.KdataLog.Println(_this.Result, rStr)
 
 	return rStr
 }

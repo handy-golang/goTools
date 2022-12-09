@@ -153,7 +153,7 @@ func StorageKdata(kdata mOKX.TypeKd) {
 
 	CAP_EMA := mTalib.ClistNew(mTalib.ClistOpt{
 		KDList: KdataList,
-		Period: 18,
+		Period: 3,
 	}).CAP().ToStr()
 
 	global.KdataLog.Println(new_Kdata.TimeStr, new_Kdata.C, EMA_18, MA_18, CAP_EMA)
