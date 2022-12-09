@@ -128,7 +128,7 @@ func StorageKdata(kdata mOKX.TypeKd) {
 
 	RSI := mTalib.ClistNew(mTalib.ClistOpt{
 		KDList: KdataList,
-		Period: 14,
+		Period: 18,
 	}).RSI().ToStr()
 
 	EmaList = append(EmaList, EMA_18)
