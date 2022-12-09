@@ -15,6 +15,7 @@ type ClistOpt struct {
 }
 
 type ClistObj struct {
+	CList  []string // 数据
 	FList  []float64
 	Period int   // 周期
 	CLen   int   // 数组长度
@@ -26,6 +27,7 @@ func ClistNew(opt ClistOpt) *ClistObj {
 	obj := ClistObj{}
 	obj.Period = opt.Period
 
+	var CList []string
 	var floatList []float64
 	if len(opt.CList) > 0 {
 		obj.DotNum = mCount.GetDecimal(opt.CList[0])
@@ -37,6 +39,7 @@ func ClistNew(opt ClistOpt) *ClistObj {
 			}
 			floatVal := mCount.ToFloat(val, obj.DotNum)
 			floatList = append(floatList, floatVal)
+			CList = append(CList, val)
 		}
 	} else if len(opt.KDList) > 0 {
 		obj.DotNum = mCount.GetDecimal(opt.KDList[0].C)
@@ -48,6 +51,7 @@ func ClistNew(opt ClistOpt) *ClistObj {
 			}
 			floatVal := mCount.ToFloat(val.C, obj.DotNum)
 			floatList = append(floatList, floatVal)
+			CList = append(CList, val.C)
 		}
 	}
 

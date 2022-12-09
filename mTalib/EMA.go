@@ -4,11 +4,6 @@ import (
 	"github.com/EasyGolang/goTools/mTalib/talib"
 )
 
-type CListOpt struct {
-	CList  []string // 数据
-	Period int      // 周期
-}
-
 func (_this *ClistObj) EMA() *ClistObj {
 	if _this.CLen < _this.Period+1 {
 		return _this

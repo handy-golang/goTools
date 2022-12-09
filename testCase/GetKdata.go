@@ -142,11 +142,21 @@ func StorageKdata(kdata mOKX.TypeKd) {
 	// EMA 指标测试
 
 	EMA_18 := mTalib.ClistNew(mTalib.ClistOpt{
-		KDList:  KdataList,
+		KDList: KdataList,
 		Period: 18,
 	}).EMA().ToStr()
 
-	global.KdataLog.Println(new_Kdata.TimeStr, new_Kdata.C, EMA_18)
+	MA_18 := mTalib.ClistNew(mTalib.ClistOpt{
+		KDList: KdataList,
+		Period: 18,
+	}).MA().ToStr()
+
+	CAP_EMA := mTalib.ClistNew(mTalib.ClistOpt{
+		KDList: KdataList,
+		Period: 18,
+	}).CAP().ToStr()
+
+	global.KdataLog.Println(new_Kdata.TimeStr, new_Kdata.C, EMA_18, MA_18, CAP_EMA)
 
 	// global.KdataLog.Println(mJson.Format(new_Kdata))
 }

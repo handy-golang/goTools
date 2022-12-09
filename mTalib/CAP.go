@@ -6,26 +6,23 @@ import (
 	"github.com/EasyGolang/goTools/mCount"
 )
 
-func CAP(opt CListOpt) string {
-	KDList := opt.CList
-	n := opt.Period
-	cLen := len(KDList)
-
-	if cLen < n {
-		return "0"
+func (_this *ClistObj) CAP() *ClistObj {
+	if _this.CLen < _this.Period+1 {
+		return _this
 	}
 
-	last := KDList[cLen-1]
-	start := KDList[cLen-n]
+	last := _this.CList[_this.CLen-1]
+	start := _this.CList[_this.CLen-_this.Period]
 
 	// a-b 的涨幅 * 100 保留两位小数 然后 除以 n
-	//
-
 	diffC := mCount.Rose(last, start)
 	diffRc := mCount.Mul(diffC, "100")
 	diffCent := mCount.Cent(diffRc, 2)
 
-	p := mCount.Mul(diffCent, fmt.Sprint(n-1))
+	p := mCount.Mul(diffCent, fmt.Sprint(_this.Period-1))
 
-	return p
+	floatVal := mCount.ToFloat(p, _this.DotNum)
+	_this.Result = floatVal
+
+	return _this
 }
