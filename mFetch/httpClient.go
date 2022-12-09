@@ -5,7 +5,7 @@ import (
 
 	"github.com/EasyGolang/goTools/mStr"
 	"github.com/EasyGolang/goTools/mUrl"
-	"github.com/gocolly/colly"
+	"github.com/gocolly/colly/v2"
 	jsoniter "github.com/json-iterator/go"
 )
 

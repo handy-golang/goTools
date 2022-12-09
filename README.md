@@ -8,9 +8,6 @@
 go get -u github.com/EasyGolang/goTools
 ```
 
-## 配置文件
+## 包的主页
 
-```app_env.yaml
-RunMod: 1
-
-```
+https://pkg.go.dev/github.com/EasyGolang/goTools
