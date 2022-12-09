@@ -126,6 +126,11 @@ func StorageKdata(kdata mOKX.TypeKd) {
 		Period: 18,
 	}).EMA().ToStr()
 
+	RSI := mTalib.ClistNew(mTalib.ClistOpt{
+		KDList: KdataList,
+		Period: 14,
+	}).RSI().ToStr()
+
 	EmaList = append(EmaList, EMA_18)
 
 	CAP_EMA := mTalib.ClistNew(mTalib.ClistOpt{
@@ -133,11 +138,13 @@ func StorageKdata(kdata mOKX.TypeKd) {
 		Period: 3,
 	}).CAP().ToStr()
 
-	global.KdataLog.Println(new_Kdata.TimeStr, mJson.Format(
+	global.KdataLog.Println(mJson.Format(
 		map[string]any{
+			"TimeStr": new_Kdata.TimeStr,
 			"C":       new_Kdata.C,
 			"EMA_18":  EMA_18,
 			"MA_18":   MA_18,
+			"RSI":     RSI,
 			"CAP_EMA": CAP_EMA,
 		},
 	))
