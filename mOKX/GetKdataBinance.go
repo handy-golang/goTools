@@ -7,12 +7,16 @@ import (
 
 	"github.com/EasyGolang/goTools/global/config"
 	"github.com/EasyGolang/goTools/mFile"
+	"github.com/EasyGolang/goTools/mJson"
 	"github.com/EasyGolang/goTools/mOKX/binance"
+	"github.com/EasyGolang/goTools/mStr"
 	"github.com/EasyGolang/goTools/mTime"
+	jsoniter "github.com/json-iterator/go"
 )
 
-func GetKdataBinance(opt GetKdataOpt) (resData []OkxCandleDataType) {
-	resData = []OkxCandleDataType{}
+type BinanceCandleDataType [12]any // Okx 原始数据
+func GetKdataBinance(opt GetKdataOpt) (resData []TypeKd) {
+	resData = []TypeKd{}
 	if len(opt.InstID) < 2 {
 		return
 	}
@@ -58,7 +62,30 @@ func GetKdataBinance(opt GetKdataOpt) (resData []OkxCandleDataType) {
 		return
 	}
 
-	mFile.Write(config.Dir.JsonData+"/bnb_"+Symbol+".json", string((fetchData)))
+	var listStr []BinanceCandleDataType
+	jsoniter.Unmarshal(fetchData, &listStr)
+
+	mFile.Write(config.Dir.JsonData+"/bnb_"+Symbol+".json", string(mJson.ToJson((listStr))))
+	rList := []TypeKd{}
+
+	for _, item := range listStr {
+		TimeStr := mStr.ToStr(mJson.ToJson(item[0]))
+		kdata := TypeKd{
+			InstID:   opt.InstID,
+			TimeUnix: mTime.ToUnixMsec(mTime.MsToTime(TimeStr, "0")),
+			TimeStr:  mTime.UnixFormat(TimeStr),
+			O:        mStr.ToStr(item[1]),
+			H:        mStr.ToStr(item[2]),
+			L:        mStr.ToStr(item[3]),
+			C:        mStr.ToStr(item[4]),
+			Vol:      mStr.ToStr(item[5]),
+		}
+		new_Kdata := NewKD(kdata, rList)
+		rList = append(rList, new_Kdata)
+	}
+	if len(rList) == Size {
+		resData = rList
+	}
 
 	return
 }

@@ -1,7 +1,5 @@
 package mOKX
 
-type OkxCandleDataType [9]string // Okx 原始数据
-
 // K 线 数据
 type TypeKd struct {
 	InstID   string `bson:"InstID"`   // 持仓币种
