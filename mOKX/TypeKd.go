@@ -1,6 +1,6 @@
 package mOKX
 
-type OkxCandleDataType [8]string
+type OkxCandleDataType [9]string
 
 // K 线 数据
 type TypeKd struct {

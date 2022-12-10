@@ -1,7 +1,6 @@
 package mOKX
 
 import (
-	"fmt"
 	"strconv"
 
 	"github.com/EasyGolang/goTools/mJson"
@@ -16,8 +15,8 @@ type GetKdataOpt struct {
 	Bar    string `bson:"Bar"`   // 1m/3m/5m/15m/30m/1h/2h/4h
 }
 
-func GetKdata(opt GetKdataOpt) (resData []byte) {
-	resData = []byte("[]")
+func GetKdataOKX(opt GetKdataOpt) (resData []OkxCandleDataType) {
+	resData = []OkxCandleDataType{}
 	if len(opt.InstID) < 2 {
 		return
 	}
@@ -43,15 +42,11 @@ func GetKdata(opt GetKdataOpt) (resData []byte) {
 	}
 
 	// 判断应该采取哪个接口获取数据  after 距离 now 有多少条数据?
-
 	path := "/api/v5/market/candles"
-
 	fromNowItem := (now - after) / BarObj.Interval
 	if fromNowItem > 300 {
 		path = "/api/v5/market/history-index-candles"
 	}
-
-	fmt.Println(path)
 
 	fetchData, err := FetchOKX(OptFetchOKX{
 		Path: path,
@@ -72,5 +67,18 @@ func GetKdata(opt GetKdataOpt) (resData []byte) {
 		return
 	}
 
-	return mJson.ToJson(result.Data)
+	jsonByte := mJson.ToJson(result.Data)
+
+	var list []OkxCandleDataType
+	err = jsoniter.Unmarshal(jsonByte, &list)
+	if err != nil {
+		return
+	}
+	if len(list) != Size {
+		return
+	}
+
+	resData = list
+
+	return
 }
