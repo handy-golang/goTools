@@ -5,9 +5,9 @@ import (
 
 	"github.com/EasyGolang/goTools/global"
 	"github.com/EasyGolang/goTools/global/config"
-	"github.com/EasyGolang/goTools/mBinance"
 	"github.com/EasyGolang/goTools/mFile"
 	"github.com/EasyGolang/goTools/mOKX"
+	"github.com/EasyGolang/goTools/mOKX/binance"
 	"github.com/EasyGolang/goTools/mTime"
 	jsoniter "github.com/json-iterator/go"
 )
@@ -45,10 +45,10 @@ func OKXFetch() {
 }
 
 func BalanceFetch() {
-	resData, err := mBinance.FetchBinance(mBinance.OptFetchBinance{
+	resData, err := binance.FetchBinance(binance.OptFetchBinance{
 		Path:   "/fapi/v2/account",
 		Method: "get",
-		BinanceKey: mBinance.TypeBinanceKey{
+		BinanceKey: binance.TypeBinanceKey{
 			ApiKey:    config.BinanceKey.ApiKey,
 			SecretKey: config.BinanceKey.SecretKey,
 		},

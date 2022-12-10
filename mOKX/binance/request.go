@@ -1,4 +1,4 @@
-package mBinance
+package binance
 
 import (
 	"fmt"

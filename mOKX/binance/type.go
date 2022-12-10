@@ -1,4 +1,4 @@
-package mBinance
+package binance
 
 type PositionType struct {
 	InstID        string `bson:"InstID"`
