@@ -8,12 +8,6 @@ import (
 	jsoniter "github.com/json-iterator/go"
 )
 
-type GetKdataOpt struct {
-	InstID string `bson:"InstID"`
-	After  int64  `bson:"After"` // 此时间之前的内容
-	Page   int    `bson:"Page"`  // 往前第几页
-	Bar    string `bson:"Bar"`   // 1m/3m/5m/15m/30m/1h/2h/4h
-}
 type OkxCandleDataType [9]string // Okx 原始数据
 func GetKdataOKX(opt GetKdataOpt) (resData []TypeKd) {
 	resData = []TypeKd{}
