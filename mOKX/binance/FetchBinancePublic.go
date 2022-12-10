@@ -10,7 +10,7 @@ import (
 	"github.com/EasyGolang/goTools/mPath"
 )
 
-type FetchBinanceKdataOpt struct {
+type FetchBinancePublicOpt struct {
 	Path          string
 	Data          map[string]any
 	Method        string
@@ -19,14 +19,14 @@ type FetchBinanceKdataOpt struct {
 	Event         func(string, any)
 }
 
-var BinanceKdataBaseUrlArr = []string{
+var BinancePublicBaseUrlArr = []string{
 	"https://api.binance.com",
 	"https://api1.binance.com",
 	"https://api2.binance.com",
 	"https://api3.binance.com",
 }
 
-func FetchBinanceKdata(opt FetchBinanceKdataOpt) (resData []byte, resErr error) {
+func FetchBinancePublic(opt FetchBinancePublicOpt) (resData []byte, resErr error) {
 	// 是否为本地模式
 	if opt.IsLocalJson {
 		isJsonPath := mPath.Exists(opt.LocalJsonPath)
@@ -46,7 +46,7 @@ func FetchBinanceKdata(opt FetchBinanceKdataOpt) (resData []byte, resErr error) 
 	Method := strings.ToUpper(opt.Method)
 
 	fetch := mFetch.NewHttp(mFetch.HttpOpt{
-		Origin: BinanceKdataBaseUrlArr[2],
+		Origin: BinancePublicBaseUrlArr[2],
 		Path:   opt.Path,
 		Data:   mJson.ToJson(opt.Data),
 		Event:  opt.Event,

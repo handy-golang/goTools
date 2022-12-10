@@ -40,7 +40,7 @@ func GetKdataBinance(opt GetKdataOpt) (resData []TypeKd) {
 		after = after - pastTime                                    // 减去过去的时间节点
 	}
 
-	fetchData, err := binance.FetchBinanceKdata(binance.FetchBinanceKdataOpt{
+	fetchData, err := binance.FetchBinancePublic(binance.FetchBinancePublicOpt{
 		Path:   "/api/v3/klines",
 		Method: "get",
 		Data: map[string]any{
