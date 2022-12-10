@@ -2,9 +2,7 @@ package mOKX
 
 import (
 	"fmt"
-	"strings"
 
-	"github.com/EasyGolang/goTools/global/config"
 	"github.com/EasyGolang/goTools/mJson"
 	"github.com/EasyGolang/goTools/mStr"
 	"github.com/EasyGolang/goTools/mTime"
@@ -12,9 +10,9 @@ import (
 )
 
 type FormatKdataParam struct {
-	Data     any      // [][8]string
-	Inst     TypeInst // 产品信息
-	DataType string   // 格式化后的描述
+	Data     any    // [][9]string
+	InstID   string // 产品信息
+	DataInfo string // 格式化后的描述
 }
 
 func FormatKdata(opt FormatKdataParam) []TypeKd {
@@ -22,11 +20,11 @@ func FormatKdata(opt FormatKdataParam) []TypeKd {
 	// 检查参数
 	errStr := []string{}
 	switch {
-	case len(opt.Inst.InstID) < 2:
+	case len(opt.InstID) < 2:
 		errStr = append(errStr, "Inst")
 		fallthrough
-	case len(opt.DataType) < 2:
-		errStr = append(errStr, "DataType")
+	case len(opt.DataInfo) < 2:
+		errStr = append(errStr, "DataInfo")
 	case len(mStr.ToStr(opt.Data)) < 30:
 		errStr = append(errStr, "Data")
 	}
@@ -43,24 +41,10 @@ func FormatKdata(opt FormatKdataParam) []TypeKd {
 		return KdataList
 	}
 
-	CcyName := opt.Inst.InstID
-	if opt.Inst.InstType == "SWAP" {
-		CcyName = strings.Replace(opt.Inst.InstID, config.SWAP_suffix, "", -1)
-	}
-	if opt.Inst.InstType == "SPOT" {
-		CcyName = strings.Replace(opt.Inst.InstID, config.SPOT_suffix, "", -1)
-	}
-
 	for i := len(list) - 1; i >= 0; i-- {
 		item := list[i]
 		kdata := TypeKd{
-			InstID:   opt.Inst.InstID,
-			CcyName:  CcyName,
-			TickSz:   opt.Inst.TickSz,
-			InstType: opt.Inst.InstType,
-			CtVal:    opt.Inst.CtVal,
-			MinSz:    opt.Inst.MinSz,
-			MaxMktSz: opt.Inst.MaxMktSz,
+			InstID:   opt.InstID,
 			TimeStr:  mTime.UnixFormat(item[0]),
 			TimeUnix: mTime.ToUnixMsec(mTime.MsToTime(item[0], "0")),
 			O:        item[1],
@@ -68,7 +52,7 @@ func FormatKdata(opt FormatKdataParam) []TypeKd {
 			L:        item[3],
 			C:        item[4],
 			Vol:      item[5],
-			DataType: opt.DataType,
+			DataInfo: opt.DataInfo,
 		}
 		new_Kdata := NewKD(kdata, KdataList)
 		KdataList = append(KdataList, new_Kdata)
