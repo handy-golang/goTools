@@ -1,5 +1,6 @@
 package mOKX
 
+// 产品信息
 type TypeInst struct {
 	Alias        string `bson:"Alias"`
 	BaseCcy      string `bson:"BaseCcy"`

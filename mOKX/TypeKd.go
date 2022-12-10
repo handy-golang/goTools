@@ -2,6 +2,7 @@ package mOKX
 
 type OkxCandleDataType [8]string
 
+// K 线 数据
 type TypeKd struct {
 	InstID   string `bson:"InstID"`   // 持仓币种
 	CcyName  string `bson:"CcyName"`  // 币种名称

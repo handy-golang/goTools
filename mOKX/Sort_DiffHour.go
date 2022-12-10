@@ -5,7 +5,7 @@ import (
 	"github.com/EasyGolang/goTools/mStr"
 )
 
-// 按照 收盘价 价排序
+// 按照 切片排序
 func Sort_DiffHour(data []TypeWholeTickerAnaly) []TypeWholeTickerAnaly {
 	size := len(data)
 	list := make([]TypeWholeTickerAnaly, size)
