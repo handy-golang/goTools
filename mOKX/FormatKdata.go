@@ -36,7 +36,7 @@ func FormatKdata(opt FormatKdataParam) []TypeKd {
 	}
 
 	// 解析 List
-	var list []CandleDataType
+	var list []OkxCandleDataType
 	jsonStr := mJson.ToJson(opt.Data)
 	err := jsoniter.Unmarshal(jsonStr, &list)
 	if err != nil {
@@ -68,7 +68,6 @@ func FormatKdata(opt FormatKdataParam) []TypeKd {
 			L:        item[3],
 			C:        item[4],
 			Vol:      item[5],
-			VolCcy:   item[6],
 			DataType: opt.DataType,
 		}
 		new_Kdata := NewKD(kdata, KdataList)

@@ -1,6 +1,6 @@
 package mOKX
 
-type CandleDataType [7]string
+type OkxCandleDataType [8]string
 
 type TypeKd struct {
 	InstID   string `bson:"InstID"`   // 持仓币种
@@ -17,8 +17,7 @@ type TypeKd struct {
 	L        string `bson:"L"`        // 最低
 	C        string `bson:"C"`        // 收盘价格
 	CBas     string `bson:"CBas"`     // 实体中心价 (收盘+最高+最低) / 3
-	Vol      string `bson:"Vol"`      // 交易货币的数量
-	VolCcy   string `bson:"VolCcy"`   // 计价货币数量
+	Vol      string `bson:"Vol"`      // 成交量( BTC 的数量 )
 	DataType string `bson:"Type"`     // 数据类型
 	Dir      int    `bson:"Dir"`      // 方向 (收盘-开盘) ，1：涨 & -1：跌 & 0：横盘
 	HLPer    string `bson:"HLPer"`    // 振幅 (最高-最低)/最低 * 100%

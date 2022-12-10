@@ -69,7 +69,7 @@ func GetKdata(InstID string) []mOKX.TypeKd {
 }
 
 func FormatKdata(data any, Inst mOKX.TypeInst) {
-	var list []mOKX.CandleDataType
+	var list []mOKX.OkxCandleDataType
 	jsonStr := mJson.ToJson(data)
 	jsoniter.Unmarshal(jsonStr, &list)
 
@@ -101,7 +101,6 @@ func FormatKdata(data any, Inst mOKX.TypeInst) {
 			L:        item[3],
 			C:        item[4],
 			Vol:      item[5],
-			VolCcy:   item[6],
 			DataType: "GetKdata",
 		}
 		StorageKdata(kdata)
