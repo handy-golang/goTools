@@ -23,7 +23,7 @@ func main() {
 
 	// testCase.GetSPOT()
 
-	testCase.GetKdata("SHIB-USDT")
+	testCase.GetKdata()
 
 	// testCase.OKXFetch()
 	// testCase.OKXWss()

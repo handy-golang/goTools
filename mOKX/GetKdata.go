@@ -1,10 +1,9 @@
 package mOKX
 
 import (
+	"fmt"
 	"strconv"
 
-	"github.com/EasyGolang/goTools/global/config"
-	"github.com/EasyGolang/goTools/mFile"
 	"github.com/EasyGolang/goTools/mJson"
 	"github.com/EasyGolang/goTools/mTime"
 	jsoniter "github.com/json-iterator/go"
@@ -17,7 +16,8 @@ type GetKdataOpt struct {
 	Bar    string `bson:"Bar"`   // 1m/3m/5m/15m/30m/1h/2h/4h
 }
 
-func GetKdata(opt GetKdataOpt) {
+func GetKdata(opt GetKdataOpt) (resData []byte) {
+	resData = []byte("[]")
 	if len(opt.InstID) < 2 {
 		return
 	}
@@ -30,23 +30,30 @@ func GetKdata(opt GetKdataOpt) {
 	Size := 100
 
 	// 时间设置
+	now := mTime.GetUnixInt64()
 	after := mTime.GetUnixInt64()
-	if opt.After > 946656000000 {
+	// 时间必须大于6年前
+	if opt.After > now-mTime.UnixTimeInt64.Day*2190 {
 		after = opt.After
 	}
-
 	// 处理分页
 	if opt.Page > 0 {
+		pastTime := int64(opt.Page) * BarObj.Interval * int64(Size) // 一页数据 =  100 * 时间间隔
+		after = after - pastTime                                    // 减去过去的时间节点
 	}
 
-	// 判断应该采取哪个接口获取数据
+	// 判断应该采取哪个接口获取数据  after 距离 now 有多少条数据?
+
 	path := "/api/v5/market/candles"
 
-	// fmt.Println(after)
+	fromNowItem := (now - after) / BarObj.Interval
+	if fromNowItem > 300 {
+		path = "/api/v5/market/history-index-candles"
+	}
 
-	// path = "/api/v5/market/history-index-candles"
+	fmt.Println(path)
 
-	resData, err := FetchOKX(OptFetchOKX{
+	fetchData, err := FetchOKX(OptFetchOKX{
 		Path: path,
 		Data: map[string]any{
 			"instId": opt.InstID,
@@ -60,12 +67,10 @@ func GetKdata(opt GetKdataOpt) {
 		return
 	}
 	var result TypeReq
-	jsoniter.Unmarshal(resData, &result)
+	jsoniter.Unmarshal(fetchData, &result)
 	if result.Code != "0" {
 		return
 	}
 
-	mFile.Write(config.Dir.JsonData+"/okx_"+opt.InstID+".json", string(mJson.ToJson(result.Data)))
-
-	return
+	return mJson.ToJson(result.Data)
 }
