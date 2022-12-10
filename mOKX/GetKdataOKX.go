@@ -4,7 +4,6 @@ import (
 	"strconv"
 
 	"github.com/EasyGolang/goTools/mJson"
-	"github.com/EasyGolang/goTools/mStr"
 	"github.com/EasyGolang/goTools/mTime"
 	jsoniter "github.com/json-iterator/go"
 )
@@ -16,8 +15,9 @@ type GetKdataOpt struct {
 	Bar    string `bson:"Bar"`   // 1m/3m/5m/15m/30m/1h/2h/4h
 }
 
-func GetKdataOKX(opt GetKdataOpt) (resData []OkxCandleDataType) {
-	resData = []OkxCandleDataType{}
+func GetKdataOKX(opt GetKdataOpt) (resData []TypeKd) {
+	resData = []TypeKd{}
+
 	if len(opt.InstID) < 2 {
 		return
 	}
@@ -79,33 +79,9 @@ func GetKdataOKX(opt GetKdataOpt) (resData []OkxCandleDataType) {
 		return
 	}
 
-	resData = list
-
-	return
-}
-
-type FormatOkxKdataParam struct {
-	List     []OkxCandleDataType // [][9]string
-	InstID   string              // 产品信息
-	DataInfo string              // 格式化后的描述
-}
-
-func FormatOkxKdata(opt FormatOkxKdataParam) (KdataList []TypeKd) {
-	KdataList = []TypeKd{} // 声明存储
-	// 检查参数
-	if len(opt.InstID) < 2 {
-		return
-	}
-	if len(opt.DataInfo) < 1 {
-		return
-	}
-	if len(mStr.ToStr(opt.List)) < 30 {
-		return
-	}
-
-	// 解析
-	for i := len(opt.List) - 1; i >= 0; i-- {
-		item := opt.List[i]
+	KdataList := []TypeKd{} // 声明存储
+	for i := len(list) - 1; i >= 0; i-- {
+		item := list[i]
 		kdata := TypeKd{
 			InstID:   opt.InstID,
 			TimeStr:  mTime.UnixFormat(item[0]),
@@ -115,11 +91,14 @@ func FormatOkxKdata(opt FormatOkxKdataParam) (KdataList []TypeKd) {
 			L:        item[3],
 			C:        item[4],
 			Vol:      item[5],
-			DataInfo: opt.DataInfo,
 		}
 		new_Kdata := NewKD(kdata, KdataList)
 		KdataList = append(KdataList, new_Kdata)
 	}
 
-	return KdataList
+	if len(KdataList) == Size {
+		resData = KdataList
+	}
+
+	return
 }

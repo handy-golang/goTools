@@ -13,7 +13,6 @@ type TypeKd struct {
 	C        string `bson:"C"`        // 收盘价格
 	CBas     string `bson:"CBas"`     // 实体中心价 (收盘+最高+最低) / 3
 	Vol      string `bson:"Vol"`      // 成交量( BTC 的数量 )
-	DataInfo string `bson:"DataInfo"` // 数据信息
 	Dir      int    `bson:"Dir"`      // 方向 (收盘-开盘) ，1：涨 & -1：跌 & 0：横盘
 	HLPer    string `bson:"HLPer"`    // 振幅 (最高-最低)/最低 * 100%
 	U_shade  string `bson:"U_shade"`  // 上影线
