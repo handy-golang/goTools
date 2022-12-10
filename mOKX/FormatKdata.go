@@ -12,7 +12,7 @@ import (
 )
 
 type FormatKdataParam struct {
-	Data     any      // [][7]string
+	Data     any      // [][8]string
 	Inst     TypeInst // 产品信息
 	DataType string   // 格式化后的描述
 }
