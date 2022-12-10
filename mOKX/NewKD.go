@@ -7,7 +7,7 @@ import (
 // 构造新的 Kdata
 func NewKD(now TypeKd, list []TypeKd) (kdata TypeKd) {
 	kdata = now
-	if mCount.Le(now.C, "0") < 0 {
+	if mCount.Le(now.C, "0") < 1 {
 		return
 	}
 
@@ -20,10 +20,11 @@ func NewKD(now TypeKd, list []TypeKd) (kdata TypeKd) {
 	U_shade, D_shade := GetKdShade(kdata)
 	kdata.U_shade = U_shade
 	kdata.D_shade = D_shade
-	if len(list) < 1 {
-		return
+
+	Pre := kdata
+	if len(list) > 1 {
+		Pre = list[len(list)-1]
 	}
-	Pre := list[len(list)-1]
 	kdata.RosePer = mCount.RoseCent(now.C, Pre.C)
 	kdata.C_dir = mCount.Le(now.CBas, Pre.CBas)
 

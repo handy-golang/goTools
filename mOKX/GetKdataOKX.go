@@ -1,7 +1,6 @@
 package mOKX
 
 import (
-	"fmt"
 	"strconv"
 
 	"github.com/EasyGolang/goTools/mJson"
@@ -86,39 +85,27 @@ func GetKdataOKX(opt GetKdataOpt) (resData []OkxCandleDataType) {
 }
 
 type FormatOkxKdataParam struct {
-	Data     any    // [][9]string
-	InstID   string // 产品信息
-	DataInfo string // 格式化后的描述
+	List     []OkxCandleDataType // [][9]string
+	InstID   string              // 产品信息
+	DataInfo string              // 格式化后的描述
 }
 
-func FormatOkxKdata(opt FormatOkxKdataParam) []TypeKd {
-	KdataList := []TypeKd{} // 声明存储
+func FormatOkxKdata(opt FormatOkxKdataParam) (KdataList []TypeKd) {
+	KdataList = []TypeKd{} // 声明存储
 	// 检查参数
-	errStr := []string{}
-	switch {
-	case len(opt.InstID) < 2:
-		errStr = append(errStr, "Inst")
-		fallthrough
-	case len(opt.DataInfo) < 2:
-		errStr = append(errStr, "DataInfo")
-	case len(mStr.ToStr(opt.Data)) < 30:
-		errStr = append(errStr, "Data")
+	if len(opt.InstID) < 2 {
+		return
 	}
-	if len(errStr) > 0 {
-		errStr := fmt.Errorf("缺少参数:%+v", errStr)
-		panic(errStr)
+	if len(opt.DataInfo) < 1 {
+		return
+	}
+	if len(mStr.ToStr(opt.List)) < 30 {
+		return
 	}
 
-	// 解析 List
-	var list []OkxCandleDataType
-	jsonStr := mJson.ToJson(opt.Data)
-	err := jsoniter.Unmarshal(jsonStr, &list)
-	if err != nil {
-		return KdataList
-	}
-
-	for i := len(list) - 1; i >= 0; i-- {
-		item := list[i]
+	// 解析
+	for i := len(opt.List) - 1; i >= 0; i-- {
+		item := opt.List[i]
 		kdata := TypeKd{
 			InstID:   opt.InstID,
 			TimeStr:  mTime.UnixFormat(item[0]),
