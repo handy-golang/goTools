@@ -9,7 +9,7 @@ type GetKdataOpt struct {
 	InstID string `bson:"InstID"`
 	After  int64  `bson:"After"` // 此时间之前的内容
 	Page   int    `bson:"Page"`  // 往前第几页
-	Bar    string `bson:"Bar"`   // 1m/3m/5m/15m/30m/1h/2h/4h
+	Bar    string `bson:"Bar"`   // 1m/3m/5m/15m/30m/1h/2h/4h  默认 1 小时
 }
 
 func GetKdata(opt GetKdataOpt) (KdataList []TypeKd) {
@@ -17,6 +17,10 @@ func GetKdata(opt GetKdataOpt) (KdataList []TypeKd) {
 	if len(opt.InstID) < 2 {
 		return
 	}
+	if len(opt.Bar) < 1 {
+		opt.Bar = "1h"
+	}
+
 	BarObj := GetBarOpt(opt.Bar)
 	if BarObj.Interval < mTime.UnixTimeInt64.Minute {
 		return
