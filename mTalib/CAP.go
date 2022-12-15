@@ -17,11 +17,9 @@ func (_this *ClistObj) CAP() *ClistObj {
 	// a-b 的涨幅 * 100 保留两位小数 然后 除以 n
 	diffC := mCount.Rose(last, start)
 	diffRc := mCount.Mul(diffC, "100")
-	diffCent := mCount.Cent(diffRc, 2)
+	p := mCount.Div(diffRc, fmt.Sprint(_this.Period-1))
 
-	p := mCount.Mul(diffCent, fmt.Sprint(_this.Period-1))
-
-	floatVal := mCount.ToFloat(p, _this.DotNum)
+	floatVal := mCount.ToFloat(p, 2)
 	_this.Result = floatVal
 
 	return _this
