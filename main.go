@@ -4,18 +4,15 @@ import (
 	_ "embed"
 	"fmt"
 
-	"github.com/EasyGolang/goTools/global"
-	"github.com/EasyGolang/goTools/global/config"
 	"github.com/EasyGolang/goTools/testCase"
-	jsoniter "github.com/json-iterator/go"
 )
 
 //go:embed package.json
 var AppPackage []byte
 
 func main() {
-	jsoniter.Unmarshal(AppPackage, &config.AppInfo)
-	global.Start()
+	// jsoniter.Unmarshal(AppPackage, &config.AppInfo)
+	// global.Start()
 
 	fmt.Println(" =========  START  ========= ")
 
@@ -23,7 +20,7 @@ func main() {
 
 	// testCase.GetSPOT()
 
-	testCase.GetKdata()
+	// testCase.GetKdata()
 
 	// testCase.OKXFetch()
 	// testCase.OKXWss()
@@ -45,6 +42,8 @@ func main() {
 	// testCase.TimeTest()
 
 	// testCase.Tactics()
+
+	testCase.ShellTest()
 
 	fmt.Println(" =========   END   ========= ")
 }
