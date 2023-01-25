@@ -4,6 +4,7 @@ import (
 	_ "embed"
 	"fmt"
 
+	"github.com/EasyGolang/goTools/global"
 	"github.com/EasyGolang/goTools/testCase"
 )
 
@@ -12,7 +13,7 @@ var AppPackage []byte
 
 func main() {
 	// jsoniter.Unmarshal(AppPackage, &config.AppInfo)
-	// global.Start()
+	global.Start()
 
 	fmt.Println(" =========  START  ========= ")
 
