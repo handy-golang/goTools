@@ -46,7 +46,9 @@ func main() {
 
 	// testCase.Tactics()
 
-	testCase.ShellTest()
+	// testCase.ShellTest()
+
+	testCase.TestEmail()
 
 	fmt.Println(" =========   END   ========= ")
 }
