@@ -19,7 +19,7 @@ func TestEmail() {
 		},
 		From:        "Hunter 测试 服务",
 		Subject:     "这里是Subject",
-		Port:        "25",
+		Port:        "587",
 		Host:        "smtp.qq.com",
 		TemplateStr: TStr,
 		SendData: struct {
