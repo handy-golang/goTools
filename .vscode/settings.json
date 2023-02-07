@@ -4,6 +4,7 @@
     "Aroon",
     "bson",
     "Clist",
+    "exmail",
     "fasthttp",
     "gocolly",
     "gofiber",
