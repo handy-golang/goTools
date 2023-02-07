@@ -3,8 +3,7 @@
   "version": "1.0.7",
   "Port": 17353,
   "scripts": {
-    "git": "./_shell/gitSet.sh",
-    "sync": "./_shell/sync_git.sh",
+    "sync": "./_shell/GitSync.sh",
     "crun": "rm -rf ./logs && rm -rf ./jsonData && go run main.go  "
   },
   "dependencies": {}
