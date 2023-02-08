@@ -4,7 +4,6 @@ import (
 	"bytes"
 	"crypto/tls"
 	_ "embed"
-	"fmt"
 	"net/smtp"
 	"text/template"
 
@@ -130,13 +129,13 @@ func (Info *EmailInfo) Send() error {
 
 	var err error
 
-	fmt.Println(
-		"IsSSL:", IsSSL, "\n",
-		"addr:", addr, "\n",
-		"Info.Account:", Info.Account, "\n",
-		"Info.Password:", Info.Password, "\n",
-		"Info.Host:", Info.Host,
-	)
+	// fmt.Println(
+	// 	"IsSSL:", IsSSL, "\n",
+	// 	"addr:", addr, "\n",
+	// 	"Info.Account:", Info.Account, "\n",
+	// 	"Info.Password:", Info.Password, "\n",
+	// 	"Info.Host:", Info.Host,
+	// )
 
 	if IsSSL {
 		err = em.SendWithTLS(
