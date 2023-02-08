@@ -40,7 +40,7 @@ func main() {
 
 	// testCase.IPtest()
 
-	// testCase.BalanceFetch()
+	testCase.BalanceFetch()
 
 	// testCase.TimeTest()
 
@@ -48,7 +48,7 @@ func main() {
 
 	// testCase.ShellTest()
 
-	testCase.TestEmail()
+	// testCase.TestEmail()
 
 	fmt.Println(" =========   END   ========= ")
 }
