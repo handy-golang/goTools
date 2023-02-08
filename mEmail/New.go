@@ -2,7 +2,6 @@ package mEmail
 
 import (
 	"bytes"
-	"crypto/tls"
 	_ "embed"
 	"net/smtp"
 	"text/template"
@@ -106,8 +105,6 @@ func New(opt Opt) *EmailInfo {
 }
 
 func (Info *EmailInfo) Send() error {
-	IsSSL := false
-
 	em := email.NewEmail()
 
 	em.From = mStr.Join(
@@ -126,26 +123,7 @@ func (Info *EmailInfo) Send() error {
 	addr := mStr.Join(
 		Info.Host, ":", Info.Port,
 	)
-
-	var err error
-
-	// fmt.Println(
-	// 	"IsSSL:", IsSSL, "\n",
-	// 	"addr:", addr, "\n",
-	// 	"Info.Account:", Info.Account, "\n",
-	// 	"Info.Password:", Info.Password, "\n",
-	// 	"Info.Host:", Info.Host,
-	// )
-
-	if IsSSL {
-		err = em.SendWithTLS(
-			addr,
-			smtp.PlainAuth("", Info.Account, Info.Password, Info.Host),
-			&tls.Config{ServerName: Info.Host},
-		)
-	} else {
-		err = em.Send(addr, smtp.PlainAuth("", Info.Account, Info.Password, Info.Host))
-	}
+	err := em.Send(addr, smtp.PlainAuth("", Info.Account, Info.Password, Info.Host))
 
 	return err
 }
