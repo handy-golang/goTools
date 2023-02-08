@@ -16,12 +16,12 @@ func TestEmail() {
 
 	err := mEmail.New(mEmail.Opt{
 		Account:  "trade@mo7.cc",
-		Password: "svxxaeJgxxMraNmxxdVFJu",
+		Password: "xxxxxxxxx",
 		Port:     "587",
-		Host:     "smtp.exmail.qq.com",
+		Host:     "smtp.larksuite.com",
 
 		// Account:  "670188307@qq.com",
-		// Password: "momxxwdnjxxstnuxxxibcej",
+		// Password: "xxxxxx",
 		// Port:     "587",
 		// Host:     "smtp.qq.com",
 
