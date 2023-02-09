@@ -15,10 +15,15 @@ func TestEmail() {
 	fmt.Println("开始发送邮件", start)
 
 	err := mEmail.New(mEmail.Opt{
-		Account:  "trade@mo7.cc",
-		Password: "xxxxxxxxx",
-		Port:     "587",
-		Host:     "smtp.larksuite.com",
+		// Account:  "meichangliang@gmail.com",
+		// Password: "xxxxxx",  //https://support.google.com/accounts/answer/185833
+		// Port:     "587",
+		// Host:     "smtp.gmail.com",
+
+		// Account:  "trade@mo7.cc",
+		// Password: "xxxxxxxxx",
+		// Port:     "587",
+		// Host:     "smtp.larksuite.com",
 
 		// Account:  "670188307@qq.com",
 		// Password: "xxxxxx",
