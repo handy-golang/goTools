@@ -16,7 +16,7 @@ func TestEmail() {
 
 	err := mEmail.New(mEmail.Opt{
 		Account:  "meichangliang@gmail.com",
-		Password: "xxxx", // https://support.google.com/accounts/answer/185833
+		Password: "xxxxxx", // https://support.google.com/accounts/answer/185833
 		Port:     "587",
 		Host:     "smtp.gmail.com",
 
