@@ -15,10 +15,10 @@ func TestEmail() {
 	fmt.Println("开始发送邮件", start)
 
 	err := mEmail.New(mEmail.Opt{
-		// Account:  "meichangliang@gmail.com",
-		// Password: "xxxxxx",  //https://support.google.com/accounts/answer/185833
-		// Port:     "587",
-		// Host:     "smtp.gmail.com",
+		Account:  "meichangliang@gmail.com",
+		Password: "nmqlusfgaeyexxokmo7x", // https://support.google.com/accounts/answer/185833
+		Port:     "587",
+		Host:     "smtp.gmail.com",
 
 		// Account:  "trade@mo7.cc",
 		// Password: "xxxxxxxxx",
@@ -34,8 +34,9 @@ func TestEmail() {
 			"meichangliang@outlook.com",
 			"670188307@qq.com",
 			"mo7@mo7.cc",
+			"trade@mo7.cc",
 		},
-		From:    "Hunter 测试 服务",
+		From:    "测试 邮件",
 		Subject: "这里是Subject",
 
 		TemplateStr: TStr,
