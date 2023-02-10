@@ -24,8 +24,8 @@ type TaskType struct {
 	EndTimeStr    string         `bson:"EndTimeUnixStr"` // 任务结束时间
 }
 
-func CheckTask(opt TaskType) (resData string, resErr error) {
-	resData = ""
+func CheckTask(opt TaskType) (resData TaskType, resErr error) {
+	resData = TaskType{}
 	resErr = nil
 
 	if len(opt.TaskID) < 20 {
@@ -46,7 +46,7 @@ func CheckTask(opt TaskType) (resData string, resErr error) {
 		return
 	}
 
-	resData = opt.TaskType
+	resData = opt
 
 	return
 }
