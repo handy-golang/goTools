@@ -10,7 +10,7 @@ import (
 func TaskTest() {
 	resData, resErr := mTask.CheckTask(mTask.TaskType{
 		TaskID:   mEncrypt.GetUUID(),
-		TaskType: "SendsEmail",
+		TaskType: "SendEmail",
 		Content: map[string]any{
 			"jsonrpc": "2.0",
 			"id":      "5",
