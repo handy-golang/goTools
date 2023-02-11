@@ -9,12 +9,14 @@ import (
 
 // 注册模板
 var TaskTypeList = []string{
-	"SendEmail",
+	"SysEmail",
+	"CodeEmail",
+	"RegisterEmail",
 }
 
 type TaskType struct {
 	TaskID        string         `bson:"TaskID"`         // 任务ID  当做文件名字
-	TaskType      string         `bson:"TaskType"`       // 任务类型&解析模板  SendEmail, SendOrder 等
+	TaskType      string         `bson:"TaskType"`       // 任务类型 & 解析模板
 	Content       map[string]any `bson:"Content"`        // 任务内容 需要使用不同的模板去解析
 	Source        string         `bson:"Source"`         // 任务来源
 	Description   string         `bson:"Description"`    // 任务描述
