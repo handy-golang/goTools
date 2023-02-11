@@ -1,5 +1,10 @@
 package mTask
 
+import (
+	"github.com/EasyGolang/goTools/mJson"
+	jsoniter "github.com/json-iterator/go"
+)
+
 // 邮件任务需要的基本
 type SysEmail struct {
 	From     string   `bson:"From"`    // 从哪里来
@@ -39,4 +44,12 @@ type RegisterEmail struct {
 		Source       string `bson:"Source"`       // 来源
 		SecurityCode string `bson:"SecurityCode"` // 安全码
 	} `bson:"SendData"` // 要发送邮件的数据内容
+}
+
+func ToMapData(val SysEmail) (resData map[string]any) {
+	// 转换结果
+	jsonStr := mJson.ToJson(val)
+	jsoniter.Unmarshal(jsonStr, &resData)
+
+	return
 }
