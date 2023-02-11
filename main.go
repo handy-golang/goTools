@@ -48,9 +48,9 @@ func main() {
 
 	// testCase.ShellTest()
 
-	// testCase.TestEmail()
+	testCase.TestEmail()
 
-	testCase.TaskTest()
+	// testCase.TaskTest()
 
 	fmt.Println(" =========   END   ========= ")
 }
