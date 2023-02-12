@@ -22,6 +22,7 @@ type TaskType struct {
 	CreateTimeStr string         `bson:"CreateTimeStr"`  // 任务创建时间
 	EndTime       int64          `bson:"EndTime"`        // 任务结束时间 由 任务处理方生成
 	EndTimeStr    string         `bson:"EndTimeUnixStr"` // 任务结束时间
+	Result        string         `bson:"Result"`         // 任务的状态
 }
 
 func CheckTask(opt TaskType) (resData TaskType, resErr error) {
