@@ -26,7 +26,7 @@ func ToStr(data any) string {
 
 func JsonFormat(jsonByte []byte) string {
 	var out bytes.Buffer
-	json.Indent(&out, jsonByte, "", "    ")
+	json.Indent(&out, jsonByte, "", "	")
 
 	return out.String()
 }

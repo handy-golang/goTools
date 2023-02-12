@@ -59,15 +59,15 @@ err := mEmail.New(mEmail.Opt{
 */
 
 type Opt struct {
-	Account     string
-	Password    string
-	To          []string
-	From        string
-	Subject     string
-	Port        string
-	Host        string
-	TemplateStr string
-	SendData    any
+	Account     string   `bson:"Account"`
+	Password    string   `bson:"Password"`
+	To          []string `bson:"To"`
+	From        string   `bson:"From"`
+	Subject     string   `bson:"Subject"`
+	Port        string   `bson:"Port"`
+	Host        string   `bson:"Host"`
+	TemplateStr string   `bson:"TemplateStr"`
+	SendData    any      `bson:"SendData"`
 }
 
 type EmailInfo struct {
