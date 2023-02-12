@@ -13,9 +13,9 @@ func OKXWss() {
 			global.WssLog.Println("Event", s, mStr.ToStr(a))
 		},
 		OKXKey: mOKX.TypeOkxKey{
-			ApiKey:     "ca6e399d-cc78-41b0-90fe-40ab99fb8040",
-			SecretKey:  "EF88B67D7E618FF6B854359BE88A6445",
-			Passphrase: "@Mcl931750",
+			ApiKey:     "xxxx",
+			SecretKey:  "xxxx",
+			Passphrase: "xxx",
 		},
 	})
 
