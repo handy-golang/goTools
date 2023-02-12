@@ -23,16 +23,16 @@ func TestEmail() {
 
 		// outlook 失败
 
-		Account:  "meichangliang@outlook.com",
-		Password: "xxxxxxx",
-		Port:     "587",
-		Host:     "smtp.office365.com",
+		// Account:  "meichangliang@outlook.com",
+		// Password: "xxxxxxx",
+		// Port:     "587",
+		// Host:     "smtp.office365.com",
 
 		// 企业微信
-		// Account:  "xxxx@mo7.cc",
-		// Password: "xxxx",
-		// Port:     "587",
-		// Host:     "smtp.exmail.qq.com",
+		Account:  "trade@mo7.cc",
+		Password: "NUtupBM9mHccVvg3",
+		Port:     "587",
+		Host:     "smtp.exmail.qq.com",
 
 		// qq
 		// Account: "xxxx@qq.com",
