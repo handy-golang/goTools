@@ -9,9 +9,7 @@ import (
 
 // 注册模板
 var TaskTypeList = []string{
-	"SysEmail",
-	"CodeEmail",
-	"RegisterEmail",
+	"SendEmail",
 }
 
 type TaskType struct {
