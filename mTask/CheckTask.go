@@ -41,7 +41,7 @@ func CheckTask(opt TaskType) (resData TaskType, resErr error) {
 
 	find := strings.Contains(TaskTypeALl, TaskTypeNow)
 
-	if !find {
+	if !find || TaskTypeNow == sepChart {
 		resErr = fmt.Errorf("opt.TaskType不存在")
 		return
 	}
