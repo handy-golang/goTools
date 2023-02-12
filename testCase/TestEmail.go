@@ -29,8 +29,8 @@ func TestEmail() {
 		// Host:     "smtp.office365.com",
 
 		// 企业微信
-		Account:  "trade@mo7.cc",
-		Password: "NUtupBM9mHccVvg3",
+		Account:  "xxxxx@xx.xx",
+		Password: "xxxxxxx",
 		Port:     "587",
 		Host:     "smtp.exmail.qq.com",
 
