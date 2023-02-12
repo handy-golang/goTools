@@ -23,6 +23,11 @@ func TestEmail() {
 
 		// outlook 失败
 
+		Account:  "meichangliang@outlook.com",
+		Password: "xxxxxxx",
+		Port:     "587",
+		Host:     "smtp.office365.com",
+
 		// 企业微信
 		// Account:  "xxxx@mo7.cc",
 		// Password: "xxxx",
