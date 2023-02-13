@@ -72,7 +72,7 @@ func (obj *GetNameType) GetNewName() *GetNameType {
 
 	isThere := obj.FileThere()
 	if isThere {
-		obj.GetNewName()
+		return obj.GetNewName()
 	}
 
 	return obj

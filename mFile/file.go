@@ -2,6 +2,7 @@ package mFile
 
 import (
 	"fmt"
+	"io"
 	"log"
 	"net/http"
 	"os"
@@ -15,7 +16,7 @@ func Write(fileName string, content string) {
 	if err != nil {
 		//
 	} else {
-		n, _ := f.Seek(0, os.SEEK_END)
+		n, _ := f.Seek(0, io.SeekCurrent)
 		f.WriteAt([]byte(content), n)
 		defer f.Close()
 	}
