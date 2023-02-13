@@ -4,6 +4,15 @@ import (
 	"time"
 )
 
+/*
+
+mCycle.New(mCycle.Opt{
+	Func:      LogInit,
+	SleepTime: time.Hour * 24,  // 每24 小时 执行一次
+}).Start()
+
+*/
+
 type Cycle struct {
 	Func      func()
 	SleepTime time.Duration
@@ -15,7 +24,6 @@ type Opt struct {
 	SleepTime time.Duration
 }
 
-// http://cron.ciding.cc/
 func New(param Opt) *Cycle {
 	var CycleObj Cycle
 
