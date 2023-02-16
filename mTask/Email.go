@@ -27,7 +27,6 @@ type SysEmailParam struct {
 type CodeEmailParam struct {
 	VerifyCode   string `bson:"VerifyCode"` // 验证码
 	Action       string `bson:"Action"`     // 行为
-	Minute       string `bson:"Minute"`     // 有效分钟数
 	SysTime      string `bson:"SysTime"`
 	Source       string `bson:"Source"`
 	SecurityCode string `bson:"SecurityCode"`
