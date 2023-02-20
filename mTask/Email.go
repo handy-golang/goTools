@@ -1,33 +1,7 @@
 package mTask
 
-import (
-	"github.com/EasyGolang/goTools/mJson"
-	jsoniter "github.com/json-iterator/go"
-)
-
-// 验证码邮件
-type CodeEmail struct {
-	To         []string `bson:"To"`
-	VerifyCode string   `bson:"VerifyCode"` // 验证码
-	Action     string   `bson:"Action"`     // 行为
-}
-
-// 注册成功邮件
-type RegisterParam struct {
-	Password string `bson:"Password"` // 密码
-}
-
-// 邮件通用模板
-type SendEmail struct {
-	From     string     `bson:"From"`
-	To       []string   `bson:"To"`
-	Subject  string     `bson:"Subject"`
-	TmplName string     `bson:"TmplName"` // 邮件模板的名字
-	SendData EmailParam `bson:"SendData"` // 邮件模板需要的数据
-}
-
-// 邮件通用模板
-type EmailParam struct {
+// ====== 系统邮件 ========
+type SysEmailParam struct {
 	Title        string `bson:"Title"`   // 标题
 	Message      string `bson:"Message"` // 消息
 	Content      string `bson:"Content"` // 内容
@@ -36,9 +10,40 @@ type EmailParam struct {
 	SecurityCode string `bson:"SecurityCode"`
 }
 
-// 结构转换
-func ToMapData(val SendEmail) (resData map[string]any) {
-	jsonStr := mJson.ToJson(val)
-	jsoniter.Unmarshal(jsonStr, &resData)
-	return
+type SysEmail struct {
+	To       []string      `bson:"To"`
+	From     string        `bson:"From"`
+	Subject  string        `bson:"Subject"`
+	SendData SysEmailParam `bson:"SendData"` // 邮件模板需要的数据
+}
+
+// ====== 验证码邮件 ========
+type CodeEmailParam struct {
+	VerifyCode   string `bson:"VerifyCode"`
+	Action       string `bson:"Action"`
+	SysTime      string `bson:"SysTime"`
+	Source       string `bson:"Source"`
+	SecurityCode string `bson:"SecurityCode"`
+}
+
+type CodeEmail struct {
+	To       []string       `bson:"To"`
+	From     string         `bson:"From"`
+	Subject  string         `bson:"Subject"`
+	SendData CodeEmailParam `bson:"SendData"` // 邮件模板需要的数据
+}
+
+// ====== 注册成功邮件 ========
+type RegisterSucceedEmailParam struct {
+	Password     string `bson:"SysTime"`
+	SysTime      string `bson:"SysTime"`
+	Source       string `bson:"Source"`
+	SecurityCode string `bson:"SecurityCode"`
+}
+
+type RegisterSucceedEmail struct {
+	To       []string                  `bson:"To"`
+	From     string                    `bson:"From"`
+	Subject  string                    `bson:"Subject"`
+	SendData RegisterSucceedEmailParam `bson:"SendData"` // 邮件模板需要的数据
 }
