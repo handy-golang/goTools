@@ -18,7 +18,10 @@ import (
 	"github.com/EasyGolang/goTools/mStr"
 )
 
-// 将时间戳转为 时间对象，如果不正确 则返回当前时间对象
+/*
+将时间戳转为 时间对象，如果不正确 则返回当前时间对象
+ms =  string | int64 毫秒数   diff = "-988"
+*/
 func MsToTime(ms any, diff string) time.Time {
 	msToStr := mStr.ToStr(ms)
 
@@ -32,7 +35,7 @@ func MsToTime(ms any, diff string) time.Time {
 	return tm
 }
 
-// 格式化时间戳
+// ms=string | int64 毫秒数  return = 2006-01-02T15:04:05
 func UnixFormat(ms any) string {
 	timeMs := mStr.ToStr(ms)
 	if len(timeMs) < 1 {
@@ -50,35 +53,11 @@ func GetUnix() string {
 	return str
 }
 
-func ToUnixMsec(ms time.Time) int64 {
-	return ms.UnixNano() / 1e6
-}
-
 func GetUnixInt64() int64 {
 	return time.Now().UnixNano() / 1e6
 }
 
-func IsoTime() string {
-	utcTime := time.Now().UTC()
-	iso := utcTime.String()
-	isoBytes := []byte(iso)
-	iso = string(isoBytes[:10]) + "T" + string(isoBytes[11:23]) + "Z"
-	return iso
-}
-
-func RFCTime(lType bool) string {
-	TimeData := time.Now().Format(time.RFC3339Nano)
-	if lType {
-		TimeData = time.Now().Format(time.RFC3339)
-	}
-	return TimeData
-}
-
-func EpochTime() string {
-	millisecond := time.Now().UnixNano() / 1000000
-	epoch := strconv.Itoa(int(millisecond))
-	epochBytes := []byte(epoch)
-	epoch = string(epochBytes[:10])
-
-	return epoch
+// 将时间对象转为毫秒
+func ToUnixMsec(ms time.Time) int64 {
+	return ms.UnixNano() / 1e6
 }

@@ -4,13 +4,13 @@ import (
 	"fmt"
 	"os"
 	"strings"
+	"time"
 
 	"github.com/EasyGolang/goTools/mEncrypt"
 	"github.com/EasyGolang/goTools/mFetch"
 	"github.com/EasyGolang/goTools/mJson"
 	"github.com/EasyGolang/goTools/mPath"
 	"github.com/EasyGolang/goTools/mStr"
-	"github.com/EasyGolang/goTools/mTime"
 	"github.com/EasyGolang/goTools/mUrl"
 )
 
@@ -53,7 +53,7 @@ func FetchOKX(opt OptFetchOKX) (resData []byte, resErr error) {
 
 	// 处理 Header 和 加密信息
 	Method := strings.ToUpper(opt.Method)
-	Timestamp := mTime.IsoTime()
+	Timestamp := IsoTime()
 	ApiKey := opt.OKXKey.ApiKey
 	SecretKey := opt.OKXKey.SecretKey
 	Passphrase := opt.OKXKey.Passphrase
@@ -98,4 +98,13 @@ func FetchOKX(opt OptFetchOKX) (resData []byte, resErr error) {
 	} else {
 		return fetch.Post()
 	}
+}
+
+// 获取 当前 UTC 时间
+func IsoTime() string {
+	utcTime := time.Now().UTC()
+	iso := utcTime.String()
+	isoBytes := []byte(iso)
+	iso = string(isoBytes[:10]) + "T" + string(isoBytes[11:23]) + "Z"
+	return iso
 }

@@ -1,11 +1,13 @@
 package mOKX
 
 import (
+	"strconv"
+	"time"
+
 	"github.com/EasyGolang/goTools/mEncrypt"
 	"github.com/EasyGolang/goTools/mFetch"
 	"github.com/EasyGolang/goTools/mJson"
 	"github.com/EasyGolang/goTools/mStr"
-	"github.com/EasyGolang/goTools/mTime"
 )
 
 type LoginArgsType struct {
@@ -37,7 +39,7 @@ func WssOKX(opt OptWssOKX) (_this *mFetch.Wss) {
 	_this = mFetch.NewWss(WssOpt)
 
 	if opt.FetchType == 1 {
-		Timestamp := mTime.EpochTime()
+		Timestamp := EpochTime()
 		SignStr := mStr.Join(
 			Timestamp,
 			"GET",
@@ -59,4 +61,13 @@ func WssOKX(opt OptWssOKX) (_this *mFetch.Wss) {
 	}
 
 	return
+}
+
+func EpochTime() string {
+	millisecond := time.Now().UnixNano() / 1000000
+	epoch := strconv.Itoa(int(millisecond))
+	epochBytes := []byte(epoch)
+	epoch = string(epochBytes[:10])
+
+	return epoch
 }
