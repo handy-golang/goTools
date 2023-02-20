@@ -27,7 +27,7 @@ type CodeEmailParam struct {
 }
 
 type CodeEmail struct {
-	To       []string       `bson:"To"`
+	To       string         `bson:"To"` // 验证码任务一次只能是一个
 	From     string         `bson:"From"`
 	Subject  string         `bson:"Subject"`
 	SendData CodeEmailParam `bson:"SendData"` // 邮件模板需要的数据
@@ -42,7 +42,7 @@ type RegisterSucceedEmailParam struct {
 }
 
 type RegisterSucceedEmail struct {
-	To       []string                  `bson:"To"`
+	To       string                    `bson:"To"` // 注册成功一次也只能是一个
 	From     string                    `bson:"From"`
 	Subject  string                    `bson:"Subject"`
 	SendData RegisterSucceedEmailParam `bson:"SendData"` // 邮件模板需要的数据
