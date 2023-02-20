@@ -9,13 +9,11 @@ import (
 
 /*
 
-
 	mTikker.NewTikker(mTikker.TikkerOpt{
 		ShellContent: `
 		mEcho "我爱你22"
 		`,
 	}).RunToPm2()
-
 
 */
 
@@ -43,7 +41,7 @@ func NewTikker(opt TikkerOpt) *TikkerObj {
 	}
 
 	// 日志存放目录
-	LogPath := mPath.Dir.Home + "/mTikkerLogs"
+	LogPath := mPath.Dir.App + "/mTikkerLogs"
 	if len(opt.LogPath) > 0 {
 		LogPath = opt.LogPath
 	}

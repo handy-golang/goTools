@@ -14,7 +14,7 @@ import (
 
 func (obj *TikkerObj) RunToPm2() error {
 	fileName := mStr.Join(
-		"t_", mEncrypt.RandStr(3), ".sh",
+		"t_", mEncrypt.RandStr(6), ".sh",
 	)
 
 	Body := new(bytes.Buffer)
