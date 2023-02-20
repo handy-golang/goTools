@@ -8,7 +8,6 @@ import (
 
 	"github.com/EasyGolang/goTools/global/config"
 	"github.com/EasyGolang/goTools/mCycle"
-	"github.com/EasyGolang/goTools/tmpl"
 )
 
 func Start() {
@@ -22,8 +21,8 @@ func Start() {
 	}).Start()
 
 	Body := new(bytes.Buffer)
-	Tmpl := template.Must(template.New("").Parse(tmpl.AppInfo))
-	Tmpl.Execute(Body, tmpl.AppInfoParam{
+	Tmpl := template.Must(template.New("").Parse(AppInfo))
+	Tmpl.Execute(Body, AppInfoParam{
 		Version: config.AppInfo.Version,
 	})
 	Cont := Body.String()

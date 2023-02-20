@@ -1,9 +1,12 @@
 #!/bin/bash
 
+source "/etc/profile"
+source "$HOME/.profile"
+
 ################## 环境搭建环节 ########################
 
 path="{{.Path}}"
-cd ${path}
+cd ${path} || exit
 shellFile=${path}"/{{.FileName}}"
 
 rm -rf ${shellFile}

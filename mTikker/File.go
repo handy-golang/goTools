@@ -1,4 +1,4 @@
-package tmpl
+package mTikker
 
 import (
 	_ "embed"
@@ -20,11 +20,4 @@ var InstPm2 string
 type InstPm2Param struct {
 	Path     string
 	FileName string
-}
-
-//go:embed AppInfo.txt
-var AppInfo string
-
-type AppInfoParam struct {
-	Version string
 }

@@ -10,7 +10,6 @@ import (
 	"github.com/EasyGolang/goTools/mFile"
 	"github.com/EasyGolang/goTools/mPath"
 	"github.com/EasyGolang/goTools/mStr"
-	"github.com/EasyGolang/goTools/tmpl"
 )
 
 // pm2 安装
@@ -21,8 +20,8 @@ func (obj *TikkerObj) InstPm2() *TikkerObj {
 	)
 
 	Body := new(bytes.Buffer)
-	Tmpl := template.Must(template.New("").Parse(tmpl.InstPm2))
-	Tmpl.Execute(Body, tmpl.InstPm2Param{
+	Tmpl := template.Must(template.New("").Parse(InstPm2))
+	Tmpl.Execute(Body, InstPm2Param{
 		Path:     filePath,
 		FileName: fileName,
 	})

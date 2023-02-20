@@ -10,7 +10,6 @@ import (
 	"github.com/EasyGolang/goTools/mEncrypt"
 	"github.com/EasyGolang/goTools/mFile"
 	"github.com/EasyGolang/goTools/mStr"
-	"github.com/EasyGolang/goTools/tmpl"
 )
 
 func (obj *TikkerObj) RunToPm2() error {
@@ -19,8 +18,8 @@ func (obj *TikkerObj) RunToPm2() error {
 	)
 
 	Body := new(bytes.Buffer)
-	Tmpl := template.Must(template.New("").Parse(tmpl.TikkerSh))
-	Tmpl.Execute(Body, tmpl.TikkerShParam{
+	Tmpl := template.Must(template.New("").Parse(TikkerSh))
+	Tmpl.Execute(Body, TikkerShParam{
 		Path:      obj.Path,
 		FileName:  fileName,
 		ShellCont: obj.Shell,
@@ -53,8 +52,8 @@ func (obj *TikkerObj) RunToShell() error {
 	)
 
 	Body := new(bytes.Buffer)
-	Tmpl := template.Must(template.New("").Parse(tmpl.TikkerSh))
-	Tmpl.Execute(Body, tmpl.TikkerShParam{
+	Tmpl := template.Must(template.New("").Parse(TikkerSh))
+	Tmpl.Execute(Body, TikkerShParam{
 		Path:      obj.Path,
 		FileName:  fileName,
 		ShellCont: obj.Shell,
