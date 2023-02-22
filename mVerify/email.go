@@ -9,6 +9,7 @@ func IsEmail(str string) bool {
 	return reg.MatchString(str)
 }
 
+// 1-12 位字母数字下划线和中文
 func IsNickName(str string) bool {
 	pattern := "^[a-zA-Z0-9_\u4e00-\u9fa5]{1,12}$"
 	reg := regexp.MustCompile(pattern)
