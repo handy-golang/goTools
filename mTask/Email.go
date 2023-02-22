@@ -2,12 +2,12 @@ package mTask
 
 // ====== 系统邮件 ========
 type SysEmailParam struct {
-	Title        string `bson:"Title"`   // 标题
-	Message      string `bson:"Message"` // 消息
-	Content      string `bson:"Content"` // 内容
-	SysTime      string `bson:"SysTime"`
-	Source       string `bson:"Source"`
-	SecurityCode string `bson:"SecurityCode"`
+	Title          string `bson:"Title"`   // 标题
+	Message        string `bson:"Message"` // 消息
+	Content        string `bson:"Content"` // 内容
+	SysTime        string `bson:"SysTime"`
+	Source         string `bson:"Source"`
+	EntrapmentCode string `bson:"EntrapmentCode"` // 防钓鱼码
 }
 
 type SysEmail struct {
@@ -19,11 +19,11 @@ type SysEmail struct {
 
 // ====== 验证码邮件 ========
 type CodeEmailParam struct {
-	VerifyCode   string `bson:"VerifyCode"`
-	Action       string `bson:"Action"`
-	SysTime      string `bson:"SysTime"`
-	Source       string `bson:"Source"`
-	SecurityCode string `bson:"SecurityCode"`
+	VerifyCode     string `bson:"VerifyCode"`
+	Action         string `bson:"Action"`
+	SysTime        string `bson:"SysTime"`
+	Source         string `bson:"Source"`
+	EntrapmentCode string `bson:"EntrapmentCode"` // 防钓鱼码
 }
 
 type CodeEmail struct {
@@ -35,10 +35,10 @@ type CodeEmail struct {
 
 // ====== 注册成功邮件 ========
 type RegisterSucceedEmailParam struct {
-	Password     string `bson:"SysTime"`
-	SysTime      string `bson:"SysTime"`
-	Source       string `bson:"Source"`
-	SecurityCode string `bson:"SecurityCode"`
+	Password       string `bson:"SysTime"`
+	SysTime        string `bson:"SysTime"`
+	Source         string `bson:"Source"`
+	EntrapmentCode string `bson:"EntrapmentCode"` // 防钓鱼码
 }
 
 type RegisterSucceedEmail struct {
