@@ -31,9 +31,6 @@ func GetIPS(ips []string) []IPAddressType {
 https://www.ipshudi.com/36.44.232.38.htm
 */
 
-//go:embed WhatIsMyIpHeader.yaml
-var WhatIsMyIpHeader string
-
 func GetIPaddress(ip string) (resData IPAddressType, resErr error) {
 	if !IsIP(ip) {
 		resErr = fmt.Errorf("ip地址不正确")
@@ -86,6 +83,11 @@ func GetIPaddress(ip string) (resData IPAddressType, resErr error) {
 
 	return
 }
+
+// ========= 解析 Header 头 ===============
+
+//go:embed WhatIsMyIpHeader.yaml
+var WhatIsMyIpHeader string
 
 func FileToHeader(cont string) map[string]string {
 	strArr := strings.Split(cont, "\n")
