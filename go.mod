@@ -17,6 +17,7 @@ require (
 	github.com/shopspring/decimal v1.3.1
 	github.com/spf13/viper v1.15.0
 	github.com/stretchr/testify v1.8.1
+	github.com/wenlng/go-user-agent v1.0.2
 	go.mongodb.org/mongo-driver v1.11.1
 )
 
