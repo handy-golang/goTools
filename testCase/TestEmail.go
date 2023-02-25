@@ -16,10 +16,10 @@ func TestEmail() {
 
 	err := mEmail.New(mEmail.Opt{
 		// gmail
-		// Account:  "xxxx@gmail.com",
-		// Password: "xxxxx", // https://support.google.com/accounts/answer/185833
-		// Port:     "587",
-		// Host:     "smtp.gmail.com",
+		Account:  "xxxxxxxxx@gmail.com",
+		Password: "xxxxxxxxxxx", // https://support.google.com/accounts/answer/185833
+		Port:     "587",
+		Host:     "smtp.gmail.com",
 
 		// outlook 失败
 
@@ -29,10 +29,10 @@ func TestEmail() {
 		// Host:     "smtp.office365.com",
 
 		// 企业微信
-		Account:  "xxxxx@xx.xx",
-		Password: "xxxxxxx",
-		Port:     "587",
-		Host:     "smtp.exmail.qq.com",
+		// Account:  "xxxxx@xx.xx",
+		// Password: "xxxxxxx",
+		// Port:     "587",
+		// Host:     "smtp.exmail.qq.com",
 
 		// qq
 		// Account: "xxxx@qq.com",

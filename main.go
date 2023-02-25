@@ -48,12 +48,12 @@ func main() {
 
 	// testCase.ShellTest()
 
-	// testCase.TestEmail()
+	testCase.TestEmail()
 
 	// testCase.TaskTest()
 
 	// testCase.TikkerTest()
-	testCase.IPTest()
+	// testCase.IPTest()
 
 	fmt.Println(" =========   END   ========= ")
 }
