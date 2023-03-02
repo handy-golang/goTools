@@ -39,7 +39,7 @@ func GetKdataOKX(opt GetKdataOpt) (resData []TypeKd) {
 	// 判断应该采取哪个接口获取数据  after 距离 now 有多少条数据?
 	path := "/api/v5/market/candles"
 	fromNowItem := (now - after) / BarObj.Interval
-	if fromNowItem > 300 {
+	if fromNowItem > 800 { // 大于 800 条就取历史数据
 		path = "/api/v5/market/history-index-candles"
 	}
 
