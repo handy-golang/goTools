@@ -55,12 +55,9 @@ func BalanceFetch() {
 	start := mTime.GetUnixInt64()
 	fmt.Println("start", start)
 	resData, err := binance.FetchBinance(binance.OptFetchBinance{
-		Path:   "/fapi/v2/account",
-		Method: "get",
-		BinanceKey: binance.TypeBinanceKey{
-			ApiKey:    config.BinanceKey.ApiKey,
-			SecretKey: config.BinanceKey.SecretKey,
-		},
+		Path:       "/fapi/v2/account",
+		Method:     "get",
+		BinanceKey: binance.TypeBinanceKey{},
 	})
 
 	end := mTime.GetUnixInt64()

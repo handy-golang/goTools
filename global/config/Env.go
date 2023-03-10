@@ -13,18 +13,9 @@ var AppInfo struct {
 }
 
 var AppEnv struct {
-	RunMod        int
 	MongoAddress  string
 	MongoPassword string
 	MongoUserName string
-}
-
-var BinanceKey = struct {
-	ApiKey    string `bson:"ApiKey"`
-	SecretKey string `bson:"SecretKey"`
-}{
-	ApiKey:    "e1ch7VN2WEml",
-	SecretKey: "E9w2QmLtV9e",
 }
 
 func LoadAppEnv() {
