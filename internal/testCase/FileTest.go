@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"log"
 
-	"github.com/EasyGolang/goTools/global/config"
+	"github.com/EasyGolang/goTools/internal/global/config"
 	"github.com/EasyGolang/goTools/mFile"
 )
 

@@ -3,8 +3,8 @@ package testCase
 import (
 	"fmt"
 
-	"github.com/EasyGolang/goTools/global"
-	"github.com/EasyGolang/goTools/global/config"
+	"github.com/EasyGolang/goTools/internal/global"
+	"github.com/EasyGolang/goTools/internal/global/config"
 	"github.com/EasyGolang/goTools/mFile"
 	"github.com/EasyGolang/goTools/mOKX"
 	"github.com/EasyGolang/goTools/mOKX/binance"

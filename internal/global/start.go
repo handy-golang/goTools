@@ -6,7 +6,7 @@ import (
 	"text/template"
 	"time"
 
-	"github.com/EasyGolang/goTools/global/config"
+	"github.com/EasyGolang/goTools/internal/global/config"
 	"github.com/EasyGolang/goTools/mCycle"
 )
 

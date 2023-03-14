@@ -3,7 +3,7 @@ package testCase
 import (
 	"fmt"
 
-	"github.com/EasyGolang/goTools/global/config"
+	"github.com/EasyGolang/goTools/internal/global/config"
 	"github.com/EasyGolang/goTools/mMongo"
 	"github.com/EasyGolang/goTools/mOKX"
 	"github.com/EasyGolang/goTools/mStruct"

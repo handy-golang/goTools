@@ -4,9 +4,9 @@ import (
 	_ "embed"
 	"fmt"
 
-	"github.com/EasyGolang/goTools/global"
-	"github.com/EasyGolang/goTools/global/config"
-	"github.com/EasyGolang/goTools/testCase"
+	"github.com/EasyGolang/goTools/internal/global"
+	"github.com/EasyGolang/goTools/internal/global/config"
+	"github.com/EasyGolang/goTools/internal/testCase"
 	jsoniter "github.com/json-iterator/go"
 )
 

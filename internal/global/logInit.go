@@ -5,7 +5,7 @@ import (
 	"log"
 	"os"
 
-	"github.com/EasyGolang/goTools/global/config"
+	"github.com/EasyGolang/goTools/internal/global/config"
 	"github.com/EasyGolang/goTools/mLog"
 	"github.com/EasyGolang/goTools/mPath"
 	"github.com/EasyGolang/goTools/mTime"

@@ -1,7 +1,7 @@
 package testCase
 
 import (
-	"github.com/EasyGolang/goTools/global"
+	"github.com/EasyGolang/goTools/internal/global"
 	"github.com/EasyGolang/goTools/mOKX"
 	"github.com/EasyGolang/goTools/mStr"
 )
