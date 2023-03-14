@@ -42,7 +42,7 @@ func UnixFormat(ms any) string {
 		timeMs = GetUnix()
 	}
 	T := MsToTime(timeMs, "0")
-	timeStr := T.Format("2006-01-02T15:04:05")
+	timeStr := T.Format(Lay_ss)
 	return timeStr
 }
 
@@ -60,4 +60,14 @@ func GetUnixInt64() int64 {
 // 将时间对象转为毫秒
 func ToUnixMsec(ms time.Time) int64 {
 	return ms.UnixNano() / 1e6
+}
+
+// 2020-12-03 转为 时间戳  mTime.TimeParse(mTime.LaySP_ss, "2023-05-06 18:56:43")
+func TimeParse(layout, val string) (resData int64) {
+	formatTime, err := time.ParseInLocation(layout, val, time.Local)
+	if err != nil {
+		return
+	}
+	resData = ToUnixMsec(formatTime)
+	return
 }

@@ -28,7 +28,7 @@ func main() {
 	// testCase.OKXFetch()
 	// testCase.OKXWss()
 
-	testCase.CountTest()
+	// testCase.CountTest()
 	// testCase.StrFuzzy()
 
 	// testCase.FileTest()
@@ -42,7 +42,7 @@ func main() {
 
 	// testCase.BalanceFetch()
 
-	// testCase.TimeTest()
+	testCase.TimeTest()
 
 	// testCase.Tactics()
 
