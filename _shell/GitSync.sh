@@ -1,17 +1,14 @@
 #!/bin/bash
-# 加载变量
-source "./_shell/init.sh"
-#############
+
+## 判断参数
+desc=$1
+if [ -z "${desc}" ]; then
+  echo -e "\033[31m Err:需要同步说明 \033[0m"
+  exit 1
+fi
+echo "git commit: ${desc}"
 
 GitSet
-
-desc=$1
-
-if [ -z "${desc}" ]; then
-  desc="exit-push"
-fi
-
-echo "${desc}"
 
 git pull &&
   git add . &&

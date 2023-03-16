@@ -1,5 +1,6 @@
 #!/bin/bash
 
+## 环境变量
 function GitSet {
   echo " ====== git设置大小写敏感,文件权限变更 ====== "
   git config core.ignorecase false
@@ -9,5 +10,3 @@ function GitSet {
 
   chmod -R 777 ./
 }
-
-## 存储变量
