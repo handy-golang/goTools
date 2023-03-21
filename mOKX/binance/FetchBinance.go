@@ -10,11 +10,8 @@ import (
 )
 
 type TypeBinanceKey struct {
-	Name      string `bson:"Name"`
 	ApiKey    string `bson:"ApiKey"`
 	SecretKey string `bson:"SecretKey"`
-	IsTrade   bool   `bson:"IsTrade"`
-	UserID    string `bson:"UserID"`
 }
 
 type OptFetchBinance struct {
