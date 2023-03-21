@@ -8,7 +8,10 @@ import (
 )
 
 func StrFuzzy() {
-	str := mStr.Fuzzy("15309140739")
+	// str := mStr.Fuzzy("15309140739")
+
+	// str := mStr.GetKeyFuzzyStart("123456789", 3)
+	str := mStr.GetKeyFuzzy("123456789", 3, 5)
 
 	fmt.Println(str)
 }

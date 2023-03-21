@@ -33,6 +33,6 @@ func Fuzzy(cont any) string {
 	return resData
 }
 
-func GetKeyFuzzy(Ket string, num int) string {
-	return Ket[0:num] + "******" + Ket[len(Ket)-1-1:len(Ket)-1]
+func GetKeyFuzzy(Ket string, startIdx, endIdx int) string {
+	return Ket[0:startIdx] + "******" + Ket[len(Ket)-endIdx:]
 }
