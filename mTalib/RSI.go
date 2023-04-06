@@ -1,8 +1,6 @@
 package mTalib
 
-import (
-	"github.com/EasyGolang/goTools/mTalib/talib"
-)
+import "github.com/EasyGolang/goTools/mTalib/talib"
 
 func (_this *ClistObj) RSI() *ClistObj {
 	if _this.CLen < _this.Period+1 {

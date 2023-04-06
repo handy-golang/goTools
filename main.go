@@ -29,7 +29,7 @@ func main() {
 	// testCase.OKXWss()
 
 	// testCase.CountTest()
-	testCase.StrFuzzy()
+	// testCase.StrFuzzy()
 
 	// testCase.FileTest()
 
@@ -54,6 +54,8 @@ func main() {
 
 	// testCase.TikkerTest()
 	// testCase.IPTest()
+
+	testCase.TalibTest()
 
 	fmt.Println(" =========   END   ========= ")
 }
