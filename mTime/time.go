@@ -19,7 +19,7 @@ import (
 )
 
 /*
-将时间戳转为 时间对象，如果不正确 则返回当前时间对象
+将毫秒时间戳转为 时间对象，如果不正确 则返回当前时间对象
 ms =  string | int64 毫秒数   diff = "-988"
 */
 func MsToTime(ms any, diff string) time.Time {
