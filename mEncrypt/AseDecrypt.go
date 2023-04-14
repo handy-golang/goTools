@@ -8,33 +8,39 @@ import (
 	"github.com/EasyGolang/goTools/mStr"
 )
 
+/*
+
+	Golang Ase 解密
+
+*/
+
 // 必须要结合 https://github.com/AItrade-mo7/jsEncrypt 项目来使用
-// Decrypt Golang解密
-// ciphertext  important important 上面js的生成的密文进行了 hex.encoding 在这之前必须要进行 hex.Decoding
-// 上面js代码最后返回的是16进制
-// 所以收到的数据hexText还需要用hex.DecodeString(hexText)转一下,这里略了
-func Decrypt(cipherText, key string) string {
+
+func AseDecrypt(cipherText, key string) string {
 	bs, err := hex.DecodeString((cipherText))
 	if err != nil {
 		return ""
 	}
 
-	pKey := PaddingLeft16(key) // 和js的key补码方法一致
+	pKey := PaddingLeft16(key)
 
-	block, err := aes.NewCipher(pKey) // 选择加密算法
+	block, err := aes.NewCipher(pKey)
 	if err != nil {
 		return ""
 	}
-	blockModel := cipher.NewCBCDecrypter(block, pKey) // 和前端代码对应:   mode: CryptoJS.mode.CBC,// CBC算法
+	blockModel := cipher.NewCBCDecrypter(block, pKey)
 	plantText := make([]byte, len(bs))
 	blockModel.CryptBlocks(plantText, bs)
-	plantText = PKCS7UnPadding(plantText) // 和前端代码对应:  padding: CryptoJS.pad.Pkcs7
+	plantText = PKCS7UnPadding(plantText)
 	return mStr.ToStr(plantText)
 }
 
 func PKCS7UnPadding(plantText []byte) []byte {
 	length := len(plantText)
 	unpadding := int(plantText[length-1])
+	if length-unpadding < 0 {
+		return []byte("")
+	}
 	return plantText[:(length - unpadding)]
 }
 
