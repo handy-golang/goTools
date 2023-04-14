@@ -6,10 +6,6 @@ import (
 	"github.com/golang-jwt/jwt/v4"
 )
 
-/*
-
-https://topgoer.com/gin%E6%A1%86%E6%9E%B6/%E5%85%B6%E4%BB%96/%E7%94%9F%E6%88%90%E8%A7%A3%E6%9E%90token.html
-*/
 // 生成token
 type Claims struct {
 	Message string

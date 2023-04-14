@@ -42,7 +42,7 @@ func main() {
 
 	// testCase.BalanceFetch()
 
-	testCase.TimeTest()
+	// testCase.TimeTest()
 
 	// testCase.Tactics()
 
@@ -56,6 +56,8 @@ func main() {
 	// testCase.IPTest()
 
 	// testCase.TalibTest()
+
+	testCase.EncryptTest()
 
 	fmt.Println(" =========   END   ========= ")
 }
