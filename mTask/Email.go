@@ -11,7 +11,7 @@ type SysEmailParam struct {
 }
 
 type SysEmail struct {
-	To       []string      `bson:"To"`
+	To       []string      `bson:"To"` // To 可以是 UserID
 	From     string        `bson:"From"`
 	Subject  string        `bson:"Subject"`
 	SendData SysEmailParam `bson:"SendData"` // 邮件模板需要的数据
