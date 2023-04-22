@@ -36,7 +36,7 @@ func main() {
 	// testCase.YaSuoDir()
 	// OrganizeDatabase()
 
-	// testCase.StartDBRun()
+	testCase.StartDBRun()
 
 	// testCase.IPtest()
 
@@ -57,7 +57,7 @@ func main() {
 
 	// testCase.TalibTest()
 
-	testCase.EncryptTest()
+	// testCase.EncryptTest()
 
 	fmt.Println(" =========   END   ========= ")
 }

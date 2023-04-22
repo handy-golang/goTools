@@ -106,7 +106,7 @@ import (
 */
 
 // 连接数据库
-func (info *DB) Connect() *DB {
+func (info *DB) Connect() (*DB, error) {
 	info.Ctx, info.cancel = context.WithTimeout(
 		context.Background(),
 		time.Duration(info.Timeout)*time.Second,
@@ -115,16 +115,16 @@ func (info *DB) Connect() *DB {
 	o := options.Client().ApplyURI(info.URI)
 	Client, err := mongo.Connect(info.Ctx, o)
 	if err != nil {
-		errStr := fmt.Sprintf("连接失败: %+v", err)
-		info.Event("ConnectErr", errStr)
-		return info
+		err := fmt.Errorf("ConnectErr 连接失败: %+v", err)
+		info.Event("ConnectErr", mStr.ToStr(err))
+		return info, err
 	}
 
 	err = Client.Ping(info.Ctx, readpref.Primary())
 	if err != nil {
-		errStr := fmt.Sprintf("验证失败: %+v", err)
-		info.Event("PingErr", errStr)
-		return info
+		err := fmt.Errorf("PingErr 验证失败: %+v", err)
+		info.Event("PingErr", mStr.ToStr(err))
+		return info, err
 	}
 
 	info.Client = Client
@@ -135,7 +135,7 @@ func (info *DB) Connect() *DB {
 
 	info.Event("Database", info.dbName)
 
-	return info
+	return info, err
 }
 
 func (info *DB) Ping() error {

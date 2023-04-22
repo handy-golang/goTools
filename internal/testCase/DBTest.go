@@ -3,7 +3,6 @@ package testCase
 import (
 	"fmt"
 
-	"github.com/EasyGolang/goTools/internal/global/config"
 	"github.com/EasyGolang/goTools/mMongo"
 	"github.com/EasyGolang/goTools/mOKX"
 	"github.com/EasyGolang/goTools/mStruct"
@@ -13,20 +12,21 @@ import (
 
 // 连通篇
 func StartDBRun() {
-	db := mMongo.New(mMongo.Opt{
-		UserName: config.AppEnv.MongoUserName,
-		Password: config.AppEnv.MongoPassword,
-		Address:  config.AppEnv.MongoAddress,
-		Timeout:  99999999, // 秒
-		DBName:   "Mo7Test",
-	}).Connect().Collection("TestTable")
-	defer db.Close()
-	err := db.Ping()
+	db, err := mMongo.New(mMongo.Opt{
+		UserName: "123",
+		Password: "123",
+		Address:  "xx.xx.xxx:xxx",
+		Timeout:  100, // 秒
+		DBName:   "xxxx",
+	}).Connect()
 	if err != nil {
 		fmt.Println("err", err)
+		return
 	}
+	defer db.Close()
+	db = db.Collection("aaaaa")
 
-	// CountDocuments(db)
+	CountDocuments(db)
 
 	// Insert(db)
 	// InsertMany(db)
@@ -39,7 +39,9 @@ func StartDBRun() {
 
 	// Find(db)
 
-	FindOne(db)
+	// fmt.Println(db)
+
+	// FindOne(db)
 }
 
 // 查询文档总个数

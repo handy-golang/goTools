@@ -51,7 +51,8 @@ func New(opt Opt) *DB {
 	}
 
 	if len(optNilStr) > 0 {
-		fmt.Println("缺少参数:", strings.Join(optNilStr, ","))
+		err := fmt.Errorf("缺少参数: %+v", strings.Join(optNilStr, ","))
+		panic(err)
 	}
 	var NewDB DB
 
