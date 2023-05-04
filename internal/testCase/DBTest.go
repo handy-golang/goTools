@@ -13,18 +13,18 @@ import (
 // 连通篇
 func StartDBRun() {
 	db, err := mMongo.New(mMongo.Opt{
-		UserName: "123",
-		Password: "123",
-		Address:  "xx.xx.xxx:xxx",
+		UserName: "mo7",
+		Password: "asdasd55555",
+		Address:  "tcy4.mo7.cc:xxxx",
 		Timeout:  100, // 秒
-		DBName:   "xxxx",
+		DBName:   "CoinMarket",
 	}).Connect()
 	if err != nil {
 		fmt.Println("err", err)
 		return
 	}
 	defer db.Close()
-	db = db.Collection("aaaaa")
+	db = db.Collection("CoinTicker")
 
 	CountDocuments(db)
 
