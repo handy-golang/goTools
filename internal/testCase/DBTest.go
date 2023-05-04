@@ -13,9 +13,9 @@ import (
 // 连通篇
 func StartDBRun() {
 	db, err := mMongo.New(mMongo.Opt{
-		UserName: "mo7",
-		Password: "asdasd55555",
-		Address:  "tcy4.mo7.cc:xxxx",
+		UserName: "xxxxx",
+		Password: "xxxx",
+		Address:  "xxxxxx:xxxx",
 		Timeout:  100, // 秒
 		DBName:   "CoinMarket",
 	}).Connect()
