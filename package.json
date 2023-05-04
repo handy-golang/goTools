@@ -1,6 +1,6 @@
 {
   "name": "go-tools",
-  "version": "1.0.33",
+  "version": "1.0.35",
   "Port": 17353,
   "scripts": {
     "sync": "./_shell/GitSync.sh",
